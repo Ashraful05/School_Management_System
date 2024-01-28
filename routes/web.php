@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\User\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,7 +15,8 @@ use App\Http\Controllers\Admin\AdminController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+//    return view('welcome');
+    return view('auth.login');
 });
 
 Route::middleware([
@@ -29,4 +31,12 @@ Route::middleware([
 
 Route::controller(AdminController::class)->prefix('admin')->group(function (){
     Route::get('logout','logOut')->name('admin.logout');
+});
+
+//user management routes......
+Route::controller(UserController::class)->middleware('auth:sanctum')
+    ->prefix('user')
+    ->group(function (){
+    Route::get('view','userView')->name('user_view');
+    Route::get('add','userAdd')->name('user_add');
 });
