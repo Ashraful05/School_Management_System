@@ -42,17 +42,24 @@
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                     <tr>
+                                        <th>SL.</th>
+                                        <th>User Type</th>
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($users as $user)
+                                    @foreach($users as $row=>$user)
                                     <tr>
+                                        <td>{{ ++$row }}</td>
+                                        <td>{{ $user->user_type }}</td>
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->email }}</td>
-                                        <td>System Architect</td>
+                                        <td>
+                                            <a href="" class="btn btn-rounded btn-info">Edit</a>
+                                            <a href="" class="btn btn-rounded btn-danger">Delete</a>
+                                        </td>
                                     </tr>
                                     @endforeach
                                     </tbody>
