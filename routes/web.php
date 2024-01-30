@@ -34,9 +34,10 @@ Route::controller(AdminController::class)->prefix('admin')->group(function (){
 });
 
 //user management routes......
-Route::controller(UserController::class)->middleware('auth:sanctum')
+Route::controller(UserController::class)
     ->prefix('user')
     ->group(function (){
-    Route::get('view','userView')->name('user_view');
-    Route::get('add','userAdd')->name('user_add');
+    Route::get('view','userView')->name('user_view')->middleware('auth:sanctum');
+    Route::get('add','userAdd')->name('user_add')->middleware('auth:sanctum');
+    Route::post('save','userSave')->name('user_save');
 });

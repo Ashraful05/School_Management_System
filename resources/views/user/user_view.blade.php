@@ -1,10 +1,6 @@
 @extends('admin.master')
 @section('title','User View')
 @section('main_content')
-
-
-
-
     <!-- Content Wrapper. Contains page content -->
     <div class="container-full">
         <!-- Content Header (Page header) -->

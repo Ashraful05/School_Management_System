@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -17,5 +18,20 @@ class UserController extends Controller
     public function userAdd()
     {
         return view('user.user_add');
+    }
+    public function userSave(Request $request)
+    {
+        $request->validate([
+           'email'=>'required|unique:users',
+           'user_type'=>'required',
+           'name'=>'required',
+        ]);
+        User::create([
+           'email'=>$request->email,
+           'name'=>$request->name,
+           'password'=>Hash::make($request->password),
+            'user_type'=>$request->user_type
+        ]);
+        return redirect()->route('user_view');
     }
 }
