@@ -9,6 +9,7 @@
             <div class="box">
                 <div class="box-header with-border">
                     <h4 class="box-title">Add User</h4>
+                    <a href="{{ route('user_view') }}" class="btn btn-rounded btn-success mb-3" style="float: right">View User</a>
                 </div>
 
 

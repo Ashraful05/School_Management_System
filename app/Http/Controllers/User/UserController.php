@@ -32,6 +32,10 @@ class UserController extends Controller
            'password'=>Hash::make($request->password),
             'user_type'=>$request->user_type
         ]);
-        return redirect()->route('user_view');
+        $notification = [
+          'alert-type'=>'success',
+          'message'=>'User Info Saved!!'
+        ];
+        return redirect()->route('user_view')->with($notification);
     }
 }
