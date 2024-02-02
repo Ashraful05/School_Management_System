@@ -54,7 +54,7 @@
                                         <td>{{ $user->email }}</td>
                                         <td>
                                             <a href="{{ route('user_edit',$user->id) }}" class="btn btn-rounded btn-info">Edit</a>
-                                            <a href="{{ route('user_delete',$user->id) }}" class="btn btn-rounded btn-danger">Delete</a>
+                                            <a href="{{ route('user_delete',$user->id) }}" class="btn btn-rounded btn-danger" id="delete">Delete</a>
                                         </td>
                                     </tr>
                                     @endforeach
