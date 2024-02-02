@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Testing\Fluent\Concerns\Has;
 
 class UserController extends Controller
 {
@@ -37,5 +38,40 @@ class UserController extends Controller
           'message'=>'User Info Saved!!'
         ];
         return redirect()->route('user_view')->with($notification);
+    }
+    public function editUser($id)
+    {
+        $editUser = User::findOrFail($id);
+        return view('user.edit_user',compact('editUser'));
+    }
+
+    public function updateUser(Request $request,$id)
+    {
+//        User::findorFail($id)->update([
+//            'email'=>$request->email,
+//            'name'=>$request->name,
+//            'password'=>Hash::make($request->password),
+//            'user_type'=>$request->user_type
+//        ]);
+        $user = User::findOrFail($id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->user_type = $request->user_type;
+        $user->password = Hash::make($request->password);
+        $user->update();
+        $notification = [
+            'alert-type'=>'info',
+            'message'=>'User Info Updated!!'
+        ];
+        return redirect()->route('user_view')->with($notification);
+    }
+    public function deleteUser($id)
+    {
+        User::find($id)->delete();
+        $notification = [
+            'alert-type'=>'error',
+            'message'=>'User Info Deleted!!'
+        ];
+        return redirect()->back()->with($notification);
     }
 }

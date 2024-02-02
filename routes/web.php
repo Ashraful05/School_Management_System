@@ -37,7 +37,10 @@ Route::controller(AdminController::class)->prefix('admin')->group(function (){
 Route::controller(UserController::class)
     ->prefix('user')
     ->group(function (){
-    Route::get('view','userView')->name('user_view')->middleware('auth:sanctum');
+    Route::get('view','userView')->name('user_view');
     Route::get('add','userAdd')->name('user_add')->middleware('auth:sanctum');
     Route::post('save','userSave')->name('user_save');
+    Route::get('edit/{id}','editUser')->name('user_edit');
+    Route::post('update/{id}','updateUser')->name('user_update');
+    Route::get('delete/{id}','deleteUser')->name('user_delete');
 });
