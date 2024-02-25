@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Testing\Fluent\Concerns\Has;
 
@@ -74,4 +75,10 @@ class UserController extends Controller
         ];
         return redirect()->back()->with($notification);
     }
+    public function viewProfile()
+    {
+        $user = User::find(Auth::user()->id);
+        return view('user.profile.view_profile',compact('user'));
+    }
+
 }

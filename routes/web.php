@@ -42,4 +42,5 @@ Route::controller(UserController::class)
     Route::get('edit/{id}','editUser')->name('user_edit');
     Route::post('update/{id}','updateUser')->name('user_update');
     Route::get('delete/{id}','deleteUser')->name('user_delete')->middleware('auth:sanctum');
+    Route::get('profile/view','viewProfile')->name('view_profile');
 });
