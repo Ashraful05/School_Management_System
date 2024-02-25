@@ -80,5 +80,9 @@ class UserController extends Controller
         $user = User::find(Auth::user()->id);
         return view('user.profile.view_profile',compact('user'));
     }
-
+    public function editProfile()
+    {
+        $editProfile = User::find(Auth::user()->id);
+        return view('user.profile.edit_profile',compact('editProfile'));
+    }
 }
