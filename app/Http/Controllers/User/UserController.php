@@ -85,4 +85,32 @@ class UserController extends Controller
         $editProfile = User::find(Auth::user()->id);
         return view('user.profile.edit_profile',compact('editProfile'));
     }
+    public function updateProfile(Request $request)
+    {
+        $data = User::find(Auth::user()->id);
+
+        if($request->hasFile('image')){
+            $file = $request->file('image');
+            @unlink(public_path('images/user_image/'.$data->image));
+            $fileName = date('Y_m_dHi').'.'.$file->getClientOriginalExtension();
+            $file->move(public_path('images/user_image/'),$fileName);
+            $data['image'] = $fileName;
+        }
+
+        $data->update([
+            'name'=>$request->name,
+            'email'=>$request->email,
+            'gender'=>$request->gender,
+            'status'=>1,
+            'mobile_no'=>$request->mobile_no,
+            'address'=> $request->address,
+//            'image'=>$fileName
+        ]);
+        $notification = [
+          'alert-type'=>'info',
+          'message'=>'User Profile Updated!!'
+        ];
+        return redirect()->route('view_profile')->with($notification);
+
+    }
 }

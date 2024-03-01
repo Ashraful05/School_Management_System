@@ -10,7 +10,7 @@
             <div class="box">
                 <div class="box-header with-border">
                     <h4 class="box-title">Manage Profile</h4>
-                    <a href="{{ route('user_view') }}" class="btn btn-rounded btn-success mb-3" style="float: right">View User</a>
+                    <a href="{{ route('view_profile') }}" class="btn btn-rounded btn-success mb-3" style="float: right">View Profile</a>
                 </div>
 
 
@@ -18,7 +18,7 @@
                 <div class="box-body">
                     <div class="row">
                         <div class="col">
-                            <form action="{{ route('user_update',$editProfile->id) }}" method="post" >
+                            <form action="{{ route('update_user_profile') }}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
                                     <div class="col-12">

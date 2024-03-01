@@ -44,4 +44,5 @@ Route::controller(UserController::class)
     Route::get('delete/{id}','deleteUser')->name('user_delete')->middleware('auth:sanctum');
     Route::get('profile/view','viewProfile')->name('view_profile');
     Route::get('profile/edit','editProfile')->name('edit_user_profile');
+    Route::post('profile/update','updateProfile')->name('update_user_profile');
 });

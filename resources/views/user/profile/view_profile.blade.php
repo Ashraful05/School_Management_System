@@ -14,7 +14,7 @@
                             <h6 class="widget-user-desc">Type: {{ $user->user_type }}</h6>
                         </div>
                         <div class="widget-user-image">
-                            <img class="rounded-circle" src="{{ (!empty($user->profile_photo_path))?url('images/'.$user->profile_photo_path	):url('images/no_image.jpg') }}" alt="User Avatar">
+                            <img class="rounded-circle" src="{{ (!empty($user->image))?url('images/user_image/'.$user->image):url('images/no_image.jpg') }}" alt="User Avatar">
                         </div>
                         <div class="box-footer">
                             <div class="row">
