@@ -45,4 +45,8 @@ Route::controller(UserController::class)
     Route::get('profile/view','viewProfile')->name('view_profile');
     Route::get('profile/edit','editProfile')->name('edit_user_profile');
     Route::post('profile/update','updateProfile')->name('update_user_profile');
+    Route::get('change/password','changePassword')->name('change_password');
+});
+Route::controller(UserController::class)->group(function(){
+    Route::post('password/update','updatePassword')->name('password.update');
 });

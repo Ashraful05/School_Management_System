@@ -113,4 +113,25 @@ class UserController extends Controller
         return redirect()->route('view_profile')->with($notification);
 
     }
+    public function changePassword()
+    {
+        return view('user.password.change_password');
+    }
+    public function updatePassword(Request $request)
+    {
+        $request->validate([
+           'old_password'=>'required',
+           'password'=>'required|confirmed'
+        ]);
+        $hashedPassword = Auth::user()->password;
+        if(Hash::check($request->old_password,$hashedPassword)){
+            $user = User::find(Auth::id());
+            $user->password = Hash::make($request->password);
+            $user->update();
+            Auth::logout();
+            return redirect()->route('login');
+        }else{
+            return redirect()->back();
+        }
+    }
 }
