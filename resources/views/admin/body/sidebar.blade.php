@@ -1,3 +1,8 @@
+{{--@php--}}
+{{--    $prefix = Request::route()->getPrefix();--}}
+{{--    $route = Route::current()->getName();--}}
+{{--@endphp--}}
+
 <aside class="main-sidebar">
     <!-- sidebar-->
     <section class="sidebar">
@@ -17,14 +22,14 @@
         <!-- sidebar menu-->
         <ul class="sidebar-menu" data-widget="tree">
 
-            <li>
+            <li class="{{ Request::is('dashboard')?'active':'' }}">
                 <a href="{{ route('dashboard') }}">
                     <i data-feather="pie-chart"></i>
                     <span>Dashboard</span>
                 </a>
             </li>
 
-            <li class="treeview">
+            <li class="treeview {{ Request::is('user/view')||Request::is('user/add')?'active':'' }} ">
                 <a href="#">
                     <i data-feather="message-circle"></i>
                     <span>Manage User</span>
@@ -33,12 +38,12 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{ route('user_view') }}"><i class="ti-more"></i>View User</a></li>
-                    <li><a href="{{ route('user_add') }}"><i class="ti-more"></i>Add User</a></li>
+                    <li class="{{ Request::is('user/view')?'active':'' }}"><a href="{{ route('user_view') }}"><i class="ti-more"></i>View User</a></li>
+                    <li class="{{ Request::is('user/add')?'active':'' }}"><a href="{{ route('user_add') }}"><i class="ti-more"></i>Add User</a></li>
                 </ul>
             </li>
 
-            <li class="treeview">
+            <li class="treeview  {{ Request::is('user/profile/*')?'active':'' }}">
                 <a href="#">
                     <i data-feather="mail"></i> <span>Manage Profile</span>
                     <span class="pull-right-container">
@@ -46,8 +51,8 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{ route('view_profile') }}"><i class="ti-more"></i>View Profile</a></li>
-                    <li><a href="{{ route('change_password') }}"><i class="ti-more"></i>Change Password</a></li>
+                    <li class="{{ Request::is('user/profile/view')?'active':'' }}"><a href="{{ route('view_profile') }}"><i class="ti-more"></i>View Profile</a></li>
+                    <li class="{{ Request::is('user/change/*')?'active':'' }}"><a href="{{ route('change_password') }}"><i class="ti-more"></i>Change Password</a></li>
 
                 </ul>
             </li>
