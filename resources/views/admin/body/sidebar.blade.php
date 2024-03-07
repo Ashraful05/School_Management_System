@@ -47,8 +47,7 @@
                 <a href="#">
                     <i data-feather="mail"></i> <span>Manage Profile</span>
                     <span class="pull-right-container">
-              <i class="fa fa-angle-right pull-right"></i>
-            </span>
+              <i class="fa fa-angle-right pull-right"></i></span>
                 </a>
                 <ul class="treeview-menu">
                     <li class="{{ Request::is('user/profile/view')?'active':'' }}"><a href="{{ route('view_profile') }}"><i class="ti-more"></i>View Profile</a></li>
@@ -58,18 +57,16 @@
             </li>
 
 
-            <li class="header nav-small-cap">User Interface</li>
-
             <li class="treeview">
                 <a href="#">
                     <i data-feather="grid"></i>
-                    <span>Components</span>
+                    <span>SetUp Management</span>
                     <span class="pull-right-container">
               <i class="fa fa-angle-right pull-right"></i>
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="components_alerts.html"><i class="ti-more"></i>Alerts</a></li>
+                    <li class="{{ Request::is('student/class')?'active':'' }}"><a href="{{ route('class.index') }}"><i class="ti-more"></i>Student Class</a></li>
                     <li><a href="components_badges.html"><i class="ti-more"></i>Badge</a></li>
                 </ul>
             </li>
