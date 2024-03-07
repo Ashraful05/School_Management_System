@@ -24,26 +24,27 @@
                                     <tr>
                                         <th>SL.</th>
                                         <th>Name</th>
-                                        <th>Phone No.</th>
+                                        {{--                                        <th>Phone No.</th>--}}
                                         <th>Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($data as $row=>$item)
+                                    @foreach($classes as $row=>$class)
                                         <tr>
                                             <td>{{ ++$row }}</td>
-                                            <td>{{ $item->name }}</td>
-                                            <td>{{ $item->phone_no }}</td>
+                                            <td>{{ $class->name }}</td>
+                                            {{--                                            <td>{{ $item->phone_no }}</td>--}}
                                             <td>
-                                                <a href="{{ route('class.edit',$item->id) }}" class="btn btn-rounded btn-info">Edit</a>
-                                                <form action="{{ route('class.destroy',$item->id) }}" id="form_select" method="post">
+                                                <a href="{{ route('class.edit',$class->id) }}" class="btn btn-rounded btn-info">Edit</a>
+                                                <form action="{{ route('class.destroy',$class->id) }}" method="post" >
                                                     @csrf
                                                     @method('delete')
-                                                    <button type="submit" class="btn btn-rounded btn-danger">Delete</button>
+                                                    <button type="submit" class="btn btn-rounded btn-danger" onclick="return confirm('Are you sure to delete?')">Delete</button>
                                                 </form>
 
                                             </td>
                                         </tr>
+
                                     @endforeach
                                     </tbody>
                                 </table>

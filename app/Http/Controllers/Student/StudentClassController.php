@@ -15,8 +15,8 @@ class StudentClassController extends Controller
      */
     public function index()
     {
-        $data = StudentClass::get();
-        return view('student_class.index',compact('data'));
+        $classes = StudentClass::get();
+        return view('student_class.index',compact('classes'));
     }
 
     /**
@@ -24,9 +24,9 @@ class StudentClassController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(StudentClass $class)
     {
-        return view('student_class.form');
+        return view('student_class.form',compact('class'));
     }
 
     /**
@@ -35,9 +35,19 @@ class StudentClassController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request,StudentClass $class)
+    public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name'=>'required'
+        ]);
+        StudentClass::create([
+            'name'=>$request->name
+        ]);
+        $notification = [
+            'alert-type'=>'success',
+            'message'=>'Class Info Saved!!'
+        ];
+        return redirect()->route('class.index')->with($notification);
     }
 
     /**
@@ -71,7 +81,17 @@ class StudentClassController extends Controller
      */
     public function update(Request $request, StudentClass $class)
     {
-        //
+        $request->validate([
+           'name'=>'required'
+        ]);
+        $class->update([
+           'name'=>$request->name
+        ]);
+        $notification = [
+          'alert-type'=>'info',
+          'message'=>'Class Info Updated!!'
+        ];
+        return redirect()->route('class.index')->with($notification);
     }
 
     /**
@@ -82,6 +102,11 @@ class StudentClassController extends Controller
      */
     public function destroy(StudentClass $class)
     {
-        //
+        $class->delete();
+        $notification = [
+          'alert-type'=>'error',
+          'message'=>'Class Info deleted'
+        ];
+        return redirect()->route('class.index')->with($notification);
     }
 }
