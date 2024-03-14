@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Student\StudentClassController;
+use App\Http\Controllers\Student\StudentYearController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -51,4 +52,5 @@ Route::controller(UserController::class)
 Route::controller(UserController::class)->group(function(){
     Route::post('password/update','updatePassword')->name('password.update');
 });
-Route::resource('student/class',StudentClassController::class);
+Route::resource('student/class',StudentClassController::class)->middleware('auth:sanctum');
+Route::resource('student/year',StudentYearController::class)->middleware('auth:sanctum');

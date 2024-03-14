@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="{{ asset('/') }}admin/css/style.css">
     <link rel="stylesheet" href="{{ asset('/') }}admin/css/skin_color.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
 </head>
 
 <body class="hold-transition dark-skin sidebar-mini theme-primary fixed">
@@ -60,8 +61,11 @@
 <script src="{{ asset('/') }}admin/js/pages/data-table.js"></script>
 
 <script src="{{ asset('/') }}admin/js/template.js"></script>
+<script src="{{ asset('/') }}admin/js/custom.js"></script>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
     @if(Session::has('message'))
@@ -82,33 +86,67 @@
         }
     @endif
 </script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script>
     $(function(){
-       $(document).on('click','#delete',function (e) {
-          e.preventDefault();
-          var link = $(this).attr('href');
-           Swal.fire({
-               title: "Are you sure?",
-               text: "to delete this data!",
-               icon: "warning",
-               showCancelButton: true,
-               confirmButtonColor: "#3085d6",
-               cancelButtonColor: "#d33",
-               confirmButtonText: "Yes, delete it!"
-           }).then((result) => {
-               if (result.isConfirmed) {
-                   window.location.href = link;
-                   Swal.fire({
-                       title: "Deleted!",
-                       text: "Your file has been deleted.",
-                       icon: "success"
-                   });
-               }
-           });
-       });
+
+        $(document).on('click','#delete',function (e) {
+            e.preventDefault();
+            var link = $(this).attr('href');
+            Swal.fire({
+                title: "Are you sure?",
+                text: "to delete this data!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = link;
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "Your file has been deleted.",
+                        icon: "success"
+                    });
+                }
+            });
+        });
+
+
+        //
+        // $(document).on('click','.button',function (e) {
+        //     e.preventDefault();
+        //     let id = $(this).data('id');
+        //     Swal.fire({
+        //         title: 'Are you sure?',
+        //         text: "You won't be able to revert this!",
+        //         icon: 'warning',
+        //         showCancelButton: true,
+        //         confirmButtonColor: '#3085d6',
+        //         cancelButtonColor: '#d33',
+        //         confirmButtonText: 'Yes, delete it!'
+        //     }).then((result) => {
+        //         if (result.isConfirmed) {
+        //             $('#class_select').submit();
+        //             Swal.fire(
+        //                 {
+        //                     title: 'Deleted!',
+        //                     text:'Your file has been deleted.',
+        //                     icon:'success'
+        //                 }
+        //             );
+        //             // $('#class_select').submit();
+        //             // location.reload(true);
+        //         }
+        //     });
+        // });
+
     });
+
+
 </script>
+
 
 </body>
 </html>

@@ -1,5 +1,5 @@
 @extends('admin.master')
-@section('title','Student Class List')
+@section('title','Student Year List')
 @section('main_content')
     <!-- Content Wrapper. Contains page content -->
     <div class="container-full">
@@ -13,8 +13,8 @@
 
                     <div class="box">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Students Class List</h3>
-                            <a href="{{ route('class.create') }}" class="btn btn-rounded btn-success mb-3" style="float: right">Add Class</a>
+                            <h3 class="box-title">Students Year List</h3>
+                            <a href="{{ route('year.create') }}" class="btn btn-rounded btn-success mb-3" style="float: right">Add Year</a>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
@@ -23,20 +23,19 @@
                                     <thead>
                                     <tr>
                                         <th>SL.</th>
-                                        <th>Name</th>
-                                        {{--                                        <th>Phone No.</th>--}}
+                                        <th>Year</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($classes as $row=>$class)
+                                    @foreach($years as $row=>$year)
                                         <tr>
                                             <td>{{ ++$row }}</td>
-                                            <td>{{ $class->name }}</td>
+                                            <td>{{ $year->year_name }}</td>
                                             {{--                                            <td>{{ $item->phone_no }}</td>--}}
                                             <td>
-                                                <a href="{{ route('class.edit',$class->id) }}" class="btn btn-rounded btn-info">Edit</a>
-                                                <form action="{{ route('class.destroy',$class) }}" method="post" id="">
+                                                <a href="{{ route('year.edit',$year->id) }}" class="btn btn-rounded btn-info">Edit</a>
+                                                <form action="{{ route('year.destroy',$year->id) }}" method="post" id="">
                                                     @csrf
                                                     @method('delete')
                                                     <button type="submit" class="btn btn-rounded btn-danger" onclick="return confirm('Are you sure to delete?')">Delete</button>
