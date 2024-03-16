@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Student\StudentClassController;
 use App\Http\Controllers\Student\StudentYearController;
+use App\Http\Controllers\Student\StudentGroupController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -54,3 +55,4 @@ Route::controller(UserController::class)->group(function(){
 });
 Route::resource('student/class',StudentClassController::class)->middleware('auth:sanctum');
 Route::resource('student/year',StudentYearController::class)->middleware('auth:sanctum');
+Route::resource('student/group',StudentGroupController::class)->middleware('auth:sanctum');

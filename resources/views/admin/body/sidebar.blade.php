@@ -66,8 +66,9 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="{{ Request::is('student/class')?'active':'' }}"><a href="{{ route('class.index') }}"><i class="ti-more"></i>Student Class</a></li>
-                    <li class="{{ Request::is('student/year')?'active':'' }}"><a href="{{ route('year.index') }}"><i class="ti-more"></i>Student Year</a></li>
+                    <li class="{{ Request::is('student/class/*')?'active':'' }}"><a href="{{ route('class.index') }}"><i class="ti-more"></i>Student Class</a></li>
+                    <li class="{{ Request::is('student/year/*')?'active':'' }}"><a href="{{ route('year.index') }}"><i class="ti-more"></i>Student Year</a></li>
+                    <li class="{{ Request::is('student/group/*')?'active':'' }}"><a href="{{ route('group.index') }}"><i class="ti-more"></i>Student Group</a></li>
                 </ul>
             </li>
 

@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
-use App\Models\cr;
-use App\Models\StudentYear;
+use App\Models\StudentGroup;
 use Illuminate\Http\Request;
 
-class StudentYearController extends Controller
+class StudentGroupController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +15,8 @@ class StudentYearController extends Controller
      */
     public function index()
     {
-        $years = StudentYear::get();
-        return view('student_year.index',compact('years'));
+        $groups = StudentGroup::get();
+        return view('student_group.index',compact('groups'));
     }
 
     /**
@@ -25,9 +24,9 @@ class StudentYearController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(StudentYear $year)
+    public function create(StudentGroup $group)
     {
-        return view('student_year.form',compact('year'));
+        return view('student_group.form',compact('group'));
     }
 
     /**
@@ -39,25 +38,25 @@ class StudentYearController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-           'year_name'=>'required|unique:student_years'
+           'group_name'=>'required|unique:student_groups,group_name'
         ]);
-        StudentYear::create([
-           'year_name'=>$request->year_name
+        StudentGroup::create([
+           'group_name'=>$request->group_name
         ]);
         $notification = [
-          'alert-type'=>'success',
-          'message'=>'Data Saved!!!'
+            'alert-type'=>'success',
+            'message'=>'Data Saved!!!'
         ];
-        return redirect()->route('year.index')->with($notification);
+        return redirect()->route('group.index')->with($notification);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\cr  $cr
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(cr $cr)
+    public function show($id)
     {
         //
     }
@@ -65,49 +64,49 @@ class StudentYearController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\cr  $cr
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(StudentYear $year)
+    public function edit(StudentGroup $group)
     {
-        return view('student_year.form',compact('year'));
+        return view('student_group.form',compact('group'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\cr  $cr
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, StudentYear $year)
+    public function update(Request $request, StudentGroup $group)
     {
         $request->validate([
-            'year_name'=>'required|unique:student_years,year_name,'.$year->id
+            'group_name'=>'required|unique:student_groups,group_name,'.$group->id
         ]);
-        $year->update([
-           'year_name'=>$request->year_name
+       $group->update([
+            'group_name'=>$request->group_name
         ]);
         $notification = [
             'alert-type'=>'info',
-            'message'=>'Data Saved!!!'
+            'message'=>'Data Updated!!!'
         ];
-        return redirect()->route('year.index')->with($notification);
+        return redirect()->route('group.index')->with($notification);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\cr  $cr
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(StudentYear $year)
+    public function destroy(StudentGroup $group)
     {
-        $year->delete();
+        $group->delete();
         $notification = [
             'alert-type'=>'error',
             'message'=>'Data Deleted!!!'
         ];
-        return redirect()->route('year.index')->with($notification);
+        return redirect()->route('group.index')->with($notification);
     }
 }
