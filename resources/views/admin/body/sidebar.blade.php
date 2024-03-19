@@ -70,6 +70,7 @@
                     <li class="{{ Request::is('student/year')?'active':'' }}"><a href="{{ route('year.index') }}"><i class="ti-more"></i>Student Year</a></li>
                     <li class="{{ Request::is('student/group')?'active':'' }}"><a href="{{ route('group.index') }}"><i class="ti-more"></i>Student Group</a></li>
                     <li class="{{ Request::is('student/shift')?'active':'' }}"><a href="{{ route('shift.index') }}"><i class="ti-more"></i>Student Shift</a></li>
+                    <li class="{{ Request::is('student/feeCategory')?'active':'' }}"><a href="{{ route('feeCategory.index') }}"><i class="ti-more"></i>Student Fee Category</a></li>
                 </ul>
             </li>
 

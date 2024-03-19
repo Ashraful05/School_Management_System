@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\StudentFeeCategory;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -24,6 +25,7 @@ class DatabaseSeeder extends Seeder
 //        $this->call(StudentClassSeeder::class);
 //        $this->call(StudentYearSeeder::class);
 //        $this->call(StudentGroupSeeder::class);
-        $this->call(StudentShiftSeeder::class);
+//        $this->call(StudentShiftSeeder::class);
+        $this->call(StudentFeeCategorySeeder::class);
     }
 }

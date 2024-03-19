@@ -7,6 +7,7 @@ use App\Http\Controllers\Student\StudentClassController;
 use App\Http\Controllers\Student\StudentYearController;
 use App\Http\Controllers\Student\StudentGroupController;
 use App\Http\Controllers\Student\StudentShiftController;
+use App\Http\Controllers\Student\StudentFeeCategoryController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -58,3 +59,4 @@ Route::resource('student/class',StudentClassController::class)->middleware('auth
 Route::resource('student/year',StudentYearController::class)->middleware('auth:sanctum');
 Route::resource('student/group',StudentGroupController::class)->middleware('auth:sanctum');
 Route::resource('student/shift',StudentShiftController::class)->middleware('auth:sanctum');
+Route::resource('student/feeCategory',StudentFeeCategoryController::class)->middleware('auth:sanctum');
