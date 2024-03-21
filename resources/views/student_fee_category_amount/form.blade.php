@@ -6,6 +6,8 @@
 @endif
 
 @section('main_content')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <div class="container-full">
         <!-- Main content -->
         <section class="content">
@@ -28,9 +30,10 @@
                                     @endif
                                     @csrf
                                     <div class="row">
-                                        <div class="col-md-12">
+                                        <div class="col-12">
+
                                             <div class="form-group">
-                                                <h5>Select Amount Category<span class="text-danger">*</span></h5>
+                                                <h5>Select Fee Category<span class="text-danger">*</span></h5>
                                                 <div class="controls">
                                                     <select name="fee_category_id" class="form-control">
                                                         <option value="" selected disabled>Select Category Of Fee Amount</option>
@@ -40,37 +43,41 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-5">
-                                            <div class="form-group">
-                                                <h5>Select Student Class<span class="text-danger">*</span></h5>
-                                                <div class="controls">
-                                                    <select name="class_id[]" class="form-control">
-                                                        <option value="" selected disabled>Select Student Class</option>
-                                                        @foreach($classes as $class)
-                                                            <option value="{{ $class->id }}">{{ $class->name }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                            </div>
+                                            <div class="add_item">
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <div class="form-group">
+                                                            <h5>Select Student Class<span class="text-danger">*</span></h5>
+                                                            <div class="controls">
+                                                                <select name="class_id[]" class="form-control">
+                                                                    <option value="" selected disabled>Select Student Class</option>
+                                                                    @foreach($classes as $class)
+                                                                        <option value="{{ $class->id }}">{{ $class->name }}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                        </div>
 
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <h5>Fee Amount<span class="text-danger">*</span></h5>
-                                                <div class="controls">
-                                                    <input type="text" name="amount[]" value="{{ old('amount',$feeCategoryAmount->amount) }}" class="form-control" >
-                                                    @error('amount')
-                                                    <span class="text-danger">{{ $message }}</span>
-                                                    @enderror
+                                                    </div>
+                                                    <div class="col-md-5">
+                                                        <div class="form-group">
+                                                            <h5>Fee Amount<span class="text-danger">*</span></h5>
+                                                            <div class="controls">
+                                                                <input type="text" name="amount[]" value="{{ old('amount',$feeCategoryAmount->amount) }}" class="form-control" >
+                                                                @error('amount')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                                @enderror
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2" style="padding-top: 25px;">
+                                                        <span class="btn btn-success add_more_event" ><i class="fa fa-plus-circle"></i></span>
+                                                    </div>
                                                 </div>
+
                                             </div>
                                         </div>
-                                        <div class="col-md-3" style="padding-top: 25px;">
-                                            <span class="btn btn-success addmoreevent"><i class="fa fa-plus-circle"></i></span>
-                                        </div>
+
                                     </div>
 
                                     <div class="col-md-12">
@@ -89,11 +96,60 @@
             </div>
             <!-- /.row -->
     </div>
-    <!-- /.box-body -->
-    </div>
-    <!-- /.box -->
 
-    </section>
-    <!-- /.content -->
+    <div style="display: none">
+        <div class="whole_extra_item_add" id="whole_extra_item_add">
+            <div class="delete_whole_extra_item_add" id="delete_whole_extra_item_add">
+                <div class="form-row">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <h5>Select Student Class<span class="text-danger">*</span></h5>
+                            <div class="controls">
+                                <select name="class_id[]" class="form-control">
+                                    <option value="" selected disabled>Select Student Class</option>
+                                    @foreach($classes as $class)
+                                        <option value="{{ $class->id }}">{{ $class->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <h5>Fee Amount<span class="text-danger">*</span></h5>
+                            <div class="controls">
+                                <input type="text" name="amount[]" value="{{ old('amount',$feeCategoryAmount->amount) }}" class="form-control" >
+                                @error('amount')
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3" style="padding-top: 25px;">
+                        <span class="btn btn-success add_more_event" id="add_more_event"><i class="fa fa-plus-circle"></i></span>
+                        <span class="btn btn-danger remove_more_event" id="remove_more_event"><i class="fa fa-minus-circle"></i></span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
+
+
+    <script>
+        $(document).ready(function(){
+            var counter = 0;
+            $(document).on('click','.add_more_event',function(){
+                var whole_extra_item_add = $('#whole_extra_item_add').html();
+                $(this).closest('.add_item').append(whole_extra_item_add);
+                counter++;
+            });
+            $(document).on('click','.remove_more_event',function(event){
+               $(this).closest('.delete_whole_extra_item_add').remove();
+               counter -= 1;
+            });
+        });
+    </script>
+
 @endsection
