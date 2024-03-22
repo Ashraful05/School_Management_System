@@ -17,7 +17,10 @@ class StudentFeeCategoryAmountController extends Controller
      */
     public function index()
     {
-        $amounts = FeeCategoryAmount::get();
+//        $amounts = FeeCategoryAmount::with('feeCategory','class')->get();
+        $amounts = FeeCategoryAmount::select('fee_category_id')
+                                    ->groupBy('fee_category_id')
+                                    ->get();
         return view('student_fee_category_amount.index',compact('amounts'));
     }
 
@@ -41,7 +44,22 @@ class StudentFeeCategoryAmountController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $countClass = count($request->class_id);
+        if($countClass != ''){
+            for($i=0;$i<$countClass;$i++){
+                FeeCategoryAmount::create([
+                    'fee_category_id'=>$request->fee_category_id,
+                    'class_id'=>$request->class_id[$i],
+                    'amount'=>$request->amount[$i]
+                ]);
+            }
+        }
+        $notification = [
+            'alert-type'=>'success',
+            'message'=>'Data Saved!!!'
+        ];
+//        return redirect()->route('feeCategoryAmount.index')->with($notification);
+        return redirect()->back()->with($notification);
     }
 
     /**
@@ -61,9 +79,25 @@ class StudentFeeCategoryAmountController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(FeeCategoryAmount $feeCategoryAmount,$fee_category_id)
     {
-        //
+//        return $feeCategoryAmount;
+//        return $fee_category_id;
+//        return $feeCategoryAmount;
+        $feeCategoryAmount->fee_category_id = $fee_category_id;
+//        return $feeCategoryAmount;
+        $feeCategories = StudentFeeCategory::get();
+        $classes = StudentClass::get();
+//        $feeCategoryAmount->toArray();
+//        FeeCategoryAmount $feeCategoryAmount;
+//          $feeCategoryAmount->where($feeCategoryAmount->fee_category_id)
+//            ->orderby('class_id','asc')->get()->dd();
+          $editClassWiseCategory = FeeCategoryAmount::where('fee_category_id',$fee_category_id)
+              ->orderby('class_id','asc')->get();
+//          return $classWiseCategory;
+//        return view('student_fee_category_amount.form',compact('feeCategoryAmount','feeCategories','classes'));
+        return view('student_fee_category_amount.form',compact('feeCategoryAmount',
+            'editClassWiseCategory','feeCategories','classes'));
     }
 
     /**

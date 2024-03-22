@@ -14,7 +14,7 @@
                     <div class="box">
                         <div class="box-header with-border">
                             <h3 class="box-title">Students Fees List</h3>
-                            <a href="{{ route('feeCategory.create') }}" class="btn btn-rounded btn-success mb-3" style="float: right">Add Fee Category</a>
+                            <a href="{{ route('feeCategoryAmount.create') }}" class="btn btn-rounded btn-success mb-3" style="float: right">Add Fee Category Amount</a>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
@@ -28,14 +28,13 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($fees as $row => $fee)
+                                    @foreach($amounts as $row => $amount)
                                         <tr>
                                             <td>{{ ++$row }}</td>
-                                            <td>{{ $fee->fee_category_name }}</td>
-                                            {{--                                            <td>{{ $item->phone_no }}</td>--}}
+                                            <td>{{ $amount->feeCategory->fee_category_name }}</td>
                                             <td>
-                                                <a href="{{ route('feeCategory.edit',$fee->id) }}" class="btn btn-rounded btn-info">Edit</a>
-                                                <form action="{{ route('feeCategory.destroy',$fee->id) }}" method="post" id="">
+                                                <a href="{{ route('feeCategoryAmount.edit',$amount->fee_category_id) }}" class="btn btn-rounded btn-info">Edit</a>
+                                                <form action="{{ route('feeCategoryAmount.destroy',$amount->fee_category_id) }}" method="post" id="">
                                                     @csrf
                                                     @method('delete')
                                                     <button type="submit" class="btn btn-rounded btn-danger" onclick="return confirm('Are you sure to delete?')">Delete</button>

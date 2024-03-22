@@ -1,5 +1,6 @@
 @extends('admin.master')
-@if($feeCategoryAmount->exists)
+
+@if($feeCategoryAmount['fee_category_id']!='')
     @section('title','Update Student Fees Amount')
 @else
     @section('title','Add Student Fees Amount')
@@ -15,7 +16,12 @@
             <!-- Basic Forms -->
             <div class="box">
                 <div class="box-header with-border">
-                    <h4 class="box-title">Add Fee Category Amount</h4>
+                    @if($feeCategoryAmount['fee_category_id']!='')
+                        <h4 class="box-title">Update Fee Category Amount</h4>
+                    @else
+                        <h4 class="box-title">Add Fee Category Amount</h4>
+                    @endif
+
                     <a href="{{ route('feeCategoryAmount.index') }}" class="btn btn-rounded btn-success mb-3" style="float: right">Student Fees Amount List</a>
                 </div>
 
@@ -23,7 +29,7 @@
                 <!-- /.box-header -->
                 <div class="box-body">
                     @if($feeCategoryAmount->exists)
-                        <form action="{{ route('feeCategoryAmount.update',$feeCategoryAmount->id) }}" method="post" >
+                        <form action="{{ route('feeCategoryAmount.update',$feeCategoryAmount->fee_category_id) }}" method="post" >
                             @method('put')
                             @else
                                 <form action="{{ route('feeCategoryAmount.store') }}" method="post" >
@@ -36,44 +42,84 @@
                                                 <h5>Select Fee Category<span class="text-danger">*</span></h5>
                                                 <div class="controls">
                                                     <select name="fee_category_id" class="form-control">
-                                                        <option value="" selected disabled>Select Category Of Fee Amount</option>
+                                                        <option value="0"{{ $feeCategoryAmount->exists ? '':'selected' }} selected disabled>Select Category Of Fee Amount</option>
                                                         @foreach($feeCategories as $category)
-                                                            <option value="{{ $category->id }}">{{ $category->fee_category_name }}</option>
+                                                            <option value="{{ $category->id }}" @if($category->id == $feeCategoryAmount->fee_category_id) selected @endif>{{ $category->fee_category_name }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="add_item">
-                                                <div class="row">
-                                                    <div class="col-md-5">
-                                                        <div class="form-group">
-                                                            <h5>Select Student Class<span class="text-danger">*</span></h5>
-                                                            <div class="controls">
-                                                                <select name="class_id[]" class="form-control">
-                                                                    <option value="" selected disabled>Select Student Class</option>
-                                                                    @foreach($classes as $class)
-                                                                        <option value="{{ $class->id }}">{{ $class->name }}</option>
-                                                                    @endforeach
-                                                                </select>
-                                                            </div>
-                                                        </div>
+                                                @if($feeCategoryAmount['fee_category_id']!='')
+                                                    @foreach($editClassWiseCategory as $editClass)
+                                                        <div class="delete_whole_extra_item_add" id="delete_whole_extra_item_add">
+                                                            <div class="row">
+                                                                <div class="col-md-5">
+                                                                    <div class="form-group">
+                                                                        <h5>Select Student Class<span class="text-danger">*</span></h5>
+                                                                        <div class="controls">
+                                                                            <select name="class_id[]" class="form-control">
+                                                                                <option value="0" selected disabled>Select Student Class</option>
+                                                                                @foreach($classes as $class)
+                                                                                    <option value="{{ $class->id }}" @if($class->id == $editClass->class_id) selected @endif>{{ $class->name }}</option>
+                                                                                @endforeach
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
 
-                                                    </div>
-                                                    <div class="col-md-5">
-                                                        <div class="form-group">
-                                                            <h5>Fee Amount<span class="text-danger">*</span></h5>
-                                                            <div class="controls">
-                                                                <input type="text" name="amount[]" value="{{ old('amount',$feeCategoryAmount->amount) }}" class="form-control" >
-                                                                @error('amount')
-                                                                <span class="text-danger">{{ $message }}</span>
-                                                                @enderror
+                                                                </div>
+                                                                <div class="col-md-5">
+                                                                    <div class="form-group">
+                                                                        <h5>Fee Amount<span class="text-danger">*</span></h5>
+                                                                        <div class="controls">
+                                                                            <input type="text" name="amount[]" value="{{ old('amount',$editClass->amount) }}" class="form-control" >
+                                                                            @error('amount')
+                                                                            <span class="text-danger">{{ $message }}</span>
+                                                                            @enderror
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-2" style="padding-top: 25px;">
+                                                                    <span class="btn btn-success add_more_event" ><i class="fa fa-plus-circle"></i></span>
+                                                                    <span class="btn btn-danger remove_more_event"><i class="fa fa-minus-circle"></i></span>
+                                                                </div>
                                                             </div>
                                                         </div>
+                                                    @endforeach
+                                                @else
+                                                    <div class="row">
+                                                        <div class="col-md-5">
+                                                            <div class="form-group">
+                                                                <h5>Select Student Class<span class="text-danger">*</span></h5>
+                                                                <div class="controls">
+                                                                    <select name="class_id[]" class="form-control">
+                                                                        <option value="0" selected disabled>Select Student Class</option>
+                                                                        @foreach($classes as $class)
+                                                                            <option value="{{ $class->id }}">{{ $class->name }}</option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="col-md-5">
+                                                            <div class="form-group">
+                                                                <h5>Fee Amount<span class="text-danger">*</span></h5>
+                                                                <div class="controls">
+                                                                    <input type="text" name="amount[]" value="{{ old('amount',$feeCategoryAmount->amount) }}" class="form-control" >
+                                                                    @error('amount')
+                                                                    <span class="text-danger">{{ $message }}</span>
+                                                                    @enderror
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-2" style="padding-top: 25px;">
+                                                            <span class="btn btn-success add_more_event" ><i class="fa fa-plus-circle"></i></span>
+                                                        </div>
                                                     </div>
-                                                    <div class="col-md-2" style="padding-top: 25px;">
-                                                        <span class="btn btn-success add_more_event" ><i class="fa fa-plus-circle"></i></span>
-                                                    </div>
-                                                </div>
+                                                @endif
+
+
 
                                             </div>
                                         </div>
@@ -146,8 +192,8 @@
                 counter++;
             });
             $(document).on('click','.remove_more_event',function(event){
-               $(this).closest('.delete_whole_extra_item_add').remove();
-               counter -= 1;
+                $(this).closest('.delete_whole_extra_item_add').remove();
+                counter -= 1;
             });
         });
     </script>
