@@ -28,8 +28,8 @@
 
                 <!-- /.box-header -->
                 <div class="box-body">
-                    @if($feeCategoryAmount->exists)
-                        <form action="{{ route('feeCategoryAmount.update',$feeCategoryAmount->fee_category_id) }}" method="post" >
+                    @if($feeCategoryAmount->fee_category_id != '')
+                        <form action="{{ route('feeCategoryAmount.update',$editClassWiseCategory[0]->fee_category_id) }}" method="post" >
                             @method('put')
                             @else
                                 <form action="{{ route('feeCategoryAmount.store') }}" method="post" >
@@ -47,10 +47,13 @@
                                                             <option value="{{ $category->id }}" @if($category->id == $feeCategoryAmount->fee_category_id) selected @endif>{{ $category->fee_category_name }}</option>
                                                         @endforeach
                                                     </select>
+                                                    @error('fee_category_id')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                    @enderror
                                                 </div>
                                             </div>
                                             <div class="add_item">
-                                                @if($feeCategoryAmount['fee_category_id']!='')
+                                                @if($feeCategoryAmount['fee_category_id'] != '')
                                                     @foreach($editClassWiseCategory as $editClass)
                                                         <div class="delete_whole_extra_item_add" id="delete_whole_extra_item_add">
                                                             <div class="row">
@@ -128,7 +131,7 @@
 
                                     <div class="col-md-12">
                                         <div class="text-xs-right">
-                                            @if($feeCategoryAmount->exists)
+                                            @if($feeCategoryAmount->fee_category_id != '')
                                                 <button type="submit" class="form-control btn btn-rounded btn-info">Update</button>
                                             @else
                                                 <button type="submit" class="form-control btn btn-rounded btn-info">Add</button>

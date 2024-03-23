@@ -44,6 +44,11 @@ class StudentFeeCategoryAmountController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'fee_category_id'=>'required'
+        ],[
+            'fee_category_id.required'=>'Fee Category Name is required'
+        ]);
         $countClass = count($request->class_id);
         if($countClass != ''){
             for($i=0;$i<$countClass;$i++){
@@ -58,8 +63,8 @@ class StudentFeeCategoryAmountController extends Controller
             'alert-type'=>'success',
             'message'=>'Data Saved!!!'
         ];
-//        return redirect()->route('feeCategoryAmount.index')->with($notification);
-        return redirect()->back()->with($notification);
+        return redirect()->route('feeCategoryAmount.index')->with($notification);
+//        return redirect()->back()->with($notification);
     }
 
     /**
@@ -107,9 +112,32 @@ class StudentFeeCategoryAmountController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,$fee_category_id)
     {
-        //
+//        return $request->all();
+        if($request->class_id == null){
+            $notification = [
+              'alert-type'=>'error',
+              'message'=>'You must have to add at least one class!'
+            ];
+            return redirect()->back()->with($notification);
+        }else{
+            $countClass = count($request->class_id);
+            FeeCategoryAmount::where('fee_category_id',$fee_category_id)->delete();
+            for($i=0; $i<$countClass; $i++){
+              $data = new FeeCategoryAmount();
+              $data->fee_category_id = $request->fee_category_id;
+              $data->class_id = $request->class_id[$i];
+              $data->amount = $request->amount[$i];
+              $data->save();
+            }
+            $notification = [
+                'alert-type'=>'info',
+                'message'=>'You data is Updated!'
+            ];
+            return redirect()->route('feeCategoryAmount.index')->with($notification);
+        }
+
     }
 
     /**

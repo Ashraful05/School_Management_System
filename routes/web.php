@@ -66,3 +66,4 @@ Route::resource('student/feeCategoryAmount',StudentFeeCategoryAmountController::
     ->except('edit')
     ->middleware('auth:sanctum');
 Route::get('student/feeCategoryAmount/{fee_category_id}/edit', [StudentFeeCategoryAmountController::class,'edit'])->name('feeCategoryAmount.edit');
+//Route::post('student/feeCategoryAmount/{fee_category_id}', [StudentFeeCategoryAmountController::class,'update'])->name('feeCategoryAmount.update');
