@@ -73,9 +73,13 @@ class StudentFeeCategoryAmountController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($fee_category_id)
     {
-        //
+        $detailsData = FeeCategoryAmount::where('fee_category_id',$fee_category_id)
+            ->orderby('class_id','asc')
+            ->get();
+        return view('student_fee_category_amount.details_data',compact('detailsData'));
+
     }
 
     /**

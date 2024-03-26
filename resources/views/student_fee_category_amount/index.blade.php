@@ -33,12 +33,14 @@
                                             <td>{{ ++$row }}</td>
                                             <td>{{ $amount->feeCategory->fee_category_name }}</td>
                                             <td>
-                                                <a href="{{ route('feeCategoryAmount.edit',$amount->fee_category_id) }}" class="btn btn-rounded btn-info">Edit</a>
-                                                <form action="{{ route('feeCategoryAmount.destroy',$amount->fee_category_id) }}" method="post" id="">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button type="submit" class="btn btn-rounded btn-danger" onclick="return confirm('Are you sure to delete?')">Delete</button>
-                                                </form>
+                                                <a href="{{ route('feeCategoryAmount.edit',$amount->fee_category_id) }}" class="btn btn-rounded btn-info"><i class="fa fa-pencil" title="Edit"></i></a>
+                                                <a href="{{ route('feeCategoryAmount.show',$amount->fee_category_id) }}" class="btn btn-rounded btn-info"><i class="fa fa-info" title="Details"></i></a>
+
+{{--                                                <form action="{{ route('feeCategoryAmount.destroy',$amount->fee_category_id) }}" method="post" id="">--}}
+{{--                                                    @csrf--}}
+{{--                                                    @method('delete')--}}
+{{--                                                    <button type="submit" class="btn btn-rounded btn-danger" onclick="return confirm('Are you sure to delete?')">Delete</button>--}}
+{{--                                                </form>--}}
 
                                             </td>
                                         </tr>
