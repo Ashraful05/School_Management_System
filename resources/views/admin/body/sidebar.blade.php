@@ -72,6 +72,7 @@
                     <li class="{{ Request::is('student/shift')?'active':'' }}"><a href="{{ route('shift.index') }}"><i class="ti-more"></i>Student Shift</a></li>
                     <li class="{{ Request::is('student/feeCategory')?'active':'' }}"><a href="{{ route('feeCategory.index') }}"><i class="ti-more"></i>Student Fee Category</a></li>
                     <li class="{{ Request::is('student/feeCategoryAmount')?'active':'' }}"><a href="{{ route('feeCategoryAmount.index') }}"><i class="ti-more"></i>Student Fee Amount</a></li>
+                    <li class="{{ Request::is('examType')?'active':'' }}"><a href="{{ route('examType.index') }}"><i class="ti-more"></i>Student Exam Type</a></li>
                 </ul>
             </li>
 
