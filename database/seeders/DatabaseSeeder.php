@@ -28,5 +28,6 @@ class DatabaseSeeder extends Seeder
 //        $this->call(StudentShiftSeeder::class);
 //        $this->call(StudentFeeCategorySeeder::class);
 //        $this->call(ExamTypeSeeder::class);
+//        $this->call(SchoolSubjectSeeder::class);
     }
 }

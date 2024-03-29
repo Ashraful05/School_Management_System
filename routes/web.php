@@ -10,6 +10,8 @@ use App\Http\Controllers\Student\StudentShiftController;
 use App\Http\Controllers\Student\StudentFeeCategoryController;
 use App\Http\Controllers\Student\StudentFeeCategoryAmountController;
 use App\Http\Controllers\Student\ExamTypeController;
+use App\Http\Controllers\Student\SchoolSubjectController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -70,4 +72,5 @@ Route::get('student/feeCategoryAmount/{fee_category_id}/edit', [StudentFeeCatego
     ->name('feeCategoryAmount.edit')->middleware('auth:sanctum');
 //Route::post('student/feeCategoryAmount/{fee_category_id}', [StudentFeeCategoryAmountController::class,'update'])->name('feeCategoryAmount.update');
 
-Route::resource('examType',ExamTypeController::class);
+Route::resource('examType',ExamTypeController::class)->middleware('auth:sanctum');
+Route::resource('schoolSubject',SchoolSubjectController::class)->middleware('auth:sanctum');

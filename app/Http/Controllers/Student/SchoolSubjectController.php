@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
-use App\Models\ExamType;
+use App\Models\SchoolSubject;
+use GuzzleHttp\Cookie\SessionCookieJar;
 use Illuminate\Http\Request;
 
-class ExamTypeController extends Controller
+class SchoolSubjectController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +16,8 @@ class ExamTypeController extends Controller
      */
     public function index()
     {
-        $examTypes = ExamType::get();
-        return view('exam_type.index',compact('examTypes'));
+        $subjects = SchoolSubject::get();
+        return view('school_subject.index',compact('subjects'));
     }
 
     /**
@@ -24,9 +25,9 @@ class ExamTypeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(ExamType $examType)
+    public function create(SchoolSubject $schoolSubject)
     {
-        return view('exam_type.form',compact('examType'));
+        return view('school_subject.form',compact('schoolSubject'));
     }
 
     /**
@@ -38,14 +39,14 @@ class ExamTypeController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name'=>'required|unique:exam_types'
+           'name'=>'required|unique:school_subjects'
         ]);
-        ExamType::create($data);
+        SchoolSubject::create($data);
         $notification = [
             'alert-type'=>'success',
             'message'=>'Data Saved!!'
         ];
-        return redirect()->route('examType.index')->with($notification);
+        return redirect()->route('schoolSubject.index')->with($notification);
     }
 
     /**
@@ -65,9 +66,9 @@ class ExamTypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(ExamType $examType)
+    public function edit(SchoolSubject $schoolSubject)
     {
-        return view('exam_type.form',compact('examType'));
+        return view('school_subject.form',compact('schoolSubject'));
     }
 
     /**
@@ -77,19 +78,17 @@ class ExamTypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ExamType $examType)
+    public function update(Request $request, SchoolSubject $schoolSubject)
     {
-        $request->validate([
-            'name'=>'required|unique:exam_types,name,'.$examType->id
+        $data = $request->validate([
+            'name'=>'required|unique:school_subjects,name,'.$schoolSubject->id
         ]);
-        $examType->update([
-           'name'=>$request->name,
-        ]);
+        $schoolSubject->update($data);
         $notification = [
             'alert-type'=>'info',
             'message'=>'Data Updated!!'
         ];
-        return redirect()->route('examType.index')->with($notification);
+        return redirect()->route('schoolSubject.index')->with($notification);
     }
 
     /**
@@ -98,13 +97,13 @@ class ExamTypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ExamType $examType)
+    public function destroy(SchoolSubject $schoolSubject)
     {
-        $examType->delete();
+        $schoolSubject->delete();
         $notification = [
             'alert-type'=>'error',
             'message'=>'Data Deleted!!'
         ];
-        return redirect()->route('examType.index')->with($notification);
+        return redirect()->route('schoolSubject.index')->with($notification);
     }
 }
