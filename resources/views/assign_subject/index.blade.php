@@ -1,5 +1,5 @@
 @extends('admin.master')
-@section('title','School Subject List')
+@section('title','Assign Subject List')
 @section('main_content')
     <!-- Content Wrapper. Contains page content -->
     <div class="container-full">
@@ -13,8 +13,8 @@
 
                     <div class="box">
                         <div class="box-header with-border">
-                            <h3 class="box-title">School Subject List</h3>
-                            <a href="{{ route('schoolSubject.create') }}" class="btn btn-rounded btn-success mb-3" style="float: right">Add Subject</a>
+                            <h3 class="box-title">Assign Subject List</h3>
+                            <a href="{{ route('assignStudentSubject.create') }}" class="btn btn-rounded btn-success mb-3" style="float: right">Assign Subject</a>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
@@ -28,17 +28,17 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($subjects as $row=>$subject)
+                                    @foreach($assignSubjects as $row=>$assignSubject)
                                         <tr>
                                             <td>{{ ++$row }}</td>
-                                            <td>{{ $subject->name }}</td>
+                                            <td>{{ $assignSubject->studentClassName->name }}</td>
                                             <td>
-                                                <a href="{{ route('schoolSubject.edit',$subject->id) }}" class="btn btn-rounded btn-info"><i class="fa fa-pencil" title="edit"></i></a>
-                                                <form action="{{ route('schoolSubject.destroy',$subject->id) }}" method="post" id="">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button type="submit" class="btn btn-rounded btn-danger" onclick="return confirm('Are you sure to delete?')"><i class="fa fa-trash-o" title="delete"></i></button>
-                                                </form>
+{{--                                                <a href="{{ route('schoolSubject.edit',$subject->id) }}" class="btn btn-rounded btn-info"><i class="fa fa-pencil" title="edit"></i></a>--}}
+{{--                                                <form action="{{ route('schoolSubject.destroy',$subject->id) }}" method="post" id="">--}}
+{{--                                                    @csrf--}}
+{{--                                                    @method('delete')--}}
+{{--                                                    <button type="submit" class="btn btn-rounded btn-danger" onclick="return confirm('Are you sure to delete?')"><i class="fa fa-trash-o" title="delete"></i></button>--}}
+{{--                                                </form>--}}
 
                                             </td>
                                         </tr>
