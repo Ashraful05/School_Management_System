@@ -75,9 +75,12 @@ class AssignStudentSubjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($class_id)
     {
-        //
+        $detailsData = AssignStudentSubject::where('class_id',$class_id)
+            ->orderby('subject_id','asc')
+            ->get();
+        return view('assign_subject.details_data',compact('detailsData'));
     }
 
     /**
@@ -86,9 +89,16 @@ class AssignStudentSubjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(AssignStudentSubject $assignStudentSubject,$class_id)
     {
-        //
+        $assignStudentSubject->class_id = $class_id;
+        $studentClasses = StudentClass::get();
+        $schoolSubjects = SchoolSubject::get();
+        $editSubjectWise = AssignStudentSubject::where('class_id',$class_id)
+            ->orderby('subject_id','asc')
+            ->get();
+//        return $editSubjectWise;
+        return view('assign_subject.form',compact('assignStudentSubject','studentClasses','schoolSubjects','editSubjectWise'));
     }
 
     /**
@@ -98,9 +108,33 @@ class AssignStudentSubjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $class_id)
     {
-        //
+        if($request->subject_id == null){
+            $notification = [
+                'alert-type'=>'error',
+                'message'=>'You must have to add at least one subject!'
+            ];
+            return redirect()->back()->with($notification);
+        }else{
+            $countSubject = count($request->subject_id);
+            AssignStudentSubject::where('class_id',$class_id)->delete();
+            for($i=0;$i<$countSubject;$i++){
+                AssignStudentSubject::create([
+                   'class_id'=>$request->class_id,
+                   'subject_id'=>$request->subject_id[$i],
+                   'full_mark'=>$request->full_mark[$i],
+                   'pass_mark'=>$request->pass_mark[$i],
+                   'subjective_mark'=>$request->subjective_mark[$i],
+                ]);
+            }
+            $notification = [
+                'alert-type'=>'info',
+                'message'=>'Your data is Updated!'
+            ];
+            return redirect()->route('assignStudentSubject.index')->with($notification);
+
+        }
     }
 
     /**

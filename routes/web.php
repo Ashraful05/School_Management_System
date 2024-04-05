@@ -70,9 +70,15 @@ Route::resource('student/feeCategoryAmount',StudentFeeCategoryAmountController::
     ->except('edit')
     ->middleware('auth:sanctum');
 Route::get('student/feeCategoryAmount/{fee_category_id}/edit', [StudentFeeCategoryAmountController::class,'edit'])
-    ->name('feeCategoryAmount.edit')->middleware('auth:sanctum');
+    ->name('feeCategoryAmount.edit')
+    ->middleware('auth:sanctum');
 //Route::post('student/feeCategoryAmount/{fee_category_id}', [StudentFeeCategoryAmountController::class,'update'])->name('feeCategoryAmount.update');
 
 Route::resource('examType',ExamTypeController::class)->middleware('auth:sanctum');
 Route::resource('schoolSubject',SchoolSubjectController::class)->middleware('auth:sanctum');
-Route::resource('assignStudentSubject',AssignStudentSubjectController::class)->middleware('auth:sanctum');
+Route::resource('assignStudentSubject',AssignStudentSubjectController::class)
+    ->except('edit')
+    ->middleware('auth:sanctum');
+Route::get('assignStudentSubject/{class_id}/edit',[AssignStudentSubjectController::class,'edit'])
+    ->name('assignStudentSubject.edit')
+    ->middleware('auth:sanctum');

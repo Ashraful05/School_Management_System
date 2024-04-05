@@ -139,11 +139,13 @@
                                         </div>
                                     </div>
                                 </form>
+                        </form>
 
                 </div>
                 <!-- /.col -->
             </div>
             <!-- /.row -->
+        </section>
     </div>
 
     <div style="display: none">

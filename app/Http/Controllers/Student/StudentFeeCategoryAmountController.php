@@ -19,8 +19,8 @@ class StudentFeeCategoryAmountController extends Controller
     {
 //        $amounts = FeeCategoryAmount::with('feeCategory','class')->get();
         $amounts = FeeCategoryAmount::select('fee_category_id')
-                                    ->groupBy('fee_category_id')
-                                    ->get();
+            ->groupBy('fee_category_id')
+            ->get();
         return view('student_fee_category_amount.index',compact('amounts'));
     }
 
@@ -90,21 +90,11 @@ class StudentFeeCategoryAmountController extends Controller
      */
     public function edit(FeeCategoryAmount $feeCategoryAmount,$fee_category_id)
     {
-//        return $feeCategoryAmount;
-//        return $fee_category_id;
-//        return $feeCategoryAmount;
         $feeCategoryAmount->fee_category_id = $fee_category_id;
-//        return $feeCategoryAmount;
         $feeCategories = StudentFeeCategory::get();
         $classes = StudentClass::get();
-//        $feeCategoryAmount->toArray();
-//        FeeCategoryAmount $feeCategoryAmount;
-//          $feeCategoryAmount->where($feeCategoryAmount->fee_category_id)
-//            ->orderby('class_id','asc')->get()->dd();
-          $editClassWiseCategory = FeeCategoryAmount::where('fee_category_id',$fee_category_id)
-              ->orderby('class_id','asc')->get();
-//          return $classWiseCategory;
-//        return view('student_fee_category_amount.form',compact('feeCategoryAmount','feeCategories','classes'));
+        $editClassWiseCategory = FeeCategoryAmount::where('fee_category_id',$fee_category_id)
+            ->orderby('class_id','asc')->get();
         return view('student_fee_category_amount.form',compact('feeCategoryAmount',
             'editClassWiseCategory','feeCategories','classes'));
     }
@@ -121,19 +111,19 @@ class StudentFeeCategoryAmountController extends Controller
 //        return $request->all();
         if($request->class_id == null){
             $notification = [
-              'alert-type'=>'error',
-              'message'=>'You must have to add at least one class!'
+                'alert-type'=>'error',
+                'message'=>'You must have to add at least one class!'
             ];
             return redirect()->back()->with($notification);
         }else{
             $countClass = count($request->class_id);
             FeeCategoryAmount::where('fee_category_id',$fee_category_id)->delete();
             for($i=0; $i<$countClass; $i++){
-              $data = new FeeCategoryAmount();
-              $data->fee_category_id = $request->fee_category_id;
-              $data->class_id = $request->class_id[$i];
-              $data->amount = $request->amount[$i];
-              $data->save();
+                $data = new FeeCategoryAmount();
+                $data->fee_category_id = $request->fee_category_id;
+                $data->class_id = $request->class_id[$i];
+                $data->amount = $request->amount[$i];
+                $data->save();
             }
             $notification = [
                 'alert-type'=>'info',

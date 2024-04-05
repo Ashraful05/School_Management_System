@@ -1,5 +1,5 @@
 @extends('admin.master')
-@section('title','Assign Subject List')
+@section('title','Assign Subject Details')
 @section('main_content')
     <!-- Content Wrapper. Contains page content -->
     <div class="container-full">
@@ -13,30 +13,30 @@
 
                     <div class="box">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Assign Subject List</h3>
-                            <a href="{{ route('assignStudentSubject.create') }}" class="btn btn-rounded btn-success mb-3" style="float: right">Assign Subject</a>
+                            <h3 class="box-title">Students Class Name: {{ $detailsData['0']['studentClassName']['name'] }}</h3>
+                            <a href="{{ route('assignStudentSubject.index') }}" class="btn btn-rounded btn-success mb-3" style="float: right">Assigned Subject List</a>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
                             <div class="table-responsive">
-                                <table id="example1" class="table table-bordered table-striped">
-                                    <thead>
+                                <table id="" class="table table-bordered table-striped">
+                                    <thead class="thead-light">
                                     <tr>
                                         <th>SL.</th>
-                                        <th>Name</th>
-                                        <th>Action</th>
+                                        <th>Subject Name</th>
+                                        <th>Full Mark</th>
+                                        <th>Pass Mark</th>
+                                        <th>Subjective Mark</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($assignSubjects as $row=>$assignSubject)
+                                    @foreach($detailsData as $row => $data)
                                         <tr>
                                             <td>{{ ++$row }}</td>
-                                            <td>{{ $assignSubject->studentClassName->name }}</td>
-                                            <td>
-                                                <a href="{{ route('assignStudentSubject.edit',$assignSubject->class_id) }}" class="btn btn-rounded btn-info"><i class="fa fa-pencil" title="edit"></i></a>
-                                                <a href="{{ route('assignStudentSubject.show',$assignSubject->class_id) }}" class="btn btn-rounded btn-info"><i class="fa fa-info" title="Details"></i></a>
-
-                                            </td>
+                                            <td>{{ $data->subjectName->name }}</td>
+                                            <td>{{ $data->full_mark }}</td>
+                                            <td>{{ $data->pass_mark }}</td>
+                                            <td>{{ $data->subjective_mark }}</td>
                                         </tr>
 
                                     @endforeach
@@ -59,3 +59,4 @@
 
 
 @endsection
+
