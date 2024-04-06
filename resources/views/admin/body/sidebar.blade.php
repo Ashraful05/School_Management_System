@@ -29,6 +29,8 @@
                 </a>
             </li>
 
+            @if(\Illuminate\Support\Facades\Auth::user()->role == 'admin')
+
             <li class="treeview {{ Request::is('user/view')||Request::is('user/add')?'active':'' }} ">
                 <a href="#">
                     <i data-feather="message-circle"></i>
@@ -42,6 +44,8 @@
                     <li class="{{ Request::is('user/add')?'active':'' }}"><a href="{{ route('user_add') }}"><i class="ti-more"></i>Add User</a></li>
                 </ul>
             </li>
+
+            @endif
 
             <li class="treeview  {{ Request::is('user/profile/*')?'active':'' }}">
                 <a href="#">

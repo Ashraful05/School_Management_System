@@ -24,6 +24,7 @@
                                     <tr>
                                         <th>SL.</th>
                                         <th>User Type</th>
+                                        <th>Role</th>
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>Action</th>
@@ -34,6 +35,7 @@
                                     <tr>
                                         <td>{{ ++$row }}</td>
                                         <td>{{ $user->user_type }}</td>
+                                        <td>{{ $user->role }}</td>
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->email }}</td>
                                         <td>

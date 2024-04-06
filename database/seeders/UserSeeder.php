@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
            'user_type'=>'Admin',
            'email'=>'admin@gmail.com',
            'password'=>Hash::make('ashraful5'),
-            'image'=>'images/user_image/2024_03_011532.png'
+            'image'=>'2024_03_011532.png'
         ]);
     }
 }
