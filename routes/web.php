@@ -13,6 +13,7 @@ use App\Http\Controllers\Student\ExamTypeController;
 use App\Http\Controllers\Student\SchoolSubjectController;
 use App\Http\Controllers\Student\AssignStudentSubjectController;
 use App\Http\Controllers\Student\DesignationController;
+use App\Http\Controllers\Student\StudentRegistrationController;
 
 
 /*

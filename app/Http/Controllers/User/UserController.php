@@ -102,7 +102,7 @@ class UserController extends Controller
             'email'=>$request->email,
             'gender'=>$request->gender,
             'status'=>1,
-            'mobile_no'=>$request->mobile_no,
+            'mobile'=>$request->mobile,
             'address'=> $request->address,
 //            'image'=>$fileName
         ]);

@@ -18,9 +18,10 @@ class UserSeeder extends Seeder
     {
         User::create([
            'name'=>'Ashraf',
-           'user_type'=>'admin',
+           'user_type'=>'Admin',
            'email'=>'admin@gmail.com',
-           'password'=>Hash::make('ashraful5')
+           'password'=>Hash::make('ashraful5'),
+            'image'=>'images/user_image/2024_03_011532.png'
         ]);
     }
 }

@@ -38,7 +38,7 @@
                                         <div class="form-group">
                                             <h5>User Mobile <span class="text-danger">*</span></h5>
                                             <div class="controls">
-                                                <input type="text" name="mobile_no" value="{{ old('mobile_no',$editProfile->mobile_no) }}" class="form-control" > </div>
+                                                <input type="text" name="mobile" value="{{ old('mobile',$editProfile->mobile) }}" class="form-control" > </div>
                                         </div>
                                         <div class="form-group">
                                             <h5>User Address <span class="text-danger">*</span></h5>
