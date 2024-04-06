@@ -12,6 +12,7 @@ use App\Http\Controllers\Student\StudentFeeCategoryAmountController;
 use App\Http\Controllers\Student\ExamTypeController;
 use App\Http\Controllers\Student\SchoolSubjectController;
 use App\Http\Controllers\Student\AssignStudentSubjectController;
+use App\Http\Controllers\Student\DesignationController;
 
 
 /*
@@ -82,3 +83,5 @@ Route::resource('assignStudentSubject',AssignStudentSubjectController::class)
 Route::get('assignStudentSubject/{class_id}/edit',[AssignStudentSubjectController::class,'edit'])
     ->name('assignStudentSubject.edit')
     ->middleware('auth:sanctum');
+
+Route::resource('designation',DesignationController::class)->middleware('auth:sanctum');

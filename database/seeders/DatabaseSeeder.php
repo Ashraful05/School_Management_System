@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Designation;
 use App\Models\StudentFeeCategory;
 use Illuminate\Database\Seeder;
 
@@ -29,5 +30,6 @@ class DatabaseSeeder extends Seeder
 //        $this->call(StudentFeeCategorySeeder::class);
 //        $this->call(ExamTypeSeeder::class);
 //        $this->call(SchoolSubjectSeeder::class);
+//        $this->call(DesignationSeeder::class);
     }
 }

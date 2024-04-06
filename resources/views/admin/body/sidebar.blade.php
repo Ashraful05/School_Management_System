@@ -75,6 +75,7 @@
                     <li class="{{ Request::is('examType')?'active':'' }}"><a href="{{ route('examType.index') }}"><i class="ti-more"></i>Student Exam Type</a></li>
                     <li class="{{ Request::is('schoolSubject')?'active':'' }}"><a href="{{ route('schoolSubject.index') }}"><i class="ti-more"></i>School Subject List</a></li>
                     <li class="{{ Request::is('assignStudentSubject')?'active':'' }}"><a href="{{ route('assignStudentSubject.index') }}"><i class="ti-more"></i>Assign Subject List</a></li>
+                    <li class="{{ Request::is('designation')?'active':'' }}"><a href="{{ route('designation.index') }}"><i class="ti-more"></i>Designation</a></li>
                 </ul>
             </li>
 
