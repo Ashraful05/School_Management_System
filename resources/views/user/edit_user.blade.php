@@ -29,10 +29,11 @@
                                         <div class="form-group">
                                             <h5>Select Role<span class="text-danger">*</span></h5>
                                             <div class="controls">
-                                                <select name="user_type" class="form-control">
+                                                <select name="role" class="form-control">
                                                     <option value="" selected disabled>Select Your Role</option>
-                                                    <option value="admin" {{ $editUser->user_type == 'admin' ?'selected':'' }}>Admin</option>
-                                                    <option value="user" {{ $editUser->user_type == 'user' ?'selected':'' }}>User</option>
+                                                    <option value="admin" {{ $editUser->role == 'admin' ?'selected':'' }}>Admin</option>
+                                                    <option value="user" {{ $editUser->role == 'user' ?'selected':'' }}>User</option>
+                                                    <option value="operator" {{ $editUser->role == 'operator' ?'selected':'' }}>Operator</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -51,11 +52,11 @@
                                             </div>
                                         </div>
 
-                                        <div class="form-group">
-                                            <h5>Password <span class="text-danger">*</span></h5>
-                                            <div class="controls">
-                                                <input type="password" name="password" class="form-control" > </div>
-                                        </div>
+{{--                                        <div class="form-group">--}}
+{{--                                            <h5>Password <span class="text-danger">*</span></h5>--}}
+{{--                                            <div class="controls">--}}
+{{--                                                <input type="password" name="password" class="form-control" > </div>--}}
+{{--                                        </div>--}}
 
                                     </div>
 

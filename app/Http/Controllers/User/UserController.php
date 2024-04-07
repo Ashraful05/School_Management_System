@@ -13,7 +13,7 @@ class UserController extends Controller
 {
     public function userView()
     {
-        $users = User::get();
+        $users = User::where('user_type','Admin')->get();
 //        return $users;
         return view('user.user_view',compact('users'));
     }
@@ -25,14 +25,18 @@ class UserController extends Controller
     {
         $request->validate([
            'email'=>'required|unique:users',
-           'user_type'=>'required',
+           'role'=>'required',
            'name'=>'required',
         ]);
+        $code = rand(0000,9999);
         User::create([
            'email'=>$request->email,
            'name'=>$request->name,
-           'password'=>Hash::make($request->password),
-            'user_type'=>$request->user_type
+//           'password'=>Hash::make($request->password),
+           'password'=>Hash::make($code),
+            'user_type'=>'Admin',
+            'role'=>$request->role,
+            'code'=>$code
         ]);
         $notification = [
           'alert-type'=>'success',
@@ -57,8 +61,8 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->user_type = $request->user_type;
-        $user->password = Hash::make($request->password);
+        $user->role = $request->role;
+//        $user->password = Hash::make($request->password);
         $user->update();
         $notification = [
             'alert-type'=>'info',

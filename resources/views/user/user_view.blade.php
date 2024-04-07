@@ -23,10 +23,10 @@
                                     <thead>
                                     <tr>
                                         <th>SL.</th>
-                                        <th>User Type</th>
                                         <th>Role</th>
                                         <th>Name</th>
                                         <th>Email</th>
+                                        <th>Code</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
@@ -34,10 +34,10 @@
                                     @foreach($users as $row=>$user)
                                     <tr>
                                         <td>{{ ++$row }}</td>
-                                        <td>{{ $user->user_type }}</td>
                                         <td>{{ $user->role }}</td>
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->email }}</td>
+                                        <td>{{ $user->code }}</td>
                                         <td>
                                             <a href="{{ route('user_edit',$user->id) }}" class="btn btn-rounded btn-info">Edit</a>
                                             <a href="{{ route('user_delete',$user->id) }}" class="btn btn-rounded btn-danger" id="delete">Delete</a>
