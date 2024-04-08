@@ -31,19 +31,19 @@
 
             @if(\Illuminate\Support\Facades\Auth::user()->role == 'admin')
 
-            <li class="treeview {{ Request::is('user/view')||Request::is('user/add')?'active':'' }} ">
-                <a href="#">
-                    <i data-feather="message-circle"></i>
-                    <span>Manage User</span>
-                    <span class="pull-right-container">
+                <li class="treeview {{ Request::is('user/view')||Request::is('user/add')?'active':'' }} ">
+                    <a href="#">
+                        <i data-feather="message-circle"></i>
+                        <span>Manage User</span>
+                        <span class="pull-right-container">
               <i class="fa fa-angle-right pull-right"></i>
             </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li class="{{ Request::is('user/view')?'active':'' }}"><a href="{{ route('user_view') }}"><i class="ti-more"></i>View User</a></li>
-                    <li class="{{ Request::is('user/add')?'active':'' }}"><a href="{{ route('user_add') }}"><i class="ti-more"></i>Add User</a></li>
-                </ul>
-            </li>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li class="{{ Request::is('user/view')?'active':'' }}"><a href="{{ route('user_view') }}"><i class="ti-more"></i>View User</a></li>
+                        <li class="{{ Request::is('user/add')?'active':'' }}"><a href="{{ route('user_add') }}"><i class="ti-more"></i>Add User</a></li>
+                    </ul>
+                </li>
 
             @endif
 
@@ -66,8 +66,8 @@
                     <i data-feather="grid"></i>
                     <span>SetUp Management</span>
                     <span class="pull-right-container">
-              <i class="fa fa-angle-right pull-right"></i>
-            </span>
+                        <i class="fa fa-angle-right pull-right"></i>
+                    </span>
                 </a>
                 <ul class="treeview-menu">
                     <li class="{{ Request::is('student/class')?'active':'' }}"><a href="{{ route('class.index') }}"><i class="ti-more"></i>Student Class</a></li>
@@ -80,6 +80,20 @@
                     <li class="{{ Request::is('schoolSubject')?'active':'' }}"><a href="{{ route('schoolSubject.index') }}"><i class="ti-more"></i>School Subject List</a></li>
                     <li class="{{ Request::is('assignStudentSubject')?'active':'' }}"><a href="{{ route('assignStudentSubject.index') }}"><i class="ti-more"></i>Assign Subject List</a></li>
                     <li class="{{ Request::is('designation')?'active':'' }}"><a href="{{ route('designation.index') }}"><i class="ti-more"></i>Designation</a></li>
+                </ul>
+            </li>
+
+            <li class="treeview ">
+                <a href="#">
+                    <i data-feather="grid"></i>
+                    <span>Student Management</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-right pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="{{ Request::is('student/registration/*')?'active':'' }}"><a href="{{ route('student.registration.index') }}"><i class="ti-more"></i>Student List</a></li>
+
                 </ul>
             </li>
 

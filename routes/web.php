@@ -86,3 +86,9 @@ Route::get('assignStudentSubject/{class_id}/edit',[AssignStudentSubjectControlle
     ->middleware('auth:sanctum');
 
 Route::resource('designation',DesignationController::class)->middleware('auth:sanctum');
+Route::controller(StudentRegistrationController::class)
+    ->prefix('student/registration')
+    ->group(function (){
+        Route::get('index','registrationIndex')->name('student.registration.index');
+        Route::get('create','registrationCreate')->name('student.registration.create');
+});
