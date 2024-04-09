@@ -25,4 +25,8 @@ class StudentRegistrationController extends Controller
         $classes = StudentClass::get();
         return view('student_registration.form',compact('classes','years','shifts','groups'));
     }
+    public function saveRegistration(Request $request)
+    {
+        return $request->all();
+    }
 }

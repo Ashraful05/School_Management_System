@@ -7,6 +7,8 @@
 @section('title','Add Student Class')
 
 @section('main_content')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
     <div class="container-full">
         <!-- Main content -->
         <section class="content">
@@ -23,7 +25,7 @@
                 <div class="box-body">
                     <div class="row">
                         <div class="col">
-                            <form action="{{ route('class.store') }}" method="post" >
+                            <form action="{{ route('student.registration.store') }}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-4">
@@ -66,8 +68,8 @@
                                         <div class="form-group">
                                             <h5>Mobile Number<span class="text-danger">*</span></h5>
                                             <div class="controls">
-                                                <input type="text" name="name" value="{{ old('name') }}" class="form-control" >
-                                                @error('name')
+                                                <input type="text" name="mobile" value="{{ old('mobile') }}" class="form-control" >
+                                                @error('mobile')
                                                 <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
@@ -148,7 +150,7 @@
                                             <h5>Student Class<span class="text-danger">*</span></h5>
                                             <div class="controls">
                                                 <select name="class_id" id="class_id" class="form-control">
-                                                    <option value="" selected disabled>Select Year</option>
+                                                    <option value="" selected disabled>Select Class</option>
                                                     @foreach($classes as $class)
                                                     <option value="{{ $class->id }}">{{ $class->name }}</option>
                                                     @endforeach
@@ -209,6 +211,23 @@
                                     </div>
 
                                 </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <h5>Profile Image <span class="text-danger">*</span></h5>
+                                            <div class="controls">
+                                                <input type="file" name="image"id="image"  class="form-control" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <div class="controls">
+                                                <img id="showImage" src="{{ url('images/no_image.jpg') }}" style="height: 100px;width: 100px;" alt="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
                                 <div class="text-xs-right">
                                     <button type="submit" class="form-control btn btn-rounded btn-info">Add</button>
@@ -228,5 +247,17 @@
         </section>
         <!-- /.content -->
     </div>
+
+    <script>
+        $(document).ready(function(){
+            $('#image').change(function(e){
+                var reader = new FileReader();
+                reader.onload = function(e){
+                    $('#showImage').attr('src',e.target.result);
+                }
+                reader.readAsDataURL(e.target.files['0']);
+            });
+        });
+    </script>
 @endsection
 
