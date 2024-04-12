@@ -20,7 +20,9 @@ class StudentRegistrationController extends Controller
     public function registrationIndex()
     {
         $assignedStudents = AssignStudent::get();
-        return view('student_registration.index',compact('assignedStudents'));
+        $classes = StudentClass::get();
+        $years = StudentYear::get();
+        return view('student_registration.index',compact('assignedStudents','classes','years'));
     }
     public function registrationCreate()
     {
