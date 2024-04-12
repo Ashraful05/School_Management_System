@@ -19,10 +19,16 @@ class StudentRegistrationController extends Controller
 {
     public function registrationIndex()
     {
-        $assignedStudents = AssignStudent::get();
+
         $classes = StudentClass::get();
         $years = StudentYear::get();
-        return view('student_registration.index',compact('assignedStudents','classes','years'));
+        $yearId = StudentYear::orderby('id','desc')->first()->id;
+        $classId = StudentClass::orderby('id','desc')->first()->id;
+        $assignedStudents = AssignStudent::where(['class_id'=>$classId,'year_id'=>$yearId])->get();
+//        return $assignedStudents;
+
+        return view('student_registration.index',compact('assignedStudents',
+            'classes','years','yearId','classId'));
     }
     public function registrationCreate()
     {
