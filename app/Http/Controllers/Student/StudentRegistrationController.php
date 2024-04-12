@@ -4,12 +4,14 @@ namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
 use App\Models\AssignStudent;
+use App\Models\DiscountStudent;
 use App\Models\StudentClass;
 use App\Models\StudentGroup;
 use App\Models\StudentShift;
 use App\Models\StudentYear;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
@@ -37,7 +39,7 @@ class StudentRegistrationController extends Controller
             'address'=>'required|string',
         ]);
         DB::transaction(function() use($request){
-            $checkYear = StudentYear::find($request->year_id)->name;
+            $checkYear = StudentYear::find($request->year_id)->year_name;
             $student = User::where('user_type','student')->orderBy('id','desc')->first();
             if($student == null){
                 $firstReg = 0;
@@ -63,13 +65,14 @@ class StudentRegistrationController extends Controller
 
             if($request->file('image')){
                 $file = $request->file('image');
-                $fileName = date('YmdHi').$file->getClientOriginalExtension();
-                $file->move(public_path('images/student_images'),$fileName);
+                $fileName = date('Y_m_dHi').'.'.$file->getClientOriginalExtension();
+                $file->move(public_path('images/student_images/'),$fileName);
             }
             $finalIdNo = $checkYear.$id_no;
             $code = rand(0000,9999);
-            User::create([
-               'id_number'=>$finalIdNo,
+            $userData = User::create([
+                'name'=> $request->name,
+                'id_number'=>$finalIdNo,
                 'code'=>$code,
                 'password'=>Hash::make($code),
                 'user_type'=>'student',
@@ -83,6 +86,24 @@ class StudentRegistrationController extends Controller
                 'image'=>$fileName,
             ]);
 
+            $assignData = AssignStudent::create([
+               'student_id'=>$userData->id,
+                'class_id'=>$request->class_id,
+                'year_id'=>$request->year_id,
+                'group_id'=>$request->group_id,
+                'shift_id'=>$request->shift_id
+            ]);
+            DiscountStudent::create([
+               'assign_student_id'=>$assignData->id,
+                'fee_category_id'=>'1',
+                'discount'=>$request->discount
+            ]);
+
         });
+        $notification = [
+          'alert-type'=>'success',
+          'message'=>'Data Saved!!'
+        ];
+        return redirect()->route('student.registration.index')->with($notification);
     }
 }
