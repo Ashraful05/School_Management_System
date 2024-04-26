@@ -23,7 +23,7 @@
                                                 <select name="class_id" id="" class="form-control">
                                                     <option value="" selected disabled>Select Class</option>
                                                     @foreach($classes as $class)
-                                                        <option value="{{ $class->id }}">{{ $class->name }}</option>
+                                                        <option value="{{ $class->id }}" {{ (@$classId == $class->id)?'selected':'' }} >{{ $class->name }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -35,7 +35,7 @@
                                                 <select name="class_id" id="" class="form-control">
                                                     <option value="" selected disabled>Select Year</option>
                                                     @foreach($years as $year)
-                                                        <option value="{{ $year->id }}">{{ $year->year_name }}</option>
+                                                        <option value="{{ $year->id }}" {{ (@$yearId == $year->id)?'selected':'' }} >{{ $year->year_name }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -64,7 +64,14 @@
                                     <tr>
                                         <th>SL.</th>
                                         <th>Name</th>
-                                        <th>Id No.</th>
+                                        <th>ID No.</th>
+                                        <th>Roll</th>
+                                        <th>Class</th>
+                                        <th>Year</th>
+                                        <th>Image</th>
+                                        @if(\Illuminate\Support\Facades\Auth::user()->role == 'admin')
+                                        <th>Code</th>
+                                        @endif
                                         <th>Action</th>
                                     </tr>
                                     </thead>
@@ -72,11 +79,19 @@
                                     @foreach($assignedStudents as $row=>$data)
                                         <tr>
                                             <td>{{ ++$row }}</td>
-                                            <td>{{ $data->class_id }}</td>
-                                            <td>{{ $data->year_id }}</td>
+                                            <td>{{ $data->student->name }}</td>
+                                            <td>{{ $data->student->id_number }}</td>
+                                            <td>{{ $data->roll }}</td>
+                                            <td>{{ $data->studentClass->name }}</td>
+                                            <td>{{ $data->studentYear->year_name }}</td>
                                             <td>
-                                                <a href="#" class="btn btn-rounded btn-info">Edit</a>
-                                                <a href="#" class="btn btn-rounded btn-info">Delete</a>
+                                                <img src="{{ (!empty($data->student->image))?url('images/student_images/'.$data->student->image):url('images/no_image.jpg') }}"
+                                                     style="height: 50px;width: 50px;" alt="">
+                                            </td>
+                                            <td>{{ $data->student->code }}</td>
+                                            <td>
+                                                <a href="#" class="btn btn-rounded btn-info" title="Edit"><i class="fa fa-pencil-square-o"></i></a>
+                                                <a href="#" class="btn btn-rounded btn-danger" title="Delete"><i class="fa fa-trash-o"></i></a>
                                                 {{--                                                <form action="{{ route('shift.destroy',$shift->id) }}" method="post" id="">--}}
                                                 {{--                                                    @csrf--}}
                                                 {{--                                                    @method('delete')--}}
