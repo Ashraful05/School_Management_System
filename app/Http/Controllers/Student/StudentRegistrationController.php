@@ -127,4 +127,15 @@ class StudentRegistrationController extends Controller
         return view('student_registration.index',compact('assignedStudents',
             'classes','years','yearId','classId'));
     }
+
+    public function editRegistration($student_id)
+    {
+        $years = StudentYear::get();
+        $shifts = StudentShift::get();
+        $groups = StudentGroup::get();
+        $classes = StudentClass::get();
+        $editData = AssignStudent::with(['student','discount'])->where('student_id',$student_id)->first();
+//        return $editData;
+        return view('student_registration.edit',compact('classes','years','shifts','groups','editData'));
+    }
 }

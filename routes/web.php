@@ -93,4 +93,5 @@ Route::controller(StudentRegistrationController::class)
         Route::get('create','registrationCreate')->name('student.registration.create');
         Route::post('save','saveRegistration')->name('student.registration.store');
         Route::get('year/wise/class','classYearWise')->name('student_class_year_wise');
+        Route::get('edit/{student_id}','editRegistration')->name('student.registration.edit');
 });

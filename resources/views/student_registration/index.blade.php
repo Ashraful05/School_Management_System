@@ -92,7 +92,7 @@
                                                 </td>
                                                 <td>{{ $data->student->code }}</td>
                                                 <td>
-                                                    <a href="#" class="btn btn-rounded btn-info" title="Edit"><i class="fa fa-pencil-square-o"></i></a>
+                                                    <a href="{{ route('student.registration.edit',$data->student_id) }}" class="btn btn-rounded btn-info" title="Edit"><i class="fa fa-pencil-square-o"></i></a>
                                                     <a href="#" class="btn btn-rounded btn-danger" title="Delete"><i class="fa fa-trash-o"></i></a>
                                                     {{--                                                <form action="{{ route('shift.destroy',$shift->id) }}" method="post" id="">--}}
                                                     {{--                                                    @csrf--}}
@@ -138,7 +138,7 @@
                                                 </td>
                                                 <td>{{ $data->student->code }}</td>
                                                 <td>
-                                                    <a href="#" class="btn btn-rounded btn-info" title="Edit"><i class="fa fa-pencil-square-o"></i></a>
+                                                    <a href="{{ route('student.registration.edit',$data->student_id) }}" class="btn btn-rounded btn-info" title="Edit"><i class="fa fa-pencil-square-o"></i></a>
                                                     <a href="#" class="btn btn-rounded btn-danger" title="Delete"><i class="fa fa-trash-o"></i></a>
                                                     {{--                                                <form action="{{ route('shift.destroy',$shift->id) }}" method="post" id="">--}}
                                                     {{--                                                    @csrf--}}
