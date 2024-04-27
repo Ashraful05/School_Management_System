@@ -92,4 +92,5 @@ Route::controller(StudentRegistrationController::class)
         Route::get('index','registrationIndex')->name('student.registration.index');
         Route::get('create','registrationCreate')->name('student.registration.create');
         Route::post('save','saveRegistration')->name('student.registration.store');
+        Route::get('year/wise/class','classYearWise')->name('student_class_year_wise');
 });

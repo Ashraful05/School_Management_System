@@ -114,4 +114,17 @@ class StudentRegistrationController extends Controller
         ];
         return redirect()->route('student.registration.index')->with($notification);
     }
+
+    public function classYearWise(Request $request)
+    {
+        $classes = StudentClass::get();
+        $years = StudentYear::get();
+        $yearId = $request->year_id;
+        $classId = $request->class_id;
+        $assignedStudents = AssignStudent::where(['class_id'=>$classId,'year_id'=>$yearId])->get();
+//        return $assignedStudents;
+
+        return view('student_registration.index',compact('assignedStudents',
+            'classes','years','yearId','classId'));
+    }
 }

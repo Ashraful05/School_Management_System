@@ -15,7 +15,7 @@
                             <h4 class="box-title">Student <strong>Search</strong></h4>
                         </div>
                         <div class="box-body">
-                            <form action="" method="">
+                            <form action="{{ route('student_class_year_wise') }}" method="get">
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">
@@ -32,7 +32,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <div class="controls">
-                                                <select name="class_id" id="" class="form-control">
+                                                <select name="year_id" id="" class="form-control">
                                                     <option value="" selected disabled>Select Year</option>
                                                     @foreach($years as $year)
                                                         <option value="{{ $year->id }}" {{ (@$yearId == $year->id)?'selected':'' }} >{{ $year->year_name }}</option>
@@ -59,51 +59,100 @@
                         <!-- /.box-header -->
                         <div class="box-body">
                             <div class="table-responsive">
-                                <table id="example1" class="table table-bordered table-striped">
-                                    <thead>
-                                    <tr>
-                                        <th>SL.</th>
-                                        <th>Name</th>
-                                        <th>ID No.</th>
-                                        <th>Roll</th>
-                                        <th>Class</th>
-                                        <th>Year</th>
-                                        <th>Image</th>
-                                        @if(\Illuminate\Support\Facades\Auth::user()->role == 'admin')
-                                        <th>Code</th>
-                                        @endif
-                                        <th>Action</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($assignedStudents as $row=>$data)
+
+                                @if(!isset($self->search))
+                                    <table id="example1" class="table table-bordered table-striped">
+                                        <thead>
                                         <tr>
-                                            <td>{{ ++$row }}</td>
-                                            <td>{{ $data->student->name }}</td>
-                                            <td>{{ $data->student->id_number }}</td>
-                                            <td>{{ $data->roll }}</td>
-                                            <td>{{ $data->studentClass->name }}</td>
-                                            <td>{{ $data->studentYear->year_name }}</td>
-                                            <td>
-                                                <img src="{{ (!empty($data->student->image))?url('images/student_images/'.$data->student->image):url('images/no_image.jpg') }}"
-                                                     style="height: 50px;width: 50px;" alt="">
-                                            </td>
-                                            <td>{{ $data->student->code }}</td>
-                                            <td>
-                                                <a href="#" class="btn btn-rounded btn-info" title="Edit"><i class="fa fa-pencil-square-o"></i></a>
-                                                <a href="#" class="btn btn-rounded btn-danger" title="Delete"><i class="fa fa-trash-o"></i></a>
-                                                {{--                                                <form action="{{ route('shift.destroy',$shift->id) }}" method="post" id="">--}}
-                                                {{--                                                    @csrf--}}
-                                                {{--                                                    @method('delete')--}}
-                                                {{--                                                    <button type="submit" class="btn btn-rounded btn-danger" onclick="return confirm('Are you sure to delete?')">Delete</button>--}}
-                                                {{--                                                </form>--}}
-
-                                            </td>
+                                            <th>SL.</th>
+                                            <th>Name</th>
+                                            <th>ID No.</th>
+                                            <th>Roll</th>
+                                            <th>Class</th>
+                                            <th>Year</th>
+                                            <th>Image</th>
+                                            @if(\Illuminate\Support\Facades\Auth::user()->role == 'admin')
+                                                <th>Code</th>
+                                            @endif
+                                            <th>Action</th>
                                         </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($assignedStudents as $row=>$data)
+                                            <tr>
+                                                <td>{{ ++$row }}</td>
+                                                <td>{{ $data->student->name }}</td>
+                                                <td>{{ $data->student->id_number }}</td>
+                                                <td>{{ $data->roll }}</td>
+                                                <td>{{ $data->studentClass->name }}</td>
+                                                <td>{{ $data->studentYear->year_name }}</td>
+                                                <td>
+                                                    <img src="{{ (!empty($data->student->image))?url('images/student_images/'.$data->student->image):url('images/no_image.jpg') }}"
+                                                         style="height: 50px;width: 50px;" alt="">
+                                                </td>
+                                                <td>{{ $data->student->code }}</td>
+                                                <td>
+                                                    <a href="#" class="btn btn-rounded btn-info" title="Edit"><i class="fa fa-pencil-square-o"></i></a>
+                                                    <a href="#" class="btn btn-rounded btn-danger" title="Delete"><i class="fa fa-trash-o"></i></a>
+                                                    {{--                                                <form action="{{ route('shift.destroy',$shift->id) }}" method="post" id="">--}}
+                                                    {{--                                                    @csrf--}}
+                                                    {{--                                                    @method('delete')--}}
+                                                    {{--                                                    <button type="submit" class="btn btn-rounded btn-danger" onclick="return confirm('Are you sure to delete?')">Delete</button>--}}
+                                                    {{--                                                </form>--}}
 
-                                    @endforeach
-                                    </tbody>
-                                </table>
+                                                </td>
+                                            </tr>
+
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                @else
+                                    <table id="example1" class="table table-bordered table-striped">
+                                        <thead>
+                                        <tr>
+                                            <th>SL.</th>
+                                            <th>Name</th>
+                                            <th>ID No.</th>
+                                            <th>Roll</th>
+                                            <th>Class</th>
+                                            <th>Year</th>
+                                            <th>Image</th>
+                                            @if(\Illuminate\Support\Facades\Auth::user()->role == 'admin')
+                                                <th>Code</th>
+                                            @endif
+                                            <th>Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($assignedStudents as $row=>$data)
+                                            <tr>
+                                                <td>{{ ++$row }}</td>
+                                                <td>{{ $data->student->name }}</td>
+                                                <td>{{ $data->student->id_number }}</td>
+                                                <td>{{ $data->roll }}</td>
+                                                <td>{{ $data->studentClass->name }}</td>
+                                                <td>{{ $data->studentYear->year_name }}</td>
+                                                <td>
+                                                    <img src="{{ (!empty($data->student->image))?url('images/student_images/'.$data->student->image):url('images/no_image.jpg') }}"
+                                                         style="height: 50px;width: 50px;" alt="">
+                                                </td>
+                                                <td>{{ $data->student->code }}</td>
+                                                <td>
+                                                    <a href="#" class="btn btn-rounded btn-info" title="Edit"><i class="fa fa-pencil-square-o"></i></a>
+                                                    <a href="#" class="btn btn-rounded btn-danger" title="Delete"><i class="fa fa-trash-o"></i></a>
+                                                    {{--                                                <form action="{{ route('shift.destroy',$shift->id) }}" method="post" id="">--}}
+                                                    {{--                                                    @csrf--}}
+                                                    {{--                                                    @method('delete')--}}
+                                                    {{--                                                    <button type="submit" class="btn btn-rounded btn-danger" onclick="return confirm('Are you sure to delete?')">Delete</button>--}}
+                                                    {{--                                                </form>--}}
+
+                                                </td>
+                                            </tr>
+
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                @endif
                             </div>
                         </div>
                         <!-- /.box-body -->
