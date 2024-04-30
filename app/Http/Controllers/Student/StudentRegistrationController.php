@@ -138,4 +138,70 @@ class StudentRegistrationController extends Controller
 //        return $editData;
         return view('student_registration.edit',compact('classes','years','shifts','groups','editData'));
     }
+    public function updateRegistration(Request $request,$student_id)
+    {
+        $request->validate([
+            'name'=>'required|string',
+            'mobile'=>'required|numeric',
+            'address'=>'required|string',
+        ]);
+
+        DB::transaction(function() use($request,$student_id){
+
+            $userData = User::where('id',$student_id)->first();
+            if($request->file('image')){
+                $file = $request->file('image');
+                @unlink(public_path('images/student_images/'.$userData->image));
+                $fileName = date('Y_m_dHi').'.'.$file->getClientOriginalExtension();
+                $file->move(public_path('images/student_images/'),$fileName);
+
+                $userData->update([
+                    'name'=> $request->name,
+                    'mobile'=>$request->mobile,
+                    'address'=>$request->address,
+                    'gender'=>$request->gender,
+                    'mothers_name'=>$request->mothers_name,
+                    'fathers_name'=>$request->fathers_name,
+                    'religion'=>$request->religion,
+                    'date_of_birth'=>date('Y-m-d',strtotime($request->date_of_birth)),
+                    'image'=>$fileName,
+                ]);
+            }else{
+                $userData->update([
+                    'name'=> $request->name,
+                    'mobile'=>$request->mobile,
+                    'address'=>$request->address,
+                    'gender'=>$request->gender,
+                    'mothers_name'=>$request->mothers_name,
+                    'fathers_name'=>$request->fathers_name,
+                    'religion'=>$request->religion,
+                    'date_of_birth'=>date('Y-m-d',strtotime($request->date_of_birth)),
+                ]);
+            }
+
+
+//            $assignData = AssignStudent::where(['id'=>$request->id,'student_id'=>$student_id])->first();
+             AssignStudent::where(['id'=>$request->id,'student_id'=>$student_id])->update([
+//            $assignData->update([
+                 'class_id'=>$request->class_id,
+                 'year_id'=>$request->year_id,
+                 'group_id'=>$request->group_id,
+                 'shift_id'=>$request->shift_id
+             ]);
+
+//            $discountStudent = DiscountStudent::where('assign_student_id',$request->id)->first();
+            DiscountStudent::where('assign_student_id',$request->id)->update([
+                'discount'=>$request->discount
+            ]);
+//            $discountStudent->update([
+//                'discount'=>$request->discount
+//            ]);
+
+        });
+        $notification = [
+            'alert-type'=>'info',
+            'message'=>'Data Updated!!'
+        ];
+        return redirect()->route('student.registration.index')->with($notification);
+    }
 }
