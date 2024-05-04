@@ -97,4 +97,5 @@ Route::controller(StudentRegistrationController::class)
         Route::post('update/{student_id}','updateRegistration')->name('student.registration.update');
         Route::get('promotion/{student_id}','studentPromotion')->name('student.registration.promotion');
         Route::post('promotion/update/{student_id}','studentPromotionUpdate')->name('promotion.update');
+        Route::get('details/pdf/{student_id}','studentDetailsInPdf')->name('student.registration.details');
 });

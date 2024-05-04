@@ -290,8 +290,8 @@ class StudentRegistrationController extends Controller
 
     public function studentDetailsInPdf($student_id)
     {
-        $detailsData = AssignStudent::with(['student','discount'])->where('student_id',$student_id)->first();
-        $pdf = PDF::loadView('student_registration.student_details_pdf', $detailsData);
+        $detailsData = AssignStudent::with(['student','discount','studentGroup','classShift'])->where('student_id',$student_id)->first();
+        $pdf = PDF::loadView('student_registration.student_details_pdf', compact('detailsData'));
         $pdf->setProtection(['copy','print'],'','pass');
         return $pdf->stream('document.pdf');
 
