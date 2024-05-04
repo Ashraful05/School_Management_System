@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use niklasravnsborg\LaravelPdf\Facades\Pdf;
 
 class StudentRegistrationController extends Controller
 {
@@ -285,5 +286,14 @@ class StudentRegistrationController extends Controller
             'message'=>'Data Updated!!'
         ];
         return redirect()->route('student.registration.index')->with($notification);
+    }
+
+    public function studentDetailsInPdf($student_id)
+    {
+        $detailsData = AssignStudent::with(['student','discount'])->where('student_id',$student_id)->first();
+        $pdf = PDF::loadView('student_registration.student_details_pdf', $detailsData);
+        $pdf->setProtection(['copy','print'],'','pass');
+        return $pdf->stream('document.pdf');
+
     }
 }

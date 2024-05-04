@@ -94,6 +94,7 @@
                                                 <td>
                                                     <a href="{{ route('student.registration.edit',$data->student_id) }}" class="btn btn-rounded btn-info" title="Edit"><i class="fa fa-pencil-square-o"></i></a>
                                                     <a href="{{ route('student.registration.promotion',$data->student_id) }}" class="btn btn-rounded btn-danger" title="Promotion"><i class="fa fa-upload"></i></a>
+                                                    <a href="{{ route('student.registration.promotion',$data->student_id) }}" class="btn btn-rounded btn-danger" title="Details"><i class="fa fa-file-pdf-o"></i></a>
                                                     {{--                                                <form action="{{ route('shift.destroy',$shift->id) }}" method="post" id="">--}}
                                                     {{--                                                    @csrf--}}
                                                     {{--                                                    @method('delete')--}}
@@ -140,6 +141,7 @@
                                                 <td>
                                                     <a href="{{ route('student.registration.edit',$data->student_id) }}" class="btn btn-rounded btn-info" title="Edit"><i class="fa fa-pencil-square-o"></i></a>
                                                     <a href="{{ route('student.registration.promotion',$data->student_id) }}" class="btn btn-rounded btn-danger" title="Promotion"><i class="fa fa-upload"></i></a>
+                                                    <a href="{{ route('student.registration.promotion',$data->student_id) }}" class="btn btn-rounded btn-danger" title="Description"><i class="fa fa-file-pdf-o></i></a>
                                                     {{--                                                <form action="{{ route('shift.destroy',$shift->id) }}" method="post" id="">--}}
                                                     {{--                                                    @csrf--}}
                                                     {{--                                                    @method('delete')--}}
