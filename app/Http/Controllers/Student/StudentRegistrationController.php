@@ -296,4 +296,5 @@ class StudentRegistrationController extends Controller
         return $pdf->stream('document.pdf');
 
     }
+
 }

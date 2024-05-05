@@ -14,6 +14,7 @@ use App\Http\Controllers\Student\SchoolSubjectController;
 use App\Http\Controllers\Student\AssignStudentSubjectController;
 use App\Http\Controllers\Student\DesignationController;
 use App\Http\Controllers\Student\StudentRegistrationController;
+use App\Http\Controllers\Student\StudentRollGenerateController;
 
 
 /*
@@ -98,4 +99,9 @@ Route::controller(StudentRegistrationController::class)
         Route::get('promotion/{student_id}','studentPromotion')->name('student.registration.promotion');
         Route::post('promotion/update/{student_id}','studentPromotionUpdate')->name('promotion.update');
         Route::get('details/pdf/{student_id}','studentDetailsInPdf')->name('student.registration.details');
+        Route::get('roll/generate','studentRollGenerate')->name('student.roll.generate');
 });
+Route::controller(StudentRollGenerateController::class)->prefix('student/roll')
+    ->middleware('auth:sanctum')->group(function(){
+       Route::get('generate','rollGenerate')->name('student.roll.generate');
+    });
