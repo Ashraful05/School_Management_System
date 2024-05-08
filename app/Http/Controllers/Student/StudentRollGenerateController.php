@@ -24,5 +24,27 @@ class StudentRollGenerateController extends Controller
         return response()->json($allData);
     }
 
+    public function saveStudentRoll(Request $request)
+    {
+        if($request->student_id != null){
+            for($i=0;$i<count($request->student_id);$i++){
+                AssignStudent::where(['year_id'=>$request->year_id,'class_id'=>$request->class_id,
+                    'student_id'=>$request->student_id[$i]])->update(['roll'=>$request->roll[$i] ]);
+            }
+            $notification = [
+                'alert-type'=>'info',
+                'message'=>'Student Roll is updated....'
+            ];
+        }else{
+            $notification = [
+              'alert-type'=>'error',
+              'message'=>'Sorry there is no student...'
+            ];
+//            return redirect()->back()->with($notification);
+        }
+        return redirect()->back()->with($notification);
+    }
+
+
 
 }

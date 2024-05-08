@@ -17,7 +17,7 @@
                             <h4 class="box-title">Student <strong>Search</strong></h4>
                         </div>
                         <div class="box-body">
-                            <form action="{{ route('student_class_year_wise') }}" method="post">
+                            <form action="{{ route('student.roll.save') }}" method="post">
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-4">

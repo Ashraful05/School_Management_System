@@ -105,4 +105,5 @@ Route::controller(StudentRollGenerateController::class)->prefix('student/roll')
     ->middleware('auth:sanctum')->group(function(){
        Route::get('generate','rollGenerate')->name('student.roll.generate');
        Route::get('students','getStudents')->name('student.registration.getstudents');
+       Route::post('generate/save','saveStudentRoll')->name('student.roll.save');
     });
