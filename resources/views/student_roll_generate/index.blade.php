@@ -17,7 +17,8 @@
                             <h4 class="box-title">Student <strong>Search</strong></h4>
                         </div>
                         <div class="box-body">
-                            <form action="{{ route('student_class_year_wise') }}" method="get">
+                            <form action="{{ route('student_class_year_wise') }}" method="post">
+                                @csrf
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">
@@ -53,11 +54,11 @@
                                     <div class="col-md-12">
                                         <table class="table table-bordered table-striped" style="width: 100%">
                                             <thead>
-                                                <th>Id</th>
-                                                <th>Student Name</th>
-                                                <th>Student Father's Name</th>
-                                                <th>Gender</th>
-                                                <th>Roll</th>
+                                                <td>ID No.</td>
+                                                <td>Student Name</td>
+                                                <td>Student Father's Name</td>
+                                                <td>Gender</td>
+                                                <td>Roll</td>
                                             </thead>
                                             <tbody id="roll-generate-tr">
 
@@ -96,9 +97,9 @@
                     $.each( data, function(key, v){
                         html +=
                             '<tr>'+
-                            '<td>'+v.student.id_no+'<input type="hidden" name="student_id[]" value="'+v.student_id+'"></td>'+
+                            '<td>'+v.student.id_number+'<input type="hidden" name="student_id[]" value="'+v.student_id+'"></td>'+
                             '<td>'+v.student.name+'</td>'+
-                            '<td>'+v.student.fname+'</td>'+
+                            '<td>'+v.student.fathers_name+'</td>'+
                             '<td>'+v.student.gender+'</td>'+
                             '<td><input type="text" class="form-control form-control-sm" name="roll[]" value="'+v.roll+'"></td>'+
                             '</tr>';
