@@ -15,6 +15,7 @@ use App\Http\Controllers\Student\AssignStudentSubjectController;
 use App\Http\Controllers\Student\DesignationController;
 use App\Http\Controllers\Student\StudentRegistrationController;
 use App\Http\Controllers\Student\StudentRollGenerateController;
+use App\Http\Controllers\Student\StudentRegistrationFeeController;
 
 
 /*
@@ -107,3 +108,4 @@ Route::controller(StudentRollGenerateController::class)->prefix('student/roll')
        Route::get('students','getStudents')->name('student.registration.getstudents');
        Route::post('generate/save','saveStudentRoll')->name('student.roll.save');
     });
+Route::resource('registration/fee',StudentRegistrationFeeController::class);

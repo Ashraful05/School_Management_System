@@ -94,6 +94,7 @@
                 <ul class="treeview-menu">
                     <li class="{{ Request::is('student/registration/*')?'active':'' }}"><a href="{{ route('student.registration.index') }}"><i class="ti-more"></i>Student List</a></li>
                     <li class="{{ Request::is('student/roll/*')?'active':'' }}"><a href="{{ route('student.roll.generate') }}"><i class="ti-more"></i>Roll Generate</a></li>
+                    <li class="{{ Request::is('registration/fee')?'active':'' }}"><a href="{{ route('fee.index') }}"><i class="ti-more"></i>Student Fee</a></li>
 
                 </ul>
             </li>
