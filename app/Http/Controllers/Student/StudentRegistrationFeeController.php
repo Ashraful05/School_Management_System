@@ -8,6 +8,7 @@ use App\Models\FeeCategoryAmount;
 use App\Models\StudentClass;
 use App\Models\StudentYear;
 use Illuminate\Http\Request;
+use niklasravnsborg\LaravelPdf\Facades\Pdf;
 
 class StudentRegistrationFeeController extends Controller
 {
@@ -71,9 +72,14 @@ class StudentRegistrationFeeController extends Controller
         return response()->json(@$html);
     }
 
-    public function registrationFeePaySlip()
+    public function registrationFeePaySlip(Request $request)
     {
-
+        $studentDetails = AssignStudent::with('student','discount')
+            ->where(['student_id',$request->student_id,'class_id'=>$request->class_id])->first();
+        $pdf = Pdf::loadView('student_registration_fee.registration_fee_pdf',$studentDetails);
+        $pdf->SetProtection(['copy','print'], '', 'pass');
+        return $pdf->stream('document.pdf');
+//        return view('student_registration_fee.index',compact('studentDetails'));
     }
     /**
      * Show the form for creating a new resource.
