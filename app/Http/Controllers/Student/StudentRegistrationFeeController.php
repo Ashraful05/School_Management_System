@@ -74,9 +74,12 @@ class StudentRegistrationFeeController extends Controller
 
     public function registrationFeePaySlip(Request $request)
     {
-        $studentDetails = AssignStudent::with('student','discount')
-            ->where(['student_id',$request->student_id,'class_id'=>$request->class_id])->first();
-        $pdf = Pdf::loadView('student_registration_fee.registration_fee_pdf',$studentDetails);
+//        return $request->all();
+        $detailsData = AssignStudent::with(['student','discount'])
+//            ->where(['class_id'=>$request->class_id,'student_id'=>$request->student_id])->first();
+        ->where('class_id',$request->class_id)->where('student_id',$request->student_id)->first();
+//        return $detailsData;
+        $pdf = Pdf::loadView('student_registration_fee.registration_fee_pdf',compact('detailsData'));
         $pdf->SetProtection(['copy','print'], '', 'pass');
         return $pdf->stream('document.pdf');
 //        return view('student_registration_fee.index',compact('studentDetails'));

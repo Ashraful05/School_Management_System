@@ -110,4 +110,4 @@ Route::controller(StudentRollGenerateController::class)->prefix('student/roll')
     });
 Route::resource('registration/fee',StudentRegistrationFeeController::class)->middleware('auth:sanctum');
 Route::get('classwise/registration/fee',[StudentRegistrationFeeController::class,'classWiseRegistrationFee'])->name('student_registration_fee_classwise_get')->middleware('auth:sanctum');
-Route::get('registration/fee/pay_slip',[StudentRegistrationFeeController::class,'registrationFeePaySlip'])->name('student.registration.fee.payslip')->middleware('auth:sanctum');
+Route::get('registration_fee/pay_slip',[StudentRegistrationFeeController::class,'registrationFeePaySlip'])->name('student.registration.fee.payslip')->middleware('auth:sanctum');
