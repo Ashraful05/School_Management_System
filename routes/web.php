@@ -16,6 +16,9 @@ use App\Http\Controllers\Student\DesignationController;
 use App\Http\Controllers\Student\StudentRegistrationController;
 use App\Http\Controllers\Student\StudentRollGenerateController;
 use App\Http\Controllers\Student\StudentRegistrationFeeController;
+use App\Http\Controllers\Student\StudentMonthlyFeeController;
+
+
 
 
 /*
@@ -111,3 +114,7 @@ Route::controller(StudentRollGenerateController::class)->prefix('student/roll')
 Route::resource('registration/fee',StudentRegistrationFeeController::class)->middleware('auth:sanctum');
 Route::get('classwise/registration/fee',[StudentRegistrationFeeController::class,'classWiseRegistrationFee'])->name('student_registration_fee_classwise_get')->middleware('auth:sanctum');
 Route::get('registration_fee/pay_slip',[StudentRegistrationFeeController::class,'registrationFeePaySlip'])->name('student.registration.fee.payslip')->middleware('auth:sanctum');
+
+Route::get('monthly/fee',[StudentMonthlyFeecontroller::class,'Index'])->name('monthlyfee.index')->middleware('auth:sanctum');
+Route::get('classwise/monthly/fee',[StudentMonthlyFeecontroller::class,'classWiseMonthlyFee'])->name('student_monthly_fee_classwise_get')->middleware('auth:sanctum');
+Route::get('monthly_fee/pay_slip',[StudentMonthlyFeeController::class,'monthlyFeePaySlip'])->name('student.monthly.fee.payslip')->middleware('auth:sanctum');
