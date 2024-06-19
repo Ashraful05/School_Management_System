@@ -17,6 +17,7 @@ use App\Http\Controllers\Student\StudentRegistrationController;
 use App\Http\Controllers\Student\StudentRollGenerateController;
 use App\Http\Controllers\Student\StudentRegistrationFeeController;
 use App\Http\Controllers\Student\StudentMonthlyFeeController;
+use App\Http\Controllers\Student\StudentExamFeeController;
 
 
 
@@ -118,3 +119,10 @@ Route::get('registration_fee/pay_slip',[StudentRegistrationFeeController::class,
 Route::get('monthly/fee',[StudentMonthlyFeecontroller::class,'Index'])->name('monthlyfee.index')->middleware('auth:sanctum');
 Route::get('classwise/monthly/fee',[StudentMonthlyFeecontroller::class,'classWiseMonthlyFee'])->name('student_monthly_fee_classwise_get')->middleware('auth:sanctum');
 Route::get('monthly_fee/pay_slip',[StudentMonthlyFeeController::class,'monthlyFeePaySlip'])->name('student.monthly.fee.payslip')->middleware('auth:sanctum');
+
+Route::controller(StudentExamFeeController::class)->middleware('auth:sanctum')
+    ->prefix('exam')->group(function (){
+    Route::get('fee','Index')->name('exam.fee.index');
+    Route::get('class_wise/fee','classWiseExamFee')->name('student_exam_fee_classwise_get');
+    Route::get('fee/pay_slip','examFeePaySlip')->name('student.exam.fee.payslip');
+});

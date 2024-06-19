@@ -96,6 +96,7 @@
                     <li class="{{ Request::is('student/roll/*')?'active':'' }}"><a href="{{ route('student.roll.generate') }}"><i class="ti-more"></i>Roll Generate</a></li>
                     <li class="{{ Request::is('registration/fee')?'active':'' }}"><a href="{{ route('fee.index') }}"><i class="ti-more"></i>Student Registration Fee</a></li>
                     <li class="{{ Request::is('monthly/fee')?'active':'' }}"><a href="{{ route('monthlyfee.index') }}"><i class="ti-more"></i>Student Monthly Fee</a></li>
+                    <li class="{{ Request::is('exam/fee')?'active':'' }}"><a href="{{ route('exam.fee.index') }}"><i class="ti-more"></i>Student Exam Fee</a></li>
 
                 </ul>
             </li>
