@@ -9,6 +9,7 @@ use App\Models\FeeCategoryAmount;
 use App\Models\StudentClass;
 use App\Models\StudentYear;
 use Illuminate\Http\Request;
+use niklasravnsborg\LaravelPdf\Facades\Pdf;
 
 class StudentExamFeeController extends Controller
 {
@@ -39,7 +40,7 @@ class StudentExamFeeController extends Controller
         $html['thsource'] .= '<th>Roll No</th>';
         $html['thsource'] .= '<th>Exam Fee</th>';
         $html['thsource'] .= '<th>Discount </th>';
-        $html['thsource'] .= '<th>Student Fee </th>';
+        $html['thsource'] .= '<th>Final Exam Fee </th>';
         $html['thsource'] .= '<th>Action</th>';
 
 //        return response()->json($allStudent);
@@ -69,9 +70,20 @@ class StudentExamFeeController extends Controller
         }
         return response()->json(@$html);
     }
-    public function examFeePaySlip()
+    public function examFeePaySlip(Request $request)
     {
+        $detailsData = AssignStudent::with(['student','discount'])
+            ->where(['class_id'=>$request->class_id,'student_id'=>$request->student_id])
+            ->first();
 
+        $examType = ExamType::where('id',$request->exam_type)->first()['name'];
+
+        $pdf = Pdf::loadView('student_exam_fee.exam_fee_pdf',
+            compact('detailsData','examType'));
+
+        $pdf->SetProtection(['copy','print'], '', 'pass');
+
+        return $pdf->stream('document.pdf');
     }
 
 }
