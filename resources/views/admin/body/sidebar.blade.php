@@ -100,6 +100,19 @@
 
                 </ul>
             </li>
+            <li class="treeview ">
+                <a href="#">
+                    <i data-feather="grid"></i>
+                    <span>Employee Management</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-right pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="{{ Request::is('employee/management/*')?'active':'' }}"><a href="{{ route('employee.registration.index') }}"><i class="ti-more"></i>Employee Registration</a></li>
+
+                </ul>
+            </li>
 
 
             <li>

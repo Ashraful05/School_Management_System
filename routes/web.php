@@ -18,6 +18,7 @@ use App\Http\Controllers\Student\StudentRollGenerateController;
 use App\Http\Controllers\Student\StudentRegistrationFeeController;
 use App\Http\Controllers\Student\StudentMonthlyFeeController;
 use App\Http\Controllers\Student\StudentExamFeeController;
+use App\Http\Controllers\Employee\EmployeeRegistrationController;
 
 
 
@@ -126,3 +127,12 @@ Route::controller(StudentExamFeeController::class)->middleware('auth:sanctum')
     Route::get('class_wise/fee','classWiseExamFee')->name('student_exam_fee_classwise_get');
     Route::get('fee/pay_slip','examFeePaySlip')->name('student.exam.fee.payslip');
 });
+
+Route::controller(EmployeeRegistrationController::class)->middleware('auth:sanctum')
+    ->prefix('employee/management')->group(function (){
+       Route::get('index','Index')->name('employee.registration.index');
+    });
+
+
+
+
