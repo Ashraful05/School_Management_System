@@ -128,11 +128,12 @@ Route::controller(StudentExamFeeController::class)->middleware('auth:sanctum')
     Route::get('fee/pay_slip','examFeePaySlip')->name('student.exam.fee.payslip');
 });
 
-Route::controller(EmployeeRegistrationController::class)->middleware('auth:sanctum')
-    ->prefix('employee/management')->group(function (){
-       Route::get('index','Index')->name('employee.registration.index');
-    });
+//Route::controller(EmployeeRegistrationController::class)->middleware('auth:sanctum')
+//    ->prefix('employee/management')->group(function (){
+//       Route::get('view','Index')->name('employee.registration.index');
+//    });
 
+Route::resource('employeeRegistration',EmployeeRegistrationController::class)->middleware('auth:sanctum');
 
 
 

@@ -109,7 +109,7 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="{{ Request::is('employee/management/*')?'active':'' }}"><a href="{{ route('employee.registration.index') }}"><i class="ti-more"></i>Employee Registration</a></li>
+                    <li class="{{ Request::is('employeeRegistration')?'active':'' }}"><a href="{{ route('employeeRegistration.index') }}"><i class="ti-more"></i>Employee Registration</a></li>
 
                 </ul>
             </li>
