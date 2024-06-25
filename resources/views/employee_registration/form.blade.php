@@ -87,7 +87,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <h5>Student Address<span class="text-danger">*</span></h5>
+                                            <h5>Employee Address<span class="text-danger">*</span></h5>
                                             <div class="controls">
                                                 <textarea type="text" name="address" value="{{ old('address') }}" class="form-control" ></textarea>
                                                 @error('address')
@@ -124,18 +124,7 @@
                                                     <option value="hindu">Hindu</option>
                                                     <option value="christian">Christian</option>
                                                 </select>
-                                                @error('name')
-                                                <span class="text-danger">{{ $message }}</span>
-                                                @enderror
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <h5>Date of Birth<span class="text-danger">*</span></h5>
-                                            <div class="controls">
-                                                <input type="date" name="date_of_birth" value="{{ old('date_of_birth') }}" class="form-control" >
-                                                @error('name')
+                                                @error('religion')
                                                 <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
@@ -162,7 +151,7 @@
                                                     <option value="{{ $designation->id }}">{{ $designation->name }}</option>
                                                     @endforeach
                                                 </select>
-                                                @error('name')
+                                                @error('designation_id')
                                                 <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
