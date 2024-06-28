@@ -107,6 +107,18 @@ Route::controller(StudentRegistrationController::class)
         Route::get('details/pdf/{student_id}','studentDetailsInPdf')->name('student.registration.details');
         Route::get('roll/generate','studentRollGenerate')->name('student.roll.generate');
 });
+
+
+Route::controller(EmployeeRegistrationController::class)->prefix('employeeRegistration')
+    ->middleware('auth:sanctum')->group(function(){
+    Route::get('/','index')->name('employeeRegistration.index');
+    Route::get('create','create')->name('employeeRegistration.create');
+    Route::post('save','store')->name('employeeRegistration.store');
+    Route::get('edit/{id}','edit')->name('employeeRegistration.edit');
+    Route::post('update/{id}','update')->name('employeeRegistration.update');
+});
+
+
 Route::controller(StudentRollGenerateController::class)->prefix('student/roll')
     ->middleware('auth:sanctum')->group(function(){
        Route::get('generate','rollGenerate')->name('student.roll.generate');
@@ -133,7 +145,7 @@ Route::controller(StudentExamFeeController::class)->middleware('auth:sanctum')
 //       Route::get('view','Index')->name('employee.registration.index');
 //    });
 
-Route::resource('employeeRegistration',EmployeeRegistrationController::class)->middleware('auth:sanctum');
+//Route::resource('employeeRegistration',EmployeeRegistrationController::class)->middleware('auth:sanctum');
 
 
 

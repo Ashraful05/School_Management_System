@@ -48,11 +48,11 @@
                                             @endif
                                             <td>
                                                 <a href="{{ route('employeeRegistration.edit',$employee->id) }}" class="btn btn-rounded btn-info" title="Edit"><i class="fa fa-pencil-square-o"></i></a>
-                                                <form action="{{ route('employeeRegistration.destroy',$employee->id) }}" method="post" id="">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button type="submit" class="btn btn-rounded btn-danger" onclick="return confirm('Are you sure to delete?')" title="delete"><i class="fa fa-trash-o"></i></button>
-                                                </form>
+{{--                                                <form action="{{ route('employeeRegistration.destroy',$employee->id) }}" method="post" id="">--}}
+{{--                                                    @csrf--}}
+{{--                                                    @method('delete')--}}
+{{--                                                    <button type="submit" class="btn btn-rounded btn-danger" onclick="return confirm('Are you sure to delete?')" title="delete"><i class="fa fa-trash-o"></i></button>--}}
+{{--                                                </form>--}}
 
                                             </td>
                                         </tr>

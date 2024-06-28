@@ -21,6 +21,7 @@ class EmployeeRegistrationController extends Controller
     public function index()
     {
         $employees = User::where('user_type','employee')->get();
+//        return $employees;
         return view('employee_registration.index',compact('employees'));
     }
 
@@ -136,7 +137,9 @@ class EmployeeRegistrationController extends Controller
      */
     public function edit($id)
     {
-        //
+        $editData = User::findOrFail($id);
+        $designations = Designation::get();
+        return view('employee_registration.edit',compact('designations','editData'));
     }
 
     /**
@@ -148,7 +151,68 @@ class EmployeeRegistrationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name'=>'required|string',
+            'mobile'=>'required|numeric',
+            'address'=>'required|string',
+            'designation_id'=>'required'
+        ],[
+            'designation_id.required'=>'Employee Designation is required'
+        ]);
+
+            $employeeData = User::where('id',$id)->first();
+//            $checkYear = date('Ym',strtotime($request->joining_date));
+//            $employee = User::where('user_type', 'employee')->orderBy('id', 'desc')->first();
+
+
+            if ($request->file('image')) {
+                $file = $request->file('image');
+                @unlink(public_path('images/employee_images/'.$employeeData->image));
+                $fileName = date('Y_m_dHi').'.'.$file->getClientOriginalExtension();
+                $file->move(public_path('images/employee_images/'),$fileName);
+
+                $employeeData->update([
+                    'name' => $request->name,
+//                'user_type' => 'employee',
+                    'mobile' => $request->mobile,
+                    'address' => $request->address,
+                    'gender' => $request->gender,
+                    'mothers_name' => $request->mothers_name,
+                    'fathers_name' => $request->fathers_name,
+                    'religion' => $request->religion,
+//                'date_of_birth' => date('Y-m-d', strtotime($request->date_of_birth)),
+
+                    'designation_id'=>$request->designation_id,
+                    'image' => $fileName,
+                ]);
+            }
+
+            else{
+                $employeeData->update([
+                    'name' => $request->name,
+//                'user_type' => 'employee',
+                    'mobile' => $request->mobile,
+                    'address' => $request->address,
+                    'gender' => $request->gender,
+                    'mothers_name' => $request->mothers_name,
+                    'fathers_name' => $request->fathers_name,
+                    'religion' => $request->religion,
+                    'designation_id'=>$request->designation_id,
+                ]);
+            }
+//            EmployeeSalaryLog::create([
+//                'employee_id'=>$employeeData->id,
+//                'effected_salary'=>date('Y-m-d', strtotime($request->joining_date)),
+//                'previous_salary'=>$request->salary,
+//                'present_salary'=>$request->salary,
+//                'increment_salary'=>'0',
+//            ]);
+//
+        $notification = [
+            'alert-type'=>'info',
+            'message'=>'Employee Data Updated Successfully!!'
+        ];
+        return redirect()->route('employeeRegistration.index')->with($notification);
     }
 
     /**
