@@ -12,10 +12,10 @@
                 <div class="col-12">
 
                     <div class="box">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Employee Salary</h3>
-                            <a href="{{ route('employeeRegistration.create') }}" class="btn btn-rounded btn-success mb-3" style="float: right">Add Employee</a>
-                        </div>
+{{--                        <div class="box-header with-border">--}}
+{{--                            <h3 class="box-title">Employee Salary</h3>--}}
+{{--                            <a href="{{ route('employeeRegistration.create') }}" class="btn btn-rounded btn-success mb-3" style="float: right">Add Employee</a>--}}
+{{--                        </div>--}}
                         <!-- /.box-header -->
                         <div class="box-body">
                             <div class="table-responsive">
@@ -43,8 +43,8 @@
                                             <td>{{ date('d-m-Y',strtotime($employeeSalary->joining_date)) }}</td>
                                             <td>{{ $employeeSalary->salary }}</td>
                                             <td>
-                                                <a href="{{ route('employeeRegistration.edit',$employeeSalary->id) }}" class="btn btn-rounded btn-info" title="Increment"><i class="fa fa-plus-circle"></i></a>
-                                                <a href="{{ route('employeeRegistration.details',$employeeSalary->id) }}" class="btn btn-rounded btn-danger" title="Details" target="_blank"><i class="fa fa-eye"></i></a>
+                                                <a href="{{ route('employeeSalary.increment',$employeeSalary->id) }}" class="btn btn-rounded btn-info" title="Increment"><i class="fa fa-plus-circle"></i></a>
+                                                <a href="{{ route('employeeSalary.details',$employeeSalary->id) }}" class="btn btn-rounded btn-danger" title="Details" target="_blank"><i class="fa fa-eye"></i></a>
                                             </td>
                                         </tr>
 
