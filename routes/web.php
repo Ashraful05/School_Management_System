@@ -115,6 +115,7 @@ Route::controller(EmployeeRegistrationController::class)->prefix('employeeRegist
     Route::get('create','create')->name('employeeRegistration.create');
     Route::post('save','store')->name('employeeRegistration.store');
     Route::get('edit/{id}','edit')->name('employeeRegistration.edit');
+    Route::get('details/{id}','details')->name('employeeRegistration.details');
     Route::post('update/{id}','update')->name('employeeRegistration.update');
 });
 

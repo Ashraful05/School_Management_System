@@ -48,12 +48,7 @@
                                             @endif
                                             <td>
                                                 <a href="{{ route('employeeRegistration.edit',$employee->id) }}" class="btn btn-rounded btn-info" title="Edit"><i class="fa fa-pencil-square-o"></i></a>
-{{--                                                <form action="{{ route('employeeRegistration.destroy',$employee->id) }}" method="post" id="">--}}
-{{--                                                    @csrf--}}
-{{--                                                    @method('delete')--}}
-{{--                                                    <button type="submit" class="btn btn-rounded btn-danger" onclick="return confirm('Are you sure to delete?')" title="delete"><i class="fa fa-trash-o"></i></button>--}}
-{{--                                                </form>--}}
-
+                                                <a href="{{ route('employeeRegistration.details',$employee->id) }}" class="btn btn-rounded btn-danger" title="Details" target="_blank"><i class="fa fa-file-pdf-o"></i></a>
                                             </td>
                                         </tr>
 

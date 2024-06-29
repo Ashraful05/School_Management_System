@@ -10,6 +10,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use niklasravnsborg\LaravelPdf\Facades\Pdf;
 
 class EmployeeRegistrationController extends Controller
 {
@@ -124,9 +125,13 @@ class EmployeeRegistrationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function details($id)
     {
-        //
+        $detailsData = User::findOrFail($id);
+        $pdf = Pdf::loadView('employee_registration.employee_details_pdf',compact('detailsData'));
+        $pdf->SetProtection(['copy','print'],'','pass');
+        return $pdf->stream('document.pdf');
+
     }
 
     /**
