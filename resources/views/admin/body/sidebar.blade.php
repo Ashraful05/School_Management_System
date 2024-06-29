@@ -109,7 +109,8 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="{{ Request::is('employeeRegistration')?'active':'' }}"><a href="{{ route('employeeRegistration.index') }}"><i class="ti-more"></i>Employee Registration</a></li>
+                    <li class="{{ Request::is('employeeRegistration/list')?'active':'' }}"><a href="{{ route('employeeRegistration.index') }}"><i class="ti-more"></i>Employee Registration</a></li>
+                    <li class="{{ Request::is('employeeSalary/list')?'active':'' }}"><a href="{{ route('employeeSalary.index') }}"><i class="ti-more"></i>Employee Salary</a></li>
 
                 </ul>
             </li>

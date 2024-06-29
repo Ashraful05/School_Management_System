@@ -19,6 +19,7 @@ use App\Http\Controllers\Student\StudentRegistrationFeeController;
 use App\Http\Controllers\Student\StudentMonthlyFeeController;
 use App\Http\Controllers\Student\StudentExamFeeController;
 use App\Http\Controllers\Employee\EmployeeRegistrationController;
+use App\Http\Controllers\Employee\EmployeeSalaryController;
 
 
 
@@ -109,15 +110,7 @@ Route::controller(StudentRegistrationController::class)
 });
 
 
-Route::controller(EmployeeRegistrationController::class)->prefix('employeeRegistration')
-    ->middleware('auth:sanctum')->group(function(){
-    Route::get('/','index')->name('employeeRegistration.index');
-    Route::get('create','create')->name('employeeRegistration.create');
-    Route::post('save','store')->name('employeeRegistration.store');
-    Route::get('edit/{id}','edit')->name('employeeRegistration.edit');
-    Route::get('details/{id}','details')->name('employeeRegistration.details');
-    Route::post('update/{id}','update')->name('employeeRegistration.update');
-});
+
 
 
 Route::controller(StudentRollGenerateController::class)->prefix('student/roll')
@@ -146,7 +139,17 @@ Route::controller(StudentExamFeeController::class)->middleware('auth:sanctum')
 //       Route::get('view','Index')->name('employee.registration.index');
 //    });
 
-//Route::resource('employeeRegistration',EmployeeRegistrationController::class)->middleware('auth:sanctum');
 
-
-
+Route::controller(EmployeeRegistrationController::class)->prefix('employeeRegistration')
+    ->middleware('auth:sanctum')->group(function(){
+        Route::get('list','index')->name('employeeRegistration.index');
+        Route::get('create','create')->name('employeeRegistration.create');
+        Route::post('save','store')->name('employeeRegistration.store');
+        Route::get('edit/{id}','edit')->name('employeeRegistration.edit');
+        Route::get('details/{id}','details')->name('employeeRegistration.details');
+        Route::post('update/{id}','update')->name('employeeRegistration.update');
+    });
+Route::controller(EmployeeSalaryController::class)->prefix('employeeSalary')
+    ->middleware('auth:sanctum')->group(function (){
+       Route::get('list','index')->name('employeeSalary.index');
+    });
