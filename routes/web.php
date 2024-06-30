@@ -154,5 +154,5 @@ Route::controller(EmployeeSalaryController::class)->prefix('employeeSalary')
        Route::get('list','index')->name('employeeSalary.index');
        Route::get('increment/{id}','increment')->name('employeeSalary.increment');
        Route::get('details/{id}','details')->name('employeeSalary.details');
-       Route::post('increment_salary/{id}','updateSalaryIncrement')->name('employeeSalary.increment');
+       Route::post('increment_salary/{id}','updateSalaryIncrement')->name('employeeSalary.increment.update');
     });

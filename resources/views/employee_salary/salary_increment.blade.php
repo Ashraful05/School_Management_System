@@ -20,7 +20,7 @@
                 <div class="box-body">
                     <div class="row">
                         <div class="col">
-                            <form action="{{ route('update.salary.increment') }}" method="post" >
+                            <form action="{{ route('employeeSalary.increment.update',$data->id) }}" method="post" >
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-6">
@@ -43,7 +43,7 @@
                                 </div>
 
                                 <div class="text-xs-right">
-                                    <button type="submit" class="form-control btn btn-rounded btn-info">Add</button>
+                                    <button type="submit" class="form-control btn btn-rounded btn-info">Update Salary</button>
                                 </div>
                             </form>
 

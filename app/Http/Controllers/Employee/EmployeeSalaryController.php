@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Employee;
 
 use App\Http\Controllers\Controller;
+use App\Models\EmployeeSalaryLog;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -27,6 +28,25 @@ class EmployeeSalaryController extends Controller
 
     public function updateSalaryIncrement(Request $request, $id)
     {
+        $user = User::findOrFail($id);
+        $previousSalary = $user->salary;
+        $presentSalary = (float)($previousSalary)+(float)($request->increment_salary);
+        $user->salary = $presentSalary;
+        $user->save();
+
+        EmployeeSalaryLog::create([
+           'employee_id'=>$id,
+            'previous_salary'=>$previousSalary,
+            'increment_salary'=>$request->increment_salary,
+            'present_salary'=>$presentSalary,
+            'effected_salary'=>date('Y-m-d',strtotime($request->effected_salary))
+        ]);
+
+        $notification = [
+            'message'=>'Salary Incremented Successfully!',
+            'alert-type'=>'info',
+        ];
+        return redirect()->route('employeeSalary.index')->with($notification);
 
     }
 
