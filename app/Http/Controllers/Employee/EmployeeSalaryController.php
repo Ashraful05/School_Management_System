@@ -23,7 +23,9 @@ class EmployeeSalaryController extends Controller
 
     public function details($id)
     {
-
+        $user = User::find($id);
+        $salaryLog = EmployeeSalaryLog::where('employee_id',$user->id)->get();
+        return view('employee_salary.salary_details_pdf',compact('salaryLog','user'));
     }
 
     public function updateSalaryIncrement(Request $request, $id)
