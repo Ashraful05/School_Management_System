@@ -1,5 +1,5 @@
 @extends('admin.master')
-@section('title','Employee Salary')
+@section('title','Employee Salary details')
 @section('main_content')
     <!-- Content Wrapper. Contains page content -->
     <div class="container-full">

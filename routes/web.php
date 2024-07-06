@@ -20,6 +20,7 @@ use App\Http\Controllers\Student\StudentMonthlyFeeController;
 use App\Http\Controllers\Student\StudentExamFeeController;
 use App\Http\Controllers\Employee\EmployeeRegistrationController;
 use App\Http\Controllers\Employee\EmployeeSalaryController;
+use App\Http\Controllers\Employee\EmployeeLeaveController;
 
 
 
@@ -155,4 +156,9 @@ Route::controller(EmployeeSalaryController::class)->prefix('employeeSalary')
        Route::get('increment/{id}','increment')->name('employeeSalary.increment');
        Route::get('details/{id}','details')->name('employeeSalary.details');
        Route::post('increment_salary/{id}','updateSalaryIncrement')->name('employeeSalary.increment.update');
+    });
+
+Route::controller(EmployeeLeaveController::class)->prefix('employeeLeave')
+    ->middleware('auth:sanctum')->group(function (){
+        Route::get('index','leaveIndex');
     });

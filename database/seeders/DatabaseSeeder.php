@@ -31,5 +31,6 @@ class DatabaseSeeder extends Seeder
 //        $this->call(ExamTypeSeeder::class);
 //        $this->call(SchoolSubjectSeeder::class);
 //        $this->call(DesignationSeeder::class);
+//        $this->call(EmployeeLeavePurposeSeeder::class);
     }
 }
