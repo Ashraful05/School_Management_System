@@ -160,5 +160,10 @@ Route::controller(EmployeeSalaryController::class)->prefix('employeeSalary')
 
 Route::controller(EmployeeLeaveController::class)->prefix('employeeLeave')
     ->middleware('auth:sanctum')->group(function (){
-        Route::get('index','leaveIndex');
+        Route::get('list','leaveIndex')->name('employeeLeave.index');
+        Route::get('create','leaveCreate')->name('employeeLeave.create');
+        Route::post('save','leaveSave')->name('employeeLeave.save');
+        Route::get('edit/{id}','leaveEdit')->name('employeeLeave.edit');
+        Route::post('update/{id}','leaveUpdate')->name('employeeLeave.update');
+        Route::get('delete/{id}','leaveDelete')->name('employeeLeave.delete');
     });

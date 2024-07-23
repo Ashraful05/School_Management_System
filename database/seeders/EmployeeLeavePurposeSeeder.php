@@ -20,7 +20,8 @@ class EmployeeLeavePurposeSeeder extends Seeder
 
         $purposes = [
            [ 'name'=>'Family Problem'],
-            ['name'=>'Personal Problem',]
+            ['name'=>'Personal Problem',],
+            ['name'=>'Sickness',]
         ];
         LeavePurpose::insert($purposes);
     }
