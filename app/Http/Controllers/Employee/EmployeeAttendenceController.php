@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Employee;
 
 use App\Http\Controllers\Controller;
 use App\Models\EmployeeAttendance;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class EmployeeAttendenceController extends Controller
@@ -26,7 +27,8 @@ class EmployeeAttendenceController extends Controller
      */
     public function create(EmployeeAttendance $employeeAttendance)
     {
-        return view('employee_attendance.form',compact('employeeAttendance'));
+        $employees = User::where('user_type','employee')->get();
+        return view('employee_attendance.form',compact('employeeAttendance','employees'));
     }
 
     /**

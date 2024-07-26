@@ -76,10 +76,10 @@
                     <li class="{{ Request::is('student/shift')?'active':'' }}"><a href="{{ route('shift.index') }}"><i class="ti-more"></i>Student Shift</a></li>
                     <li class="{{ Request::is('student/feeCategory')?'active':'' }}"><a href="{{ route('feeCategory.index') }}"><i class="ti-more"></i>Student Fee Category</a></li>
                     <li class="{{ Request::is('student/feeCategoryAmount')?'active':'' }}"><a href="{{ route('feeCategoryAmount.index') }}"><i class="ti-more"></i>Student Fee Amount</a></li>
-                    <li class="{{ Request::is('examType')?'active':'' }}"><a href="{{ route('examType.index') }}"><i class="ti-more"></i>Student Exam Type</a></li>
-                    <li class="{{ Request::is('schoolSubject')?'active':'' }}"><a href="{{ route('schoolSubject.index') }}"><i class="ti-more"></i>School Subject List</a></li>
-                    <li class="{{ Request::is('assignStudentSubject')?'active':'' }}"><a href="{{ route('assignStudentSubject.index') }}"><i class="ti-more"></i>Assign Subject List</a></li>
-                    <li class="{{ Request::is('designation')?'active':'' }}"><a href="{{ route('designation.index') }}"><i class="ti-more"></i>Designation</a></li>
+                    <li class="{{ Request::is('examType*')?'active':'' }}"><a href="{{ route('examType.index') }}"><i class="ti-more"></i>Student Exam Type</a></li>
+                    <li class="{{ Request::is('schoolSubject*')?'active':'' }}"><a href="{{ route('schoolSubject.index') }}"><i class="ti-more"></i>School Subject List</a></li>
+                    <li class="{{ Request::is('assignStudentSubject*')?'active':'' }}"><a href="{{ route('assignStudentSubject.index') }}"><i class="ti-more"></i>Assign Subject List</a></li>
+                    <li class="{{ Request::is('designation*')?'active':'' }}"><a href="{{ route('designation.index') }}"><i class="ti-more"></i>Designation</a></li>
                 </ul>
             </li>
 
@@ -112,7 +112,7 @@
                     <li class="{{ Request::is('employeeRegistration/list')?'active':'' }}"><a href="{{ route('employeeRegistration.index') }}"><i class="ti-more"></i>Employee Registration</a></li>
                     <li class="{{ Request::is('employeeSalary/list')?'active':'' }}"><a href="{{ route('employeeSalary.index') }}"><i class="ti-more"></i>Employee Salary</a></li>
                     <li class="{{ Request::is('employeeLeave/list')?'active':'' }}"><a href="{{ route('employeeLeave.index') }}"><i class="ti-more"></i>Employee Leave</a></li>
-                    <li class="{{ Request::is('employeeAttendance')?'active':'' }}"><a href="{{ route('employeeAttendance.index') }}"><i class="ti-more"></i>Employee Attendance</a></li>
+                    <li class="{{ Request::is('employeeAttendance*')?'active':'' }}"><a href="{{ route('employeeAttendance.index') }}"><i class="ti-more"></i>Employee Attendance</a></li>
 
                 </ul>
             </li>
