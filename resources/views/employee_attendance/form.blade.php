@@ -46,39 +46,43 @@
                                             <div class="row">
                                                 <div class="col-md-12">
 
-                                                        <table class="table table-bordered table-striped">
-                                                            <thead>
-                                                            <tr>
-                                                                <th rowspan="2" class="text-center" style="vertical-align: middle">Sl</th>
-                                                                <th rowspan="2" class="text-center" style="vertical-align: middle">Employee List</th>
-                                                                <th colspan="3" class="text-center" style="vertical-align: middle; width: 30%;">Attendance Status</th>
-                                                            </tr>
-                                                            <tr>
-                                                                <th class="text-center btn present_all" style="display: table-cell; background-color: #000000">Present</th>
-                                                                <th class="text-center btn leave_all" style="display: table-cell; background-color: #ffa84c">Leave</th>
-                                                                <th class="text-center btn absent_all" style="display: table-cell; background-color: red">Absent</th>
-                                                            </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                            <tr>
-                                                                <td>Sl</td>
-                                                                <td>Employee List</td>
+                                                    <table class="table table-bordered table-striped">
+                                                        <thead>
+                                                        <tr>
+                                                            <th rowspan="2" class="text-center" style="vertical-align: middle">Sl</th>
+                                                            <th rowspan="2" class="text-center" style="vertical-align: middle">Employee List</th>
+                                                            <th colspan="3" class="text-center" style="vertical-align: middle; width: 30%;">Attendance Status</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <th class="text-center btn present_all" style="display: table-cell; background-color: #000000">Present</th>
+                                                            <th class="text-center btn leave_all" style="display: table-cell; background-color: #ffa84c">Leave</th>
+                                                            <th class="text-center btn absent_all" style="display: table-cell; background-color: red">Absent</th>
+                                                        </tr>
+                                                        </thead>
+
+                                                        <tbody>
+                                                        @foreach($employees as $row=>$employee)
+                                                            <tr id="div{{$employee->id}}" class="text-center">
+                                                                <input type="hidden" name="employee_id[]" value="{{ $employee->id }}">
+                                                                <td>{{ ++$row }}</td>
+                                                                <td>{{ $employee->name }}</td>
                                                                 <td colspan="3">
                                                                     <div class="switch-toggle switch-3 switch-candy">
-                                                                        <input type="radio" name="group1" id="radio_1" checked>
-                                                                        <label for="radio_1">Present</label>
+                                                                        <input type="radio" name="attendance_status{{$row}}" value="present" id="present{{$row}}" checked>
+                                                                        <label for="present{{ $row }}">Present</label>
 
-                                                                        <input type="radio" name="group2" id="radio_2" >
-                                                                        <label for="radio_2">Leave</label>
+                                                                        <input type="radio" name="attendance_status{{$row}}" value="leave" id="leave{{$row}}" >
+                                                                        <label for="leave{{ $row }}">Leave</label>
 
-                                                                        <input type="radio" name="group3" id="radio_3" >
-                                                                        <label for="radio_3">Absent</label>
+                                                                        <input type="radio" name="attendance_status{{$row}}" value="absent" id="absent{{$row}}" >
+                                                                        <label for="absent{{ $row }}">Absent</label>
 
                                                                     </div>
                                                                 </td>
                                                             </tr>
-                                                            </tbody>
-                                                        </table>
+                                                        @endforeach
+                                                        </tbody>
+                                                    </table>
 
                                                 </div>
                                             </div>
