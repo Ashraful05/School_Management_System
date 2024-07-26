@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Employee\EmployeeAttendenceController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\User\UserController;
@@ -166,4 +167,7 @@ Route::controller(EmployeeLeaveController::class)->prefix('employeeLeave')
         Route::get('edit/{id}','leaveEdit')->name('employeeLeave.edit');
         Route::post('update/{id}','leaveUpdate')->name('employeeLeave.update');
         Route::get('delete/{id}','leaveDelete')->name('employeeLeave.delete');
+
     });
+
+Route::resource('employeeAttendance',EmployeeAttendenceController::class)->middleware('auth:sanctum');
