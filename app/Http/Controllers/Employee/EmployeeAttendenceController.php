@@ -16,7 +16,7 @@ class EmployeeAttendenceController extends Controller
      */
     public function index()
     {
-        $attendances = EmployeeAttendance::with('user')->orderby('id','desc')->get();
+        $attendances = EmployeeAttendance::orderby('id','desc')->get();
         return view('employee_attendance.index',compact('attendances'));
     }
 
@@ -39,7 +39,37 @@ class EmployeeAttendenceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+//        dd($request->all());
+        $request->validate([
+            'date'=>'required'
+        ]);
+
+        $countEmployee = count($request->employee_id);
+        for($i=0; $i<$countEmployee; $i++){
+
+            $attendanceStatus = 'attendance_status'.$i;
+//            return $attendanceStatus;
+//            $attendance = new EmployeeAttendance();
+//            $attendance->date = date('Y-m-d',strtotime($request->date));
+//            $attendance->employee_id = $request->employee_id[$i];
+//            $attendance->attendance_status = $request->$attendanceStatus;
+////            return $attendance_status;
+//
+//            $attendance->save();
+
+            EmployeeAttendance::create([
+                'date' => date('Y-m-d',strtotime($request->date)),
+                'employee_id' => $request->employee_id[$i],
+                'attendance_status'=>$request->$attendanceStatus
+            ]);
+
+        }
+
+        $notification = [
+            'alert-type'=>'success',
+            'message'=>'Data Saved!!'
+        ];
+        return redirect()->route('employeeAttendance.index')->with($notification);
     }
 
     /**

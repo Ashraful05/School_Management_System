@@ -26,7 +26,7 @@
                                 <form action="{{ route('employeeAttendance.update',$employeeAttendance->id) }}" method="post" >
                                     @method('put')
                                     @else
-                                        <form action="{{ route('employeeAttendance.store') }}" method="post" >
+                                        <form action="{{ route('employeeAttendance.store') }}" method="post">
                                             @endif
                                             @csrf
                                             <div class="row">
@@ -61,21 +61,22 @@
                                                         </thead>
 
                                                         <tbody>
-                                                        @foreach($employees as $row=>$employee)
+                                                        @foreach($employees as $key => $employee)
                                                             <tr id="div{{$employee->id}}" class="text-center">
                                                                 <input type="hidden" name="employee_id[]" value="{{ $employee->id }}">
-                                                                <td>{{ ++$row }}</td>
+                                                                <td>{{ $key+1 }}</td>
                                                                 <td>{{ $employee->name }}</td>
                                                                 <td colspan="3">
                                                                     <div class="switch-toggle switch-3 switch-candy">
-                                                                        <input type="radio" name="attendance_status{{$row}}" value="present" id="present{{$row}}" checked>
-                                                                        <label for="present{{ $row }}">Present</label>
 
-                                                                        <input type="radio" name="attendance_status{{$row}}" value="leave" id="leave{{$row}}" >
-                                                                        <label for="leave{{ $row }}">Leave</label>
+                                                                        <input type="radio" name="attendance_status{{$key}}" value="Present" id="present{{$key}}" checked>
+                                                                        <label for="present{{$key}}">Present</label>
 
-                                                                        <input type="radio" name="attendance_status{{$row}}" value="absent" id="absent{{$row}}" >
-                                                                        <label for="absent{{ $row }}">Absent</label>
+                                                                        <input type="radio" name="attendance_status{{$key}}" value="Leave" id="leave{{$key}}" >
+                                                                        <label for="leave{{$key}}">Leave</label>
+
+                                                                        <input type="radio" name="attendance_status{{$key}}" value="Absent" id="absent{{$key}}" >
+                                                                        <label for="absent{{$key}}">Absent</label>
 
                                                                     </div>
                                                                 </td>

@@ -24,6 +24,7 @@
                                     <tr>
                                         <th>SL.</th>
                                         <th>Employee Name</th>
+                                        <th>Employee ID No.</th>
                                         <th>Attendance Date</th>
                                         <th>Attendance Status</th>
                                         <th>Action</th>
@@ -34,14 +35,15 @@
                                         <tr>
                                             <td>{{ ++$row }}</td>
                                             <td>{{ $attendance->user->name }}</td>
-                                            <td>{{ $attendance->date }}</td>
+                                            <td>{{ $attendance->user->id_number }}</td>
+                                            <td>{{ date('d-m-Y',strtotime($attendance->date)) }}</td>
                                             <td>{{ $attendance->attendance_status }}</td>
                                             <td>
-                                                <a href="{{ route('$attendance.edit',$examType->id) }}" class="btn btn-rounded btn-info">Edit</a>
-                                                <form action="{{ route('$attendance.destroy',$examType->id) }}" method="post" id="">
+                                                <a href="{{ route('employeeAttendance.edit',$attendance->id) }}" class="btn btn-rounded btn-info" title="Edit"><i class="fa fa-edit"></i></a>
+                                                <form action="{{ route('employeeAttendance.destroy',$attendance->id) }}" method="post" id="">
                                                     @csrf
                                                     @method('delete')
-                                                    <button type="submit" class="btn btn-rounded btn-danger" onclick="return confirm('Are you sure to delete?')">Delete</button>
+                                                    <button type="submit" class="btn btn-rounded btn-danger" onclick="return confirm('Are you sure to delete?')" title="delete"><i class="fa fa-trash-o"></i></button>
                                                 </form>
 
                                             </td>
