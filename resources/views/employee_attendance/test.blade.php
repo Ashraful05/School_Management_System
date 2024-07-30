@@ -23,23 +23,28 @@
                                     <thead>
                                     <tr>
                                         <th>SL.</th>
+                                        <th>Employee Name</th>
+                                        <th>Employee ID No.</th>
                                         <th>Attendance Date</th>
+                                        <th>Attendance Status</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($attendances as $row => $attendance)
+                                    @foreach($attendances as $row=>$attendance)
                                         <tr>
                                             <td>{{ ++$row }}</td>
+                                            <td>{{ $attendance->user->name }}</td>
+                                            <td>{{ $attendance->user->id_number }}</td>
                                             <td>{{ date('d-m-Y',strtotime($attendance->date)) }}</td>
+                                            <td>{{ $attendance->attendance_status }}</td>
                                             <td>
-                                                <a href="{{ route('employeeAttendance.edit',$attendance->date) }}" class="btn btn-rounded btn-edi" title="Edit"><i class="fa fa-edit"></i></a>
-{{--                                                <a href="{{ route('employeeAttendance.show',$attendance->id) }}" class="btn btn-rounded btn-info" title="Details"><i class="fa fa-info-circle"></i></a>--}}
-{{--                                                <form action="{{ route('employeeAttendance.destroy',$attendance->id) }}" method="post" id="">--}}
-{{--                                                    @csrf--}}
-{{--                                                    @method('delete')--}}
-{{--                                                    <button type="submit" class="btn btn-rounded btn-danger" onclick="return confirm('Are you sure to delete?')" title="delete"><i class="fa fa-trash-o"></i></button>--}}
-{{--                                                </form>--}}
+                                                <a href="{{ route('employeeAttendance.edit',$attendance->id) }}" class="btn btn-rounded btn-info" title="Edit"><i class="fa fa-edit"></i></a>
+                                                <form action="{{ route('employeeAttendance.destroy',$attendance->id) }}" method="post" id="">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <button type="submit" class="btn btn-rounded btn-danger" onclick="return confirm('Are you sure to delete?')" title="delete"><i class="fa fa-trash-o"></i></button>
+                                                </form>
 
                                             </td>
                                         </tr>

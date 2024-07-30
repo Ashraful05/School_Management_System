@@ -16,7 +16,8 @@ class EmployeeAttendenceController extends Controller
      */
     public function index()
     {
-        $attendances = EmployeeAttendance::orderby('id','desc')->get();
+        $attendances = EmployeeAttendance::select('date')->groupby('date')->orderby('id','desc')->get();
+//        return $attendances;
         return view('employee_attendance.index',compact('attendances'));
     }
 
@@ -78,9 +79,9 @@ class EmployeeAttendenceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(EmployeeAttendance $employeeAttendance)
     {
-        //
+        return view('employee_attendance.details',compact('employeeAttendance'));
     }
 
     /**
@@ -89,9 +90,11 @@ class EmployeeAttendenceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(EmployeeAttendance $employeeAttendance)
+    public function edit($date)
     {
-        //
+        $attendanceDate = EmployeeAttendance::where('date',$date)->get();
+        $employees = User::where('user_type','employee')->get();
+        return view('employee_attendance.edit',compact('attendanceDate','employees'));
     }
 
     /**
