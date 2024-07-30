@@ -20,7 +20,7 @@
                 <div class="box-body">
                     <div class="row">
                         <div class="col">
-{{--                            <form action="{{ route('employeeAttendance.update') }}" method="post" >--}}
+                            <form action="{{ route('employeeAttendance.store') }}" method="post" >
                                 @csrf
                                 <div class="row">
                                     <div class="col-12">
@@ -86,7 +86,6 @@
 
                                 <div class="text-xs-right">
                                     <button type="submit" class="form-control btn btn-rounded btn-info">Update</button>
-
                                 </div>
                             </form>
                             </form>
