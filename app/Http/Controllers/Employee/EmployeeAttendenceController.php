@@ -79,9 +79,10 @@ class EmployeeAttendenceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(EmployeeAttendance $employeeAttendance)
+    public function show($date)
     {
-        return view('employee_attendance.details',compact('employeeAttendance'));
+        $details = EmployeeAttendance::where('date',$date)->get();
+        return view('employee_attendance.details',compact('details'));
     }
 
     /**

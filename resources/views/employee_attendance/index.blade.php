@@ -33,8 +33,8 @@
                                             <td>{{ ++$row }}</td>
                                             <td>{{ date('d-m-Y',strtotime($attendance->date)) }}</td>
                                             <td>
-                                                <a href="{{ route('employeeAttendance.edit',$attendance->date) }}" class="btn btn-rounded btn-edi" title="Edit"><i class="fa fa-edit"></i></a>
-{{--                                                <a href="{{ route('employeeAttendance.show',$attendance->id) }}" class="btn btn-rounded btn-info" title="Details"><i class="fa fa-info-circle"></i></a>--}}
+                                                <a href="{{ route('employeeAttendance.edit',$attendance->date) }}" class="btn btn-rounded btn-edit" title="Edit"><i class="fa fa-pencil-square-o"></i></a>
+                                                <a href="{{ route('employeeAttendance.show',$attendance->date) }}" class="btn btn-rounded btn-info" title="Details"><i class="fa fa-info-circle"></i></a>
 {{--                                                <form action="{{ route('employeeAttendance.destroy',$attendance->id) }}" method="post" id="">--}}
 {{--                                                    @csrf--}}
 {{--                                                    @method('delete')--}}
