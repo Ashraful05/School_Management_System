@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Employee;
 use App\Http\Controllers\Controller;
 use App\Models\EmployeeAttendance;
 use Illuminate\Http\Request;
+use Mpdf\Tag\Em;
+use niklasravnsborg\LaravelPdf\Facades\Pdf;
 
 class EmployeeMonthlySalaryController extends Controller
 {
@@ -54,14 +56,6 @@ class EmployeeMonthlySalaryController extends Controller
             $totalSalaryMinus = (float)$absentCount * (float)$salaryPerDay;
             $totalSalary = (float)$salary - (float)$totalSalaryMinus;
 
-//            $html[$key]['tdsource'] .= '<td>'.$v->roll.'</td>';
-//            $html[$key]['tdsource'] .= '<td>'.$registrationfee->amount.'</td>';
-//            $html[$key]['tdsource'] .= '<td>'.$v['discount']['discount'].'%'.'</td>';
-
-//            $originalfee = $registrationfee->amount;
-//            $discount = $v['discount']['discount'];
-//            $discounttablefee = $discount/100*$originalfee;
-//            $finalfee = (float)$originalfee-(float)$discounttablefee;
 
             $html[$key]['tdsource'] .='<td>'.$totalSalary.'</td>';
             $html[$key]['tdsource'] .='<td>';
@@ -70,6 +64,26 @@ class EmployeeMonthlySalaryController extends Controller
 
         }
         return response()->json(@$html);
+    }
+
+    public function employeeMonthlySalaryPaySlip(Request $request,$employee_id)
+    {
+        $employeeId = EmployeeAttendance::where('employee_id',$employee_id)->first();
+        $date = date('Y-m',strtotime($employeeId->date));
+        if($date!=''){
+            $where[] = ['date','like',$date.'%'];
+        }
+
+        $detailsData = EmployeeAttendance::with('user')->where($where)
+            ->where('employee_id',$employeeId->employee_id)
+            ->get();
+//        return $detailsData;
+
+        $pdf = Pdf::loadView('employee_monthly_salary.employee_monthly_salary_pdf',compact('detailsData'));
+
+        $pdf->setProtection(['copy','print'],'','pass');
+
+        return $pdf->stream('document.pdf');
     }
 
     /**

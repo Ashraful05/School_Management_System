@@ -174,4 +174,4 @@ Route::controller(EmployeeLeaveController::class)->prefix('employeeLeave')
 Route::resource('employeeAttendance',EmployeeAttendenceController::class)->middleware('auth:sanctum');
 Route::resource('employeeMonthlySalary',EmployeeMonthlySalaryController::class)->middleware('auth:sanctum');
 Route::get('employeeMonthWiseSalary',[EmployeeMonthlySalaryController::class,'employeeMonthWiseSalary'])->name('employee_monthly_salary_get');
-Route::get('employeeMonthlySalary/employee_monthly_salary_paySlip',[EmployeeMonthlySalaryController::class,'employeeMonthlySalaryPaySlip'])->name('employee.monthly.salary.payslip');
+Route::get('employeeMonthlySalary/employee_monthly_salary_paySlip/{employee_id}',[EmployeeMonthlySalaryController::class,'employeeMonthlySalaryPaySlip'])->name('employee.monthly.salary.payslip');
