@@ -22,6 +22,7 @@ use App\Http\Controllers\Student\StudentExamFeeController;
 use App\Http\Controllers\Employee\EmployeeRegistrationController;
 use App\Http\Controllers\Employee\EmployeeSalaryController;
 use App\Http\Controllers\Employee\EmployeeLeaveController;
+use App\Http\Controllers\Employee\EmployeeMonthlySalaryController;
 
 
 
@@ -171,3 +172,5 @@ Route::controller(EmployeeLeaveController::class)->prefix('employeeLeave')
     });
 
 Route::resource('employeeAttendance',EmployeeAttendenceController::class)->middleware('auth:sanctum');
+Route::resource('employeeMonthlySalary',EmployeeMonthlySalaryController::class)->middleware('auth:sanctum');
+Route::get('employeeMonthWiseSalary',[EmployeeMonthlySalaryController::class,'employeeMonthWiseSalary'])->name('employee_monthly_salary_get');

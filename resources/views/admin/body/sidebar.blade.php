@@ -113,6 +113,7 @@
                     <li class="{{ Request::is('employeeSalary/list')?'active':'' }}"><a href="{{ route('employeeSalary.index') }}"><i class="ti-more"></i>Employee Salary</a></li>
                     <li class="{{ Request::is('employeeLeave/list')?'active':'' }}"><a href="{{ route('employeeLeave.index') }}"><i class="ti-more"></i>Employee Leave</a></li>
                     <li class="{{ Request::is('employeeAttendance*')?'active':'' }}"><a href="{{ route('employeeAttendance.index') }}"><i class="ti-more"></i>Employee Attendance</a></li>
+                    <li class="{{ Request::is('employeeMonthlySalary*')?'active':'' }}"><a href="{{ route('employeeMonthlySalary.index') }}"><i class="ti-more"></i>Employee Monthly Salary</a></li>
 
                 </ul>
             </li>
