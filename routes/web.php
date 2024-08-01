@@ -19,6 +19,7 @@ use App\Http\Controllers\Student\StudentRollGenerateController;
 use App\Http\Controllers\Student\StudentRegistrationFeeController;
 use App\Http\Controllers\Student\StudentMonthlyFeeController;
 use App\Http\Controllers\Student\StudentExamFeeController;
+use App\Http\Controllers\Student\StudentMarksEntryController;
 use App\Http\Controllers\Employee\EmployeeRegistrationController;
 use App\Http\Controllers\Employee\EmployeeSalaryController;
 use App\Http\Controllers\Employee\EmployeeLeaveController;
@@ -175,3 +176,7 @@ Route::resource('employeeAttendance',EmployeeAttendenceController::class)->middl
 Route::resource('employeeMonthlySalary',EmployeeMonthlySalaryController::class)->middleware('auth:sanctum');
 Route::get('employeeMonthWiseSalary',[EmployeeMonthlySalaryController::class,'employeeMonthWiseSalary'])->name('employee_monthly_salary_get');
 Route::get('employeeMonthlySalary/employee_monthly_salary_paySlip/{employee_id}',[EmployeeMonthlySalaryController::class,'employeeMonthlySalaryPaySlip'])->name('employee.monthly.salary.payslip');
+
+Route::resource('marksEntry',StudentMarksEntryController::class)->middleware('auth:sanctum');
+
+

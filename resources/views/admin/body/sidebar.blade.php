@@ -118,6 +118,20 @@
                 </ul>
             </li>
 
+            <li class="treeview ">
+                <a href="#">
+                    <i data-feather="grid"></i>
+                    <span>Student Marks Management</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-right pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="{{ Request::is('marksEntry*')?'active':'' }}"><a href="{{ route('marksEntry.index') }}"><i class="ti-more"></i>Student Marks Entry</a></li>
+
+                </ul>
+            </li>
+
 
             <li>
                 <a href="{{ route('admin.logout') }}">
