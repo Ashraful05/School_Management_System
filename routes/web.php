@@ -174,9 +174,13 @@ Route::controller(EmployeeLeaveController::class)->prefix('employeeLeave')
 
 Route::resource('employeeAttendance',EmployeeAttendenceController::class)->middleware('auth:sanctum');
 Route::resource('employeeMonthlySalary',EmployeeMonthlySalaryController::class)->middleware('auth:sanctum');
-Route::get('employeeMonthWiseSalary',[EmployeeMonthlySalaryController::class,'employeeMonthWiseSalary'])->name('employee_monthly_salary_get');
-Route::get('employeeMonthlySalary/employee_monthly_salary_paySlip/{employee_id}',[EmployeeMonthlySalaryController::class,'employeeMonthlySalaryPaySlip'])->name('employee.monthly.salary.payslip');
+Route::middleware('auth:sanctum')->group(function (){
+    Route::get('employeeMonthWiseSalary',[EmployeeMonthlySalaryController::class,'employeeMonthWiseSalary'])->name('employee_monthly_salary_get');
+    Route::get('employeeMonthlySalary/employee_monthly_salary_paySlip/{employee_id}',[EmployeeMonthlySalaryController::class,'employeeMonthlySalaryPaySlip'])->name('employee.monthly.salary.payslip');
+});
+
 
 Route::resource('marksEntry',StudentMarksEntryController::class)->middleware('auth:sanctum');
+Route::get('get/subject',[StudentMarksEntryController::class,'getSubject'])->name('marks_get_subject');
 
 

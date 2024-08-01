@@ -3,6 +3,10 @@
 namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
+use App\Models\ExamType;
+use App\Models\StudentClass;
+use App\Models\StudentMarks;
+use App\Models\StudentYear;
 use Illuminate\Http\Request;
 
 class StudentMarksEntryController extends Controller
@@ -14,7 +18,16 @@ class StudentMarksEntryController extends Controller
      */
     public function index()
     {
-        return view('student_marks_entry.index');
+        $years = StudentYear::all();
+        $classes = StudentClass::all();
+        $examTypes = ExamType::all();
+        return view('student_marks_entry.index',compact('years','classes','examTypes'));
+//        return view('student_marks_entry.index');
+    }
+
+    public function getSubject(Request $request)
+    {
+
     }
 
     /**
@@ -22,9 +35,12 @@ class StudentMarksEntryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(StudentMarks $studentMarks)
     {
-        return view('student_marks_entry.form');
+//        $years = StudentYear::all();
+//        $classes = StudentClass::all();
+//        $examTypes = ExamType::all();
+//        return view('student_marks_entry.form',compact('studentMarks','years','classes','examTypes'));
     }
 
     /**
