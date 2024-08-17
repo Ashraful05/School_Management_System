@@ -10,4 +10,10 @@ class StudentMarks extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function assignSubjectName()
+    {
+        return $this->belongsTo(AssignStudent::class,'assign_subject_id','id');
+    }
+
 }

@@ -185,25 +185,30 @@
 
                                         </div>
                                     </div>
+                                    {{--                                    <button type="submit" class="form-control btn btn-rounded btn-info">Add</button>--}}
+                                    {{--                                </form>--}}
+                                    {{--                                <button type="submit" class="form-control btn btn-rounded btn-info">Update</button>--}}
+                                    {{--                        </form>--}}
+                                    <div class="col-md-12">
+                                        <div class="text-xs-right">
+                                            @if($assignStudentSubject->class_id != '')
+                                                <button type="submit" class="form-control btn btn-rounded btn-info">Update</button>
+                                            @else
+                                                <button type="submit" class="form-control btn btn-rounded btn-info">Add</button>
+                                            @endif
+                                        </div>
+                                    </div>
                                 </form>
                         </form>
-
                 </div>
 
-                <div class="col-md-12">
-                    <div class="text-xs-right">
-                        @if($assignStudentSubject->class_id != '')
-                            <button type="submit" class="form-control btn btn-rounded btn-info">Update</button>
-                        @else
-                            <button type="submit" class="form-control btn btn-rounded btn-info">Add</button>
-                        @endif
-                    </div>
-                </div>
-                </form>
 
             </div>
-            <!-- /.col -->
         </section>
+
+    </div>
+    <!-- /.col -->
+    </section>
     </div>
     <!-- /.row -->
     </div>

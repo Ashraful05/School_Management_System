@@ -179,8 +179,10 @@ Route::middleware('auth:sanctum')->group(function (){
     Route::get('employeeMonthlySalary/employee_monthly_salary_paySlip/{employee_id}',[EmployeeMonthlySalaryController::class,'employeeMonthlySalaryPaySlip'])->name('employee.monthly.salary.payslip');
 });
 
+Route::middleware('auth:sanctum')->group(function (){
+    Route::resource('marksEntry',StudentMarksEntryController::class);
+    Route::get('get/subject',[StudentMarksEntryController::class,'getSubject'])->name('marks_get_subject');
+});
 
-Route::resource('marksEntry',StudentMarksEntryController::class)->middleware('auth:sanctum');
-Route::get('get/subject',[StudentMarksEntryController::class,'getSubject'])->name('marks_get_subject');
 
 

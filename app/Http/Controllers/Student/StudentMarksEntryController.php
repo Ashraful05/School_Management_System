@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
+use App\Models\AssignStudent;
+use App\Models\AssignStudentSubject;
 use App\Models\ExamType;
 use App\Models\StudentClass;
 use App\Models\StudentMarks;
@@ -27,7 +29,9 @@ class StudentMarksEntryController extends Controller
 
     public function getSubject(Request $request)
     {
-
+        $class_id = $request->class_id;
+        $subjectName = AssignStudentSubject::with('subjectName')->where('class_id',$class_id)->get();
+        return response()->json($subjectName);
     }
 
     /**
