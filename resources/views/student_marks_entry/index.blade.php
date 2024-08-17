@@ -73,7 +73,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row d-none" id="roll-generate">
+                                <div class="row d-none" id="marks-entry">
                                     <div class="col-md-12">
                                         <table class="table table-bordered table-striped" style="width: 100%">
                                             <thead>
@@ -81,16 +81,16 @@
                                             <td>Student Name</td>
                                             <td>Student Father's Name</td>
                                             <td>Gender</td>
-                                            <td>Roll</td>
+                                            <td>Marks</td>
                                             </thead>
-                                            <tbody id="roll-generate-tr">
+                                            <tbody id="marks-entry-tr">
 
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
 
-                                <input type="submit" class="btn btn-rounded btn-info" value="Roll Generator">
+{{--                                <input type="submit" class="btn btn-rounded btn-info" value="Roll Generator">--}}
 
                             </form>
                         </div>
@@ -110,24 +110,27 @@
         $(document).on('click','#search',function(){
             var year_id = $('#year_id').val();
             var class_id = $('#class_id').val();
+            var assign_subject_id = $('#assign_subject_id').val();
+            var exam_type_id = $('#exam_type_id').val();
             $.ajax({
-                url: "{{ route('student.registration.getstudents')}}",
+                url: "{{ route('student.marks.getstudents')}}",
                 type: "GET",
                 data: {'year_id':year_id,'class_id':class_id},
                 success: function (data) {
-                    $('#roll-generate').removeClass('d-none');
+                    $('#marks-entry').removeClass('d-none');
                     var html = '';
                     $.each( data, function(key, v){
                         html +=
                             '<tr>'+
-                            '<td>'+v.student.id_number+'<input type="hidden" name="student_id[]" value="'+v.student_id+'"></td>'+
+                            '<td>'+v.student.id_number+'<input type="hidden" name="student_id[]" value="'+v.student_id+'">' +
+                            '<input type="hidden" name="id_number[]" value="'+v.student.id_number+'"></td>'+
                             '<td>'+v.student.name+'</td>'+
                             '<td>'+v.student.fathers_name+'</td>'+
                             '<td>'+v.student.gender+'</td>'+
-                            '<td><input type="text" class="form-control form-control-sm" name="roll[]" value="'+v.roll+'"></td>'+
+                            '<td><input type="text" class="form-control form-control-sm" name="marks[]" ></td>'+
                             '</tr>';
                     });
-                    html = $('#roll-generate-tr').html(html);
+                    html = $('#marks-entry-tr').html(html);
                 }
             });
         });

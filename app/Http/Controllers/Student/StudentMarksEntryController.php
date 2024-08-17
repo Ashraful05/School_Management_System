@@ -34,6 +34,16 @@ class StudentMarksEntryController extends Controller
         return response()->json($subjectName);
     }
 
+    public function getStudentMarks(Request $request)
+    {
+        $year_id = $request->year_id;
+        $class_id = $request->class_id;
+        $allData = AssignStudent::with('student')->where(['year_id'=>$year_id,'class_id'=>$class_id])->get();
+        return response()->json($allData);
+
+    }
+
+
     /**
      * Show the form for creating a new resource.
      *
