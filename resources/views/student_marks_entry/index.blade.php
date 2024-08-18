@@ -17,7 +17,7 @@
                             <h4 class="box-title">Student <strong>Search</strong></h4>
                         </div>
                         <div class="box-body">
-                            <form action="{{ route('student.roll.save') }}" method="post">
+                            <form action="{{ route('marksEntry.store') }}" method="post">
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-3">
@@ -67,7 +67,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-2" style="padding-right: 25px;">
+                                    <div class="col-md-2">
                                         {{--                                        <input type="submit" class="btn btn-rounded btn-dark mb-5" value="Search" name="search">--}}
                                         <a id="search" class="btn btn-rounded btn-dark mb-5" name="search">Search</a>
                                     </div>
@@ -88,9 +88,8 @@
                                             </tbody>
                                         </table>
                                     </div>
+                                    <input type="submit" class="form-control btn btn-rounded btn-info" value="Submit">
                                 </div>
-
-{{--                                <input type="submit" class="btn btn-rounded btn-info" value="Roll Generator">--}}
 
                             </form>
                         </div>

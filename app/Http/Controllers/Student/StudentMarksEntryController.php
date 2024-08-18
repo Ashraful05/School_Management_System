@@ -65,7 +65,25 @@ class StudentMarksEntryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $studentCount = $request->student_id;
+        if ($studentCount){
+            for ($i=0;$i<count($studentCount);$i++){
+                StudentMarks::create([
+                   'year_id'=>$request->year_id,
+                    'class_id'=>$request->class_id,
+                    'assign_subject_id'=>$request->assign_subject_id,
+                    'exam_type_id'=>$request->exam_type_id,
+                    'student_id'=>$request->student_id[$i],
+                    'id_number'=>$request->id_number[$i],
+                    'marks'=>$request->marks[$i],
+                ]);
+            }
+        }
+        $notification = [
+            'alert-type'=>'success',
+            'message'=>'Marks Entry is Successful!!'
+        ];
+        return redirect()->back()->with($notification);
     }
 
     /**
