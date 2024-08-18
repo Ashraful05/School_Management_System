@@ -23,18 +23,6 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <div class="controls">
-                                                <select name="class_id" id="class_id" class="form-control">
-                                                    <option value="" selected disabled>Select Class</option>
-                                                    @foreach($classes as $class)
-                                                        <option value="{{ $class->id }}" >{{ $class->name }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <div class="controls">
                                                 <select name="year_id" id="year_id" class="form-control">
                                                     <option value="" selected disabled>Select Year</option>
                                                     @foreach($years as $year)
@@ -47,22 +35,46 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <div class="controls">
-                                                <select name="year_id" id="year_id" class="form-control">
-                                                    <option value="" selected disabled>Select Exam Type</option>
-                                                    @foreach($examTypes as $examType)
-                                                        <option value="{{ $examType->id }}" >{{ $examType->name }}</option>
+                                                <select name="class_id" id="class_id" class="form-control">
+                                                    <option value="" selected disabled>Select Class</option>
+                                                    @foreach($classes as $class)
+                                                        <option value="{{ $class->id }}" >{{ $class->name }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-3" style="padding-right: 25px;">
+
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <div class="controls">
+                                                <select name="assign_subject_id" id="assign_subject_id" class="form-control">
+                                                    <option selected >Select Subject</option>
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <div class="controls">
+                                                <select name="exam_type_id" id="exam_type_id" class="form-control">
+                                                    <option selected disabled>Select Exam Type</option>
+                                                    @foreach($examTypes as $examType)
+                                                        <option value="{{ $examType->id }}">{{ $examType->name }}</option>
+                                                    @endforeach
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
                                         {{--                                        <input type="submit" class="btn btn-rounded btn-dark mb-5" value="Search" name="search">--}}
                                         <a id="search" class="btn btn-rounded btn-dark mb-5" name="search">Search</a>
                                     </div>
                                 </div>
 
-                                <div class="row d-none" id="roll-generate">
+                                <div class="row d-none" id="marks-entry">
                                     <div class="col-md-12">
                                         <table class="table table-bordered table-striped" style="width: 100%">
                                             <thead>
@@ -70,16 +82,16 @@
                                             <td>Student Name</td>
                                             <td>Student Father's Name</td>
                                             <td>Gender</td>
-                                            <td>Roll</td>
+                                            <td>Marks</td>
                                             </thead>
-                                            <tbody id="roll-generate-tr">
+                                            <tbody id="marks-entry-tr">
 
                                             </tbody>
                                         </table>
                                     </div>
+                                    <input type="submit" class="form-control btn btn-rounded btn-info" value="Update">
                                 </div>
 
-                                <input type="submit" class="btn btn-rounded btn-info" value="Roll Generator">
 
                             </form>
                         </div>
@@ -99,28 +111,53 @@
         $(document).on('click','#search',function(){
             var year_id = $('#year_id').val();
             var class_id = $('#class_id').val();
+            var assign_subject_id = $('#assign_subject_id').val();
+            var exam_type_id = $('#exam_type_id').val();
             $.ajax({
-                url: "{{ route('student.registration.getstudents')}}",
+                url: "{{ route('student.marks.edit.getstudents')}}",
                 type: "GET",
-                data: {'year_id':year_id,'class_id':class_id},
+                data: {'year_id':year_id,'class_id':class_id,'assign_subject_id':assign_subject_id,
+                    'exam_type_id':exam_type_id},
                 success: function (data) {
-                    $('#roll-generate').removeClass('d-none');
+                    $('#marks-entry').removeClass('d-none');
                     var html = '';
                     $.each( data, function(key, v){
                         html +=
                             '<tr>'+
-                            '<td>'+v.student.id_number+'<input type="hidden" name="student_id[]" value="'+v.student_id+'"></td>'+
+                            '<td>'+v.student.id_number+'<input type="hidden" name="student_id[]" value="'+v.student_id+'">' +
+                            '<input type="hidden" name="id_number[]" value="'+v.student.id_number+'"></td>'+
                             '<td>'+v.student.name+'</td>'+
                             '<td>'+v.student.fathers_name+'</td>'+
                             '<td>'+v.student.gender+'</td>'+
-                            '<td><input type="text" class="form-control form-control-sm" name="roll[]" value="'+v.roll+'"></td>'+
+                            '<td><input type="text" class="form-control form-control-sm" name="marks[]" value=" '+v.marks+' "></td>'+
                             '</tr>';
                     });
-                    html = $('#roll-generate-tr').html(html);
+                    html = $('#marks-entry-tr').html(html);
                 }
             });
         });
 
+    </script>
+
+    <script type="text/javascript">
+        $(function(){
+            $(document).on('change','#class_id',function(){
+                var class_id = $('#class_id').val();
+                // alert(class_id);
+                $.ajax({
+                    url:"{{ route('marks_get_subject') }}",
+                    type:"GET",
+                    data:{class_id:class_id},
+                    success:function(data){
+                        var html = '<option value="">Select Subject</option>';
+                        $.each(data, function(key, v) {
+                            html += '<option value="'+v.id+'">'+v.subject_name.name+'</option>';
+                        });
+                        $('#assign_subject_id').html(html);
+                    }
+                });
+            });
+        });
     </script>
 
 @endsection

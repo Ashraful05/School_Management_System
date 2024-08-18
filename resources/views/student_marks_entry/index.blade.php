@@ -15,6 +15,7 @@
                     <div class="box bb-3 border-warning">
                         <div class="box-header">
                             <h4 class="box-title">Student <strong>Search</strong></h4>
+                            <a href="{{ route('edit.student.marks') }}" class="btn btn-rounded btn-primary" style="float:right">Marks Edit</a>
                         </div>
                         <div class="box-body">
                             <form action="{{ route('marksEntry.store') }}" method="post">

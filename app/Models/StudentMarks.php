@@ -15,5 +15,10 @@ class StudentMarks extends Model
     {
         return $this->belongsTo(AssignStudent::class,'assign_subject_id','id');
     }
+    public function student()
+    {
+        return $this->belongsTo(User::class,'student_id','id');
+    }
+
 
 }

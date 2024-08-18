@@ -23,7 +23,8 @@ class StudentMarksEntryController extends Controller
         $years = StudentYear::all();
         $classes = StudentClass::all();
         $examTypes = ExamType::all();
-        return view('student_marks_entry.index',compact('years','classes','examTypes'));
+        return view('student_marks_entry.index',compact('years',
+            'classes','examTypes'));
 //        return view('student_marks_entry.index');
     }
 
@@ -103,10 +104,26 @@ class StudentMarksEntryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function editStudentMarks()
     {
-        //
+        $years = StudentYear::all();
+        $classes = StudentClass::all();
+        $examTypes = ExamType::all();
+        return view('student_marks_entry.form',compact('years','classes','examTypes'));
     }
+    public function editMarksByAjax(Request $request)
+    {
+        $year_id = $request->year_id;
+        $class_id = $request->class_id;
+        $assign_subject_id = $request->assign_subject_id;
+        $exam_type_id = $request->exam_type_id;
+
+        $getStudentMarks = StudentMarks::with('student')->where(['year_id'=>$year_id,'class_id'=>$class_id,
+            'assign_subject_id'=>$assign_subject_id,'exam_type_id'=>$exam_type_id])->get();
+
+        return response()->json($getStudentMarks);
+    }
+
 
     /**
      * Update the specified resource in storage.
