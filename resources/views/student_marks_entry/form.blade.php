@@ -1,5 +1,5 @@
 @extends('admin.master')
-@section('title','Student Marks Entry')
+@section('title','Edit Student Marks')
 @section('main_content')
     <!-- Content Wrapper. Contains page content -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -14,10 +14,10 @@
                 <div class="col-12">
                     <div class="box bb-3 border-warning">
                         <div class="box-header">
-                            <h4 class="box-title">Student <strong>Search</strong></h4>
+                            <h4 class="box-title">Edit Student <strong>Marks</strong></h4>
                         </div>
                         <div class="box-body">
-                            <form action="{{ route('student.roll.save') }}" method="post">
+                            <form action="{{ route('update.student.marks') }}" method="post">
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-3">

@@ -185,6 +185,7 @@ Route::middleware('auth:sanctum')->group(function (){
     Route::get('get/student/marks',[StudentMarksEntryController::class,'getStudentMarks'])->name('student.marks.getstudents');
     Route::get('get/student/marks/edit',[StudentMarksEntryController::class,'editStudentMarks'])->name('edit.student.marks');
     Route::get('get/student/marks/edit/by_ajax',[StudentMarksEntryController::class,'editMarksByAjax'])->name('student.marks.edit.getstudents');
+    Route::post('get/student/marks/update',[StudentMarksEntryController::class,'updateStudentMarks'])->name('update.student.marks');
 });
 
 
