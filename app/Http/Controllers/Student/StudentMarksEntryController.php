@@ -152,11 +152,17 @@ class StudentMarksEntryController extends Controller
                     'marks'=>$request->marks[$i],
                 ]);
             }
+            $notification = [
+                'alert-type'=>'info',
+                'message'=>'Marks Entry is Updated!!'
+            ];
+        }else{
+            $notification = [
+                'alert-type'=>'error',
+                'message'=>'Please Select data to update!!'
+            ];
         }
-        $notification = [
-            'alert-type'=>'info',
-            'message'=>'Marks Entry is Updated!!'
-        ];
+
         return redirect()->back()->with($notification);
     }
 
