@@ -14,7 +14,7 @@
                     <div class="box">
                         <div class="box-header with-border">
                             <h3 class="box-title">Grade Marks List</h3>
-                            <a href="{{ route('employeeRegistration.create') }}" class="btn btn-rounded btn-success mb-3" style="float: right">Add Grade Marks</a>
+                            <a href="{{ route('marksGrade.create') }}" class="btn btn-rounded btn-success mb-3" style="float: right">Add Grade Marks</a>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">

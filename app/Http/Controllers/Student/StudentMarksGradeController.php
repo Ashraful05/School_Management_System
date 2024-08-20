@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Student;
 use App\Http\Controllers\Controller;
 use App\Models\StudentMarksGrade;
 use Illuminate\Http\Request;
+use function GuzzleHttp\normalize_header_keys;
 
 class StudentMarksGradeController extends Controller
 {
@@ -13,4 +14,29 @@ class StudentMarksGradeController extends Controller
         $allData = StudentMarksGrade::get();
         return view('student_marks_grade.index',compact('allData'));
     }
+
+    public function create()
+    {
+        return view('student_marks_grade.form');
+    }
+
+    public function store(Request $request)
+    {
+        StudentMarksGrade::create($request->all());
+//        StudentMarksGrade::create([
+//            'grade_name'=>$request->grade_name,
+//            'grade_point'=>$request->grade_point,
+//            'start_marks'=>$request->start_marks,
+//            'end_marks'=>$request->end_marks,
+//            'start_point'=>$request->start_point,
+//            'end_point'=>$request->end_point,
+//            'remarks'=>$request->remarks,
+//        ]);
+        $notification = [
+          'alert-type'=>'success',
+          'message'=>'Data Saved!!'
+        ];
+        return redirect()->route('marksGrade.index')->with($notification);
+    }
+
 }
