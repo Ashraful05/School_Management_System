@@ -20,6 +20,7 @@ use App\Http\Controllers\Student\StudentRegistrationFeeController;
 use App\Http\Controllers\Student\StudentMonthlyFeeController;
 use App\Http\Controllers\Student\StudentExamFeeController;
 use App\Http\Controllers\Student\StudentMarksEntryController;
+use App\Http\Controllers\Student\StudentMarksGradeController;
 use App\Http\Controllers\Employee\EmployeeRegistrationController;
 use App\Http\Controllers\Employee\EmployeeSalaryController;
 use App\Http\Controllers\Employee\EmployeeLeaveController;
@@ -188,7 +189,12 @@ Route::middleware('auth:sanctum')->group(function (){
         Route::get('get/student/marks/edit/by_ajax',[StudentMarksEntryController::class,'editMarksByAjax'])->name('student.marks.edit.getstudents');
         Route::post('get/student/marks/update',[StudentMarksEntryController::class,'updateStudentMarks'])->name('update.student.marks');
     });
+});
 
+Route::controller(StudentMarksGradeController::class)->prefix('marksGrade')
+    ->middleware('auth:sanctum')->group(function (){
+
+    Route::get('/','index')->name('marksGrade.index');
 });
 
 

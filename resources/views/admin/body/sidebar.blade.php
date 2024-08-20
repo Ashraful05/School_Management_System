@@ -128,6 +128,7 @@
                 </a>
                 <ul class="treeview-menu">
                     <li class="{{ Request::is('marksEntry*')?'active':'' }}"><a href="{{ route('marksEntry.index') }}"><i class="ti-more"></i>Student Marks Entry</a></li>
+                    <li class="{{ Request::is('marksGrade*')?'active':'' }}"><a href="{{ route('marksGrade.index') }}"><i class="ti-more"></i>Student Marks Grade</a></li>
 
                 </ul>
             </li>
