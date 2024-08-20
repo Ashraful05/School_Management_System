@@ -195,8 +195,10 @@ Route::controller(StudentMarksGradeController::class)->prefix('marksGrade')
     ->middleware('auth:sanctum')->group(function (){
 
     Route::get('/','index')->name('marksGrade.index');
-    Route::get('/add','create')->name('marksGrade.create');
-    Route::post('/save','store')->name('marksGrade.store');
+    Route::get('add','create')->name('marksGrade.create');
+    Route::post('save','store')->name('marksGrade.store');
+    Route::get('edit/{id}','edit')->name('marksGrade.edit');
+    Route::post('update/{id}','update')->name('marksGrade.update');
 });
 
 

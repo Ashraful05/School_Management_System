@@ -43,8 +43,7 @@
                                             <td>{{ $data->start_point }} - {{ $data->end_point }}</td>
                                             <td>{{ $data->remarks }}</td>
                                             <td>
-                                                <a href="{{ route('employeeRegistration.edit',$data->id) }}" class="btn btn-rounded btn-info" title="Edit"><i class="fa fa-pencil-square-o"></i></a>
-{{--                                                <a href="{{ route('employeeRegistration.details',$employee->id) }}" class="btn btn-rounded btn-danger" title="Details" target="_blank"><i class="fa fa-file-pdf-o"></i></a>--}}
+                                                <a href="{{ route('marksGrade.edit',$data->id) }}" class="btn btn-rounded btn-info" title="Edit"><i class="fa fa-pencil-square-o"></i></a>
                                             </td>
                                         </tr>
 
