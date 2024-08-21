@@ -21,6 +21,7 @@ use App\Http\Controllers\Student\StudentMonthlyFeeController;
 use App\Http\Controllers\Student\StudentExamFeeController;
 use App\Http\Controllers\Student\StudentMarksEntryController;
 use App\Http\Controllers\Student\StudentMarksGradeController;
+use App\Http\Controllers\Student\StudentFeeController;
 use App\Http\Controllers\Employee\EmployeeRegistrationController;
 use App\Http\Controllers\Employee\EmployeeSalaryController;
 use App\Http\Controllers\Employee\EmployeeLeaveController;
@@ -193,13 +194,16 @@ Route::middleware('auth:sanctum')->group(function (){
 
 Route::controller(StudentMarksGradeController::class)->prefix('marksGrade')
     ->middleware('auth:sanctum')->group(function (){
-
     Route::get('/','index')->name('marksGrade.index');
     Route::get('add','create')->name('marksGrade.create');
     Route::post('save','store')->name('marksGrade.store');
     Route::get('edit/{id}','edit')->name('marksGrade.edit');
     Route::post('update/{id}','update')->name('marksGrade.update');
 });
+
+Route::resource('studentFee',StudentFeeController::class)->middleware('auth:sanctum');
+
+
 
 
 

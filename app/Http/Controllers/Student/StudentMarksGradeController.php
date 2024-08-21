@@ -48,15 +48,16 @@ class StudentMarksGradeController extends Controller
 
     public function update(Request $request,$id)
     {
-        StudentMarksGrade::findOrFail($id)->update([
-             'grade_name'=>$request->grade_name,
-            'grade_point'=>$request->grade_point,
-            'start_marks'=>$request->start_marks,
-            'end_marks'=>$request->end_marks,
-            'start_point'=>$request->start_point,
-            'end_point'=>$request->end_point,
-            'remarks'=>$request->remarks,
-        ]);
+//        StudentMarksGrade::findOrFail($id)->update([
+//             'grade_name'=>$request->grade_name,
+//            'grade_point'=>$request->grade_point,
+//            'start_marks'=>$request->start_marks,
+//            'end_marks'=>$request->end_marks,
+//            'start_point'=>$request->start_point,
+//            'end_point'=>$request->end_point,
+//            'remarks'=>$request->remarks,
+//        ]);
+        StudentMarksGrade::findOrFail($id)->update($request->all());
         $notification = [
             'alert-type'=>'info',
             'message'=>'Data Updated!!'
