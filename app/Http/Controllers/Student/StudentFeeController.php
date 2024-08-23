@@ -15,8 +15,8 @@ class StudentFeeController extends Controller
      */
     public function index()
     {
-        $fees = StudentFee::get();
-        return view('student_fee.index',compact('fees'));
+        $allData= StudentFee::get();
+        return view('student_fee.index',compact('allData'));
     }
 
     /**
@@ -26,7 +26,7 @@ class StudentFeeController extends Controller
      */
     public function create()
     {
-        //
+        return view('student_fee.form');
     }
 
     /**
