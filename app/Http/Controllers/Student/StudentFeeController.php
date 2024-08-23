@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
+use App\Models\ExamType;
+use App\Models\StudentClass;
 use App\Models\StudentFee;
+use App\Models\StudentFeeCategory;
+use App\Models\StudentYear;
 use Illuminate\Http\Request;
 
 class StudentFeeController extends Controller
@@ -26,7 +30,10 @@ class StudentFeeController extends Controller
      */
     public function create()
     {
-        return view('student_fee.form');
+        $years = StudentYear::get();
+        $classes = StudentClass::get();
+        $feeCategories = StudentFeeCategory::get();
+        return view('student_fee.form',compact('years','classes','feeCategories'));
     }
 
     /**
@@ -39,6 +46,12 @@ class StudentFeeController extends Controller
     {
         //
     }
+
+    public function studentFeeGet(Request $request)
+    {
+
+    }
+
 
     /**
      * Display the specified resource.

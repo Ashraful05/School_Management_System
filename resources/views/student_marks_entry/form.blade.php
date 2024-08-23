@@ -3,6 +3,7 @@
 @section('main_content')
     <!-- Content Wrapper. Contains page content -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.8/handlebars.min.js" integrity="sha512-E1dSFxg+wsfJ4HKjutk/WaCzK7S2wv1POn1RRPGh8ZK+ag9l244Vqxji3r6wgz9YBf6+vhQEYJZpSjqWFPg9gg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <div class="container-full">
         <!-- Content Header (Page header) -->
@@ -17,8 +18,6 @@
                             <h4 class="box-title">Edit Student <strong>Marks</strong></h4>
                         </div>
                         <div class="box-body">
-                            <form action="{{ route('update.student.marks') }}" method="post">
-                                @csrf
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div class="form-group">
@@ -48,20 +47,10 @@
                                     <div class="col-md-2">
                                         <div class="form-group">
                                             <div class="controls">
-                                                <select name="assign_subject_id" id="assign_subject_id" class="form-control">
-                                                    <option selected >Select Subject</option>
-
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="form-group">
-                                            <div class="controls">
-                                                <select name="exam_type_id" id="exam_type_id" class="form-control">
-                                                    <option selected disabled>Select Exam Type</option>
-                                                    @foreach($examTypes as $examType)
-                                                        <option value="{{ $examType->id }}">{{ $examType->name }}</option>
+                                                <select name="fee_category_id" id="fee_category_id" class="form-control">
+                                                    <option selected disabled>Select Fee Category</option>
+                                                    @foreach($feeCategories as $feeCategory)
+                                                        <option value="{{ $feeCategory->id }}">{{ $feeCategory->name }}</option>
                                                     @endforeach
 
                                                 </select>
@@ -74,26 +63,29 @@
                                     </div>
                                 </div>
 
-                                <div class="row d-none" id="marks-entry">
+                                <div class="row">
                                     <div class="col-md-12">
-                                        <table class="table table-bordered table-striped" style="width: 100%">
-                                            <thead>
-                                            <td>ID No.</td>
-                                            <td>Student Name</td>
-                                            <td>Student Father's Name</td>
-                                            <td>Gender</td>
-                                            <td>Marks</td>
-                                            </thead>
-                                            <tbody id="marks-entry-tr">
+                                        <div id="DocumentResults">
+                                            <script id="document-template" type="text/x-handlebars-template">
+                                                <table class="table table-striped table-bordered" style="width: 100%">
+                                                    <thead>
+                                                    <tr>
+                                                        @{{{thsource}}}
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    @{{#each this}}
+                                                    <tr>
+                                                        @{{{tdsource}}}
+                                                    </tr>
+                                                    @{{/each}}
+                                                    </tbody>
+                                                </table>
+                                            </script>
 
-                                            </tbody>
-                                        </table>
+                                        </div>
                                     </div>
-                                    <input type="submit" class="form-control btn btn-rounded btn-info" value="Update">
                                 </div>
-
-
-                            </form>
                         </div>
                     </div>
 
@@ -109,56 +101,25 @@
 
     <script type="text/javascript">
         $(document).on('click','#search',function(){
-            var year_id = $('#year_id').val();
-            var class_id = $('#class_id').val();
-            var assign_subject_id = $('#assign_subject_id').val();
-            var exam_type_id = $('#exam_type_id').val();
+            var date = $('#date').val();
             $.ajax({
-                url: "{{ route('student.marks.edit.getstudents')}}",
-                type: "GET",
-                data: {'year_id':year_id,'class_id':class_id,'assign_subject_id':assign_subject_id,
-                    'exam_type_id':exam_type_id},
+                url: "{{ route('employee_monthly_salary_get')}}",
+                type: "get",
+                data: {'date':date},
+                beforeSend: function() {
+                },
                 success: function (data) {
-                    $('#marks-entry').removeClass('d-none');
-                    var html = '';
-                    $.each( data, function(key, v){
-                        html +=
-                            '<tr>'+
-                            '<td>'+v.student.id_number+'<input type="hidden" name="student_id[]" value="'+v.student_id+'">' +
-                            '<input type="hidden" name="id_number[]" value="'+v.student.id_number+'"></td>'+
-                            '<td>'+v.student.name+'</td>'+
-                            '<td>'+v.student.fathers_name+'</td>'+
-                            '<td>'+v.student.gender+'</td>'+
-                            '<td><input type="text" class="form-control form-control-sm" name="marks[]" value=" '+v.marks+' "></td>'+
-                            '</tr>';
-                    });
-                    html = $('#marks-entry-tr').html(html);
+                    var source = $("#document-template").html();
+                    var template = Handlebars.compile(source);
+                    var html = template(data);
+                    $('#DocumentResults').html(html);
+                    $('[data-toggle="tooltip"]').tooltip();
                 }
             });
         });
 
     </script>
 
-    <script type="text/javascript">
-        $(function(){
-            $(document).on('change','#class_id',function(){
-                var class_id = $('#class_id').val();
-                // alert(class_id);
-                $.ajax({
-                    url:"{{ route('marks_get_subject') }}",
-                    type:"GET",
-                    data:{class_id:class_id},
-                    success:function(data){
-                        var html = '<option value="">Select Subject</option>';
-                        $.each(data, function(key, v) {
-                            html += '<option value="'+v.id+'">'+v.subject_name.name+'</option>';
-                        });
-                        $('#assign_subject_id').html(html);
-                    }
-                });
-            });
-        });
-    </script>
 
 @endsection
 

@@ -202,6 +202,7 @@ Route::controller(StudentMarksGradeController::class)->prefix('marksGrade')
 });
 
 Route::resource('studentFee',StudentFeeController::class)->middleware('auth:sanctum');
+Route::get('studentFee',[StudentFeeController::class,'studentFeeGet'])->name('student_fee_get');
 
 
 

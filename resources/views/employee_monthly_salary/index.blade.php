@@ -27,7 +27,6 @@
                                     </div>
                                 </div>
                                 <div class="col-md-4" style="padding-right: 25px;">
-                                    {{--                                        <input type="submit" class="btn btn-rounded btn-dark mb-5" value="Search" name="search">--}}
                                     <a id="search" class="btn btn-rounded btn-dark mb-5" name="search">Search</a>
                                 </div>
                             </div>
