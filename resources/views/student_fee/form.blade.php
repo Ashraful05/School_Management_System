@@ -2,6 +2,7 @@
 @section('title','Add Student Fee')
 @section('main_content')
     <!-- Content Wrapper. Contains page content -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.8/handlebars.min.js" integrity="sha512-E1dSFxg+wsfJ4HKjutk/WaCzK7S2wv1POn1RRPGh8ZK+ag9l244Vqxji3r6wgz9YBf6+vhQEYJZpSjqWFPg9gg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <div class="container-full">
@@ -48,7 +49,7 @@
                                     <div class="form-group">
                                         <div class="controls">
                                             <select name="fee_category_id" id="fee_category_id" class="form-control">
-                                                <option selected >Select Fee Category</option>
+                                                <option selected disabled>Select Fee Category</option>
                                                 @foreach($feeCategories as $feeCategory)
                                                     <option value="{{ $feeCategory->id }}">{{ $feeCategory->fee_category_name }}</option>
                                                 @endforeach
@@ -111,9 +112,9 @@
 
     <script type="text/javascript">
         $(document).on('click','#search',function(){
-            var year_id = $('#year_id').val();
-            var class_id = $('#class_id').val();
-            var fee_category_id = $('#fee_category_id').val();
+            var year_id = $("#year_id").val();
+            var class_id = $("#class_id").val();
+            var fee_category_id = $("#fee_category_id").val();
             var date = $('#date').val();
             $.ajax({
                 url: "{{ route('student_fee_get')}}",
@@ -130,6 +131,29 @@
                 }
             });
         });
+        {{--$(document).on('click','#search',function(){--}}
+        {{--    var year_id = $('#year_id').val();--}}
+        {{--    var class_id = $('#class_id').val();--}}
+        {{--    var fee_category_id = $('#fee_category_id').val();--}}
+        {{--    var date = $('#date').val();--}}
+        {{--    // alert(date);--}}
+
+        {{--    $.ajax({--}}
+        {{--        url: "{{ route('student_fee_get')}}",--}}
+        {{--        type: "get",--}}
+        {{--        data: {'year_id':year_id,'class_id':class_id,'fee_category_id':fee_category_id,'date':date},--}}
+        {{--        beforeSend: function() {--}}
+        {{--        },--}}
+        {{--        success: function (data) {--}}
+        {{--            console.log(data);--}}
+        {{--            var source = $("#document-template").html();--}}
+        {{--            var template = Handlebars.compile(source);--}}
+        {{--            var html = template(data);--}}
+        {{--            $('#DocumentResults').html(html);--}}
+        {{--            $('[data-toggle="tooltip"]').tooltip();--}}
+        {{--        }--}}
+        {{--    });--}}
+        {{--});--}}
 
     </script>
 

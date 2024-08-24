@@ -201,8 +201,11 @@ Route::controller(StudentMarksGradeController::class)->prefix('marksGrade')
     Route::post('update/{id}','update')->name('marksGrade.update');
 });
 
-Route::resource('studentFee',StudentFeeController::class)->middleware('auth:sanctum');
-Route::get('studentFee',[StudentFeeController::class,'studentFeeGet'])->name('student_fee_get');
+Route::middleware('auth:sanctum')->group(function (){
+    Route::resource('studentFee',StudentFeeController::class);
+    Route::get('examWiseFee',[StudentFeeController::class,'studentFeeGet'])->name('student_fee_get');
+});
+
 
 
 
