@@ -38,13 +38,12 @@
                                             <td>{{ ++$row }}</td>
                                             <td>{{ $data->student->id_number }}</td>
                                             <td>{{ $data->student->name }}</td>
-                                            <td>{{ $data->studentYear->name }}</td>
+                                            <td>{{ $data->studentYear->year_name }}</td>
                                             <td>{{ $data->studentClass->name }}</td>
-                                            <td>{{ $data->FeeCategory->name }}</td>
+                                            <td>{{ $data->FeeCategory->fee_category_name }}</td>
                                             <td>{{ $data->amount }}</td>
                                             <td>{{ date('M Y',strtotime($data->date)) }}</td>
                                         </tr>
-
                                     @endforeach
                                     </tbody>
                                 </table>

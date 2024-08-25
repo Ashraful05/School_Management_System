@@ -12,6 +12,7 @@ use App\Models\StudentFeeCategory;
 use App\Models\StudentYear;
 use App\Models\EmployeeAttendance;
 use Illuminate\Http\Request;
+use function GuzzleHttp\normalize_header_keys;
 
 class StudentFeeController extends Controller
 {
@@ -45,10 +46,6 @@ class StudentFeeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
-    }
 
     public function studentFeeGet(Request $request)
     {
@@ -68,19 +65,15 @@ class StudentFeeController extends Controller
         $html['thsource'] .= '<th>Discount Amount</th>';
         $html['thsource'] .= '<th>Fee (This Student)</th>';
         $html['thsource'] .= '<th>Select</th>';
-//        return response()->json(@$html);
 
         foreach ($data as $key => $std) {
-            $registrationfee = FeeCategoryAmount::where('fee_category_id',$fee_category_id)
-                ->where('class_id',$std->class_id)
-                ->first();
+            $registrationfee = FeeCategoryAmount::where(['fee_category_id'=>$fee_category_id,
+                'class_id'=>$std->class_id])->first();
 
-            $accountstudentfees = StudentFee::where('student_id',$std->student_id)
-                ->where('year_id',$std->year_id)
-                ->where('class_id',$std->class_id)
-                ->where('fee_category_id',$fee_category_id)
-                ->where('date',$date)
-                ->first();
+
+            $accountstudentfees = StudentFee::where(['student_id'=>$std->student_id,'year_id'=>$std->year_id,
+                'class_id'=>$std->class_id,'fee_category_id'=>$fee_category_id,'date'=>$date])->first();
+
 
             if($accountstudentfees !=null) {
                 $checked = 'checked';
@@ -103,14 +96,53 @@ class StudentFeeController extends Controller
             $discountablefee = $discount/100*$orginalfee;
             $finalfee = (int)$orginalfee-(int)$discountablefee;
 
-            $html[$key]['tdsource'] .='<td>'. '<input type="text" name="account[]" value="'.$finalfee.' " class="form-control" readonly'.'</td>';
+            $html[$key]['tdsource'] .='<td>'. '<input type="text" name="amount[]" value="'.$finalfee.' " class="form-control" readonly'.'</td>';
 
-            $html[$key]['tdsource'] .='<td>'.'<input type="hidden" name="student_id[]" value="'.$std->student_id.'">'.'<input type="checkbox" name="checkmanage[]" id="id{{$key}}" value="'.$key.'" '.$checked.' style="transform: scale(1.5);margin-left: 10px;"> <label for="id{{$key}}"> </label> '.'</td>';
+            $html[$key]['tdsource'] .='<td>'.'<input type="hidden" name="student_id[]" value="'.$std->student_id.'">'.'<input type="checkbox" name="checkmanage[]" id="'.$key.'" value="'.$key.'" '.$checked.' style="transform: scale(1.5);margin-left: 10px;"> <label for="'.$key.'"> </label> '.'</td>';
 
         }
         return response()->json(@$html);
 
     }
+
+
+    public function store(Request $request)
+    {
+        $date = date('Y-m',strtotime($request->date));
+        StudentFee::where(['year_id'=>$request->year_id,'class_id'=>$request->class_id,
+            'fee_category_id'=>$request->fee_category_id,'date'=>$request->date])->delete();
+
+        $checkData = $request->checkmanage;
+
+        if($checkData != null){
+            for ($i=0;$i<count($checkData);$i++){
+                $data = StudentFee::create([
+                    'year_id'=>$request->year_id,
+                    'class_id'=>$request->class_id,
+                    'date'=>$date,
+                    'fee_category_id'=>$request->fee_category_id,
+                    'student_id'=>$request->student_id[$checkData[$i]],
+                    'amount'=>$request->amount[$checkData[$i]],
+                ]);
+            }
+        }
+        if (!empty(@$data) || empty($checkData)){
+            $notification = [
+              'alert-type'=>'info',
+              'message'=>'Data Updated!!!'
+            ];
+            return redirect()->route('studentFee.index')->with($notification);
+        }else{
+            $notification = [
+                'alert-type'=>'error',
+                'message'=>'Data Not Saved!!!'
+            ];
+            return redirect()->back()->with($notification);
+        }
+
+    }
+
+
 
 
     /**

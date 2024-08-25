@@ -90,6 +90,7 @@
                                                     @{{/each}}
                                                     </tbody>
                                                 </table>
+                                                <button type="submit" class="form-control btn btn-primary btn-rounded">Submit</button>
                                             </form>
                                         </script>
 
@@ -131,29 +132,6 @@
                 }
             });
         });
-        {{--$(document).on('click','#search',function(){--}}
-        {{--    var year_id = $('#year_id').val();--}}
-        {{--    var class_id = $('#class_id').val();--}}
-        {{--    var fee_category_id = $('#fee_category_id').val();--}}
-        {{--    var date = $('#date').val();--}}
-        {{--    // alert(date);--}}
-
-        {{--    $.ajax({--}}
-        {{--        url: "{{ route('student_fee_get')}}",--}}
-        {{--        type: "get",--}}
-        {{--        data: {'year_id':year_id,'class_id':class_id,'fee_category_id':fee_category_id,'date':date},--}}
-        {{--        beforeSend: function() {--}}
-        {{--        },--}}
-        {{--        success: function (data) {--}}
-        {{--            console.log(data);--}}
-        {{--            var source = $("#document-template").html();--}}
-        {{--            var template = Handlebars.compile(source);--}}
-        {{--            var html = template(data);--}}
-        {{--            $('#DocumentResults').html(html);--}}
-        {{--            $('[data-toggle="tooltip"]').tooltip();--}}
-        {{--        }--}}
-        {{--    });--}}
-        {{--});--}}
 
     </script>
 
