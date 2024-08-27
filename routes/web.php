@@ -26,6 +26,7 @@ use App\Http\Controllers\Employee\EmployeeRegistrationController;
 use App\Http\Controllers\Employee\EmployeeSalaryController;
 use App\Http\Controllers\Employee\EmployeeLeaveController;
 use App\Http\Controllers\Employee\EmployeeMonthlySalaryController;
+use App\Http\Controllers\Employee\ManageEmployeeSalaryController;
 
 
 
@@ -204,6 +205,10 @@ Route::controller(StudentMarksGradeController::class)->prefix('marksGrade')
 Route::middleware('auth:sanctum')->group(function (){
     Route::resource('studentFee',StudentFeeController::class);
     Route::get('examWiseFee',[StudentFeeController::class,'studentFeeGet'])->name('student_fee_get');
+});
+
+Route::middleware('auth:sanctum')->group(function(){
+    Route::resource('manageEmployeeSalary',ManageEmployeeSalaryController::class);
 });
 
 

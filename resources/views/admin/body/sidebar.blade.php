@@ -142,6 +142,7 @@
                 </a>
                 <ul class="treeview-menu">
                     <li class="{{ Request::is('studentFee*')?'active':'' }}"><a href="{{ route('studentFee.index') }}"><i class="ti-more"></i>Student Fees</a></li>
+                    <li class="{{ Request::is('manageEmployeeSalary*')?'active':'' }}"><a href="{{ route('manageEmployeeSalary.index') }}"><i class="ti-more"></i>Manage Employee Salary</a></li>
 
                 </ul>
             </li>
