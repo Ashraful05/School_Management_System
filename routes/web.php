@@ -209,6 +209,7 @@ Route::middleware('auth:sanctum')->group(function (){
 
 Route::middleware('auth:sanctum')->group(function(){
     Route::resource('manageEmployeeSalary',ManageEmployeeSalaryController::class);
+    Route::get('employeeWiseSalary',[ManageEmployeeSalaryController::class,'employeeSalaryGet'])->name('employee_salary_get');
 });
 
 
