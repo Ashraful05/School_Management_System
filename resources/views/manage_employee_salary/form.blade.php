@@ -75,14 +75,14 @@
 
     <script type="text/javascript">
         $(document).on('click','#search',function(){
-            var year_id = $("#year_id").val();
-            var class_id = $("#class_id").val();
-            var fee_category_id = $("#fee_category_id").val();
+            // var year_id = $("#year_id").val();
+            // var class_id = $("#class_id").val();
+            // var fee_category_id = $("#fee_category_id").val();
             var date = $('#date').val();
             $.ajax({
                 url: "{{ route('employee_salary_get')}}",
                 type: "get",
-                data: {'year_id':year_id,'class_id':class_id,'fee_category_id':fee_category_id,'date':date},
+                data: {'date':date},
                 beforeSend: function() {
                 },
                 success: function (data) {

@@ -102,7 +102,34 @@ class ManageEmployeeSalaryController extends Controller
 
     public function store(Request $request)
     {
-        //
+        $date = date('Y-m',strtotime($request->date));
+
+        ManageEmployeeSalary::where(['date'=>$request->date])->delete();
+
+        $checkData = $request->checkmanage;
+
+        if($checkData != null){
+            for ($i=0;$i<count($checkData);$i++){
+                $data = ManageEmployeeSalary::create([
+                    'date'=>$date,
+                    'employee_id'=>$request->employee_id[$checkData[$i]],
+                    'amount'=>$request->amount[$checkData[$i]],
+                ]);
+            }
+        }
+        if (!empty(@$data) || empty($checkData)){
+            $notification = [
+                'alert-type'=>'info',
+                'message'=>'Data Updated!!!'
+            ];
+            return redirect()->route('manageEmployeeSalary.index')->with($notification);
+        }else{
+            $notification = [
+                'alert-type'=>'error',
+                'message'=>'Data Not Saved!!!'
+            ];
+            return redirect()->back()->with($notification);
+        }
     }
 
     /**
