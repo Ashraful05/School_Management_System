@@ -3,6 +3,7 @@
 use App\Http\Controllers\Employee\EmployeeAttendenceController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\OthersCostController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Student\StudentClassController;
 use App\Http\Controllers\Student\StudentYearController;
@@ -210,6 +211,12 @@ Route::middleware('auth:sanctum')->group(function (){
 Route::middleware('auth:sanctum')->group(function(){
     Route::resource('manageEmployeeSalary',ManageEmployeeSalaryController::class);
     Route::get('employeeWiseSalary',[ManageEmployeeSalaryController::class,'employeeSalaryGet'])->name('employee_salary_get');
+});
+
+Route::controller(OthersCostController::class)->middleware('auth:sanctum')
+    ->prefix('manageOthersCost')->group(function (){
+   Route::get('/','index')->name('manageOthersCost.index');
+   Route::get('add','create')->name('manageOthersCost.create');
 });
 
 
