@@ -16,7 +16,13 @@ class OthersCostController extends Controller
 
     public function create()
     {
+        return view('others_cost.form');
+    }
+
+    public function store(Request $request)
+    {
 
     }
+
 
 }

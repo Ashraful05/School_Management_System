@@ -217,6 +217,8 @@ Route::controller(OthersCostController::class)->middleware('auth:sanctum')
     ->prefix('manageOthersCost')->group(function (){
    Route::get('/','index')->name('manageOthersCost.index');
    Route::get('add','create')->name('manageOthersCost.create');
+   Route::post('save','store')->name('manageOthersCost.store');
+   Route::get('edit/{id}','edit')->name('manageOthersCost.edit');
 });
 
 
