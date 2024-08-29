@@ -95,7 +95,7 @@ class ManageEmployeeSalaryController extends Controller
 
             $html[$key]['tdsource'] .='<td>'.$totalSalary.'<input type="hidden" name="amount[]" value="'.$totalSalary.'">'.'</td>';
             $html[$key]['tdsource'] .='<td>'.'<input type="hidden" name="employee_id[]" value="'.$attendance->employee_id.'">'.'<input type="checkbox" name="checkmanage[]" id="'.$key.'" value="'.$key.'" '.$checked.' style="transform: scale(1.5);margin-left: 10px;"> <label for="'.$key.'"> </label> '.'</td>';
-
+            
         }
         return response()->json(@$html);
     }
