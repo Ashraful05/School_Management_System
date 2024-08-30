@@ -1,6 +1,6 @@
 @extends('admin.master')
 
-@section('title','Add Others Cost')
+@section('title','Edit Others Cost')
 
 
 @section('main_content')
@@ -22,14 +22,14 @@
                 <div class="box-body">
                     <div class="row">
                         <div class="col">
-                            <form action="{{ route('manageOthersCost.store') }}" method="post" enctype="multipart/form-data">
+                            <form action="{{ route('manageOthersCost.update',$data->id) }}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <h5>Select Date<span class="text-danger">*</span></h5>
                                             <div class="controls">
-                                                <input type="date" name="date"  class="form-control" >
+                                                <input type="date" name="date" value="{{ $data->date }}" class="form-control" >
                                                 @error('date')
                                                 <span class="text-danger">{{ $message }}</span>
                                                 @enderror
@@ -40,7 +40,7 @@
                                         <div class="form-group">
                                             <h5>Amount</h5>
                                             <div class="controls">
-                                                <input type="text" name="amount" value="{{ old('amount') }}" class="form-control" >
+                                                <input type="text" name="amount" value="{{ old('amount',$data->amount) }}" class="form-control" >
                                                 @error('amount')
                                                 <span class="text-danger">{{ $message }}</span>
                                                 @enderror
@@ -53,7 +53,7 @@
                                         <div class="form-group">
                                             <div class="controls">
                                                 <label for="description">Description</label>
-                                                <textarea name="description" id="description" class="form-control" placeholder="Enter cost description here...."></textarea>
+                                                <textarea name="description" id="description" class="form-control" placeholder="Enter cost description here....">{{ $data->description }}</textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -63,21 +63,21 @@
                                         <div class="form-group">
                                             <h5>Others Cost Image <span class="text-danger">*</span></h5>
                                             <div class="controls">
-                                                <input type="file" name="image"id="image"  class="form-control" >
+                                                <input type="file" name="image" id="image"  class="form-control" >
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <div class="controls">
-                                                <img id="showImage" src="{{ url('images/no_image.jpg') }}" style="height: 100px;width: 100px;" alt="">
+                                                <img id="showImage" src="{{ (!empty($data->image))?url('images/other_cost_images/'.$data->image):url('images/no_image.jpg') }}" style="height: 100px;width: 100px;" alt="">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="text-xs-right">
-                                    <button type="submit" class="form-control btn btn-rounded btn-info">Add</button>
+                                    <button type="submit" class="form-control btn btn-rounded btn-info">Update</button>
                                 </div>
                             </form>
 

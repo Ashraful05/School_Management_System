@@ -24,11 +24,11 @@ class OthersCostController extends Controller
     {
         if($request->file('image')){
             $file = $request->file('image');
-            $imageName = date('YmHi').$file->getClientOriginalExtension();
+            $imageName = date('YmHi').$file->getClientOriginalName();
             $file->move(public_path('images/other_cost_images/.'),$imageName);
         }
         ManageOthersCost::create([
-           'date'=>$request->name,
+           'date'=>date('Y-m-d',strtotime($request->date)),
             'amount'=>$request->amount,
             'description'=>$request->description,
             'image'=>$imageName
@@ -40,5 +40,35 @@ class OthersCostController extends Controller
         return redirect()->route('manageOthersCost.index')->with($notification);
     }
 
+    public function edit($id)
+    {
+        $data = ManageOthersCost::findOrFail($id);
+//        return $data;
+        return view('others_cost.edit',compact('data'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $data = ManageOthersCost::findOrFail($id);
+
+        if($request->file('image')){
+            $file = $request->file('image');
+            @unlink(public_path('images/other_cost_images/'.$data->image));
+            $imageName = date('YmHi').'.'.$file->getClientOriginalName();
+            $file->move(public_path('images/other_cost_images/'),$imageName);
+        }
+
+        $data->update([
+            'date'=>date('Y-m-d',strtotime($request->date)),
+            'amount'=>$request->amount,
+            'description'=>$request->description,
+            'image'=>$imageName
+        ]);
+        $notification = [
+            'alert-type'=>'success',
+            'message'=>'Date Inserted!!'
+        ];
+        return redirect()->route('manageOthersCost.index')->with($notification);
+    }
 
 }

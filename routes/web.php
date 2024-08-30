@@ -219,6 +219,7 @@ Route::controller(OthersCostController::class)->middleware('auth:sanctum')
    Route::get('add','create')->name('manageOthersCost.create');
    Route::post('save','store')->name('manageOthersCost.store');
    Route::get('edit/{id}','edit')->name('manageOthersCost.edit');
+   Route::post('update/{id}','update')->name('manageOthersCost.update');
 });
 
 
