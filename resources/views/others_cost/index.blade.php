@@ -33,13 +33,14 @@
                                     <tbody>
                                     @foreach($allData as $row=>$data)
                                         <tr>
+                                            <td>{{ ++$row }}</td>
                                             <td>{{ date('d-m-Y',strtotime($data->date)) }}</td>
                                             <td>{{ $data->amount }}</td>
                                             <td>{{ $data->description }}</td>
                                             <td>
-                                                <img src="{{ (!empty($data->image))?url('images/other_cost_images/'.$data->image):url('images/no_image.jpg') }}" alt="">
+                                                <img src="{{ (!empty($data->image))?url('images/other_cost_images/'.$data->image):url('images/no_image.jpg') }}" style="width: 60px;" alt="">
                                             </td>
-                                            <td><a href="{{ route('manageOthersCost.edit',$data->id) }}" class="form-control btn btn-info" title="edit"><i class="fa fa-pencil-square-o"></i></a></td>
+                                            <td><a href="{{ route('manageOthersCost.edit',$data->id) }}" class="btn btn-rounded btn-edit" title="edit"><i class="fa fa-pencil-square"></i></a></td>
                                         </tr>
                                     @endforeach
                                     </tbody>

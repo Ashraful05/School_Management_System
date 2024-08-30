@@ -29,8 +29,8 @@
                                         <div class="form-group">
                                             <h5>Select Date<span class="text-danger">*</span></h5>
                                             <div class="controls">
-                                                <input type="date" name="joining_date" value="{{ old('joining_date') }}" class="form-control" >
-                                                @error('joining_date')
+                                                <input type="date" name="date" value="{{ old('date') }}" class="form-control" >
+                                                @error('date')
                                                 <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
