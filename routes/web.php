@@ -29,6 +29,7 @@ use App\Http\Controllers\Employee\EmployeeLeaveController;
 use App\Http\Controllers\Employee\EmployeeMonthlySalaryController;
 use App\Http\Controllers\Employee\ManageEmployeeSalaryController;
 
+use App\Http\Controllers\Report\ProfitController;
 
 
 
@@ -222,6 +223,9 @@ Route::controller(OthersCostController::class)->middleware('auth:sanctum')
    Route::post('update/{id}','update')->name('manageOthersCost.update');
 });
 
+Route::controller(ProfitController::class)->middleware('auth:sanctum')->prefix('profit')->group(function (){
+   Route::get('monthly','monthlyProfitIndex')->name('monthly_profit');
+});
 
 
 

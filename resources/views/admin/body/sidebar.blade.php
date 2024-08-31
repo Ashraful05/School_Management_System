@@ -147,6 +147,19 @@
 
                 </ul>
             </li>
+            <li class="treeview ">
+                <a href="#">
+                    <i data-feather="grid"></i>
+                    <span>Reports Management</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-right pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="{{ Request::is('profit*')?'active':'' }}"><a href="{{ route('monthly_profit') }}"><i class="ti-more"></i>Yearly/Monthly Profit</a></li>
+
+                </ul>
+            </li>
 
 
             <li>
