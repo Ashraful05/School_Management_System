@@ -28,37 +28,31 @@ class ProfitController extends Controller
         $otherCost = ManageOthersCost::whereBetween('date',[$sdate,$edate])->sum('amount');
         $employeeSalary = ManageEmployeeSalary::whereBetween('date',[$start_date,$end_date])->sum('amount');
 
-        $html['thsource']  = '<th>SL</th>';
-        $html['thsource'] .= '<th>Employee Name</th>';
-        $html['thsource'] .= '<th>Basic Salary</th>';
-        $html['thsource'] .= '<th>Salary This Month</th>';
+        $totalCost = $otherCost + $employeeSalary;
+        $profit = $studentFee - $totalCost;
+
+        $html['thsource']  = '<th>Student Fee</th>';
+        $html['thsource']  .= '<th>Other Cost</th>';
+        $html['thsource'] .= '<th>Employee Salary</th>';
+        $html['thsource'] .= '<th>Total Cost</th>';
+        $html['thsource'] .= '<th>Profit</th>';
         $html['thsource'] .= '<th>Action</th>';
 
+        $color = 'info';
+        $html['tdsource'] = '<td>' .$studentFee. '</td>';
+        $html['tdsource'] .= '<td>' .$otherCost. '</td>';
+        $html['tdsource'] .= '<td>' .$employeeSalary. '</td>';
+        $html['tdsource'] .= '<td>' .$totalCost. '</td>';
+        $html['tdsource'] .= '<td>' .$profit. '</td>';
+        $html['tdsource'] .= '<td>';
+        $html['tdsource'] .='<a class="btn btn-sm btn-'.$color.'" title="PDF" target="_blanks" href="'.route("profit_report_pdf"). '?start_date='.$sdate.'&end_date='.$edate.'">Report</a>';
+        $html['tdsource'] .='</td>';
 
-        foreach ($data as $key => $attendance) {
-            $totalAttendance = EmployeeAttendance::with('user')->where($where)
-                ->where('employee_id',$attendance->employee_id)->get();
-
-            $absentCount = count($totalAttendance->where('attendance_status','Absent'));
-
-            $color = 'success';
-            $html[$key]['tdsource']  = '<td>'.($key+1).'</td>';
-            $html[$key]['tdsource'] .= '<td>'.$attendance['user']['name'].'</td>';
-            $html[$key]['tdsource'] .= '<td>'.$attendance['user']['salary'].'</td>';
-
-
-            $salary = (float)$attendance['user']['salary'];
-            $salaryPerDay = (float)$salary/30;
-            $totalSalaryMinus = (float)$absentCount * (float)$salaryPerDay;
-            $totalSalary = (float)$salary - (float)$totalSalaryMinus;
-
-
-            $html[$key]['tdsource'] .='<td>'.$totalSalary.'</td>';
-            $html[$key]['tdsource'] .='<td>';
-            $html[$key]['tdsource'] .='<a class="btn btn-sm btn-'.$color.'" title="PaySlip" target="_blanks" href="'.route("employee.monthly.salary.payslip",$attendance->employee_id).'">Fee Slip</a>';
-            $html[$key]['tdsource'] .= '</td>';
-
-        }
         return response()->json(@$html);
+    }
+
+    public function profitReportPDF(Request $request)
+    {
+
     }
 }

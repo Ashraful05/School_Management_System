@@ -226,6 +226,7 @@ Route::controller(OthersCostController::class)->middleware('auth:sanctum')
 Route::controller(ProfitController::class)->middleware('auth:sanctum')->prefix('profit')->group(function (){
    Route::get('monthly','monthlyProfitIndex')->name('monthly_profit');
    Route::get('report','dateWiseProfitReportGet')->name('date_wise_profit_report_get');
+   Route::get('report/pdf','profitReportPDF')->name('profit_report_pdf');
 });
 
 
