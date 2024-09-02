@@ -8,6 +8,7 @@ use App\Models\ManageEmployeeSalary;
 use App\Models\ManageOthersCost;
 use App\Models\StudentFee;
 use Illuminate\Http\Request;
+use PDF;
 
 class ProfitController extends Controller
 {
@@ -53,6 +54,15 @@ class ProfitController extends Controller
 
     public function profitReportPDF(Request $request)
     {
+        $start_date = date('Y-m',strtotime($request->start_date));
+        $end_date = date('Y-m',strtotime($request->end_date));
 
+        $sdate = date('Y-m-d',strtotime($request->start_date));
+        $edate = date('Y-m-d',strtotime($request->end_date));
+
+        $pdf = PDF::loadView('profit.monthly_yearly_profit_report_pdf',compact('start_date',
+            'sdate','end_date','edate'));
+        $pdf->setProtection(['copy','print'],'','pass');
+        return $pdf->stream('document.pdf');
     }
 }
