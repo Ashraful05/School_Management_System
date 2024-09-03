@@ -30,6 +30,7 @@ use App\Http\Controllers\Employee\EmployeeMonthlySalaryController;
 use App\Http\Controllers\Employee\ManageEmployeeSalaryController;
 
 use App\Http\Controllers\Report\ProfitController;
+use App\Http\Controllers\Report\MarkSheetController;
 
 
 
@@ -227,6 +228,11 @@ Route::controller(ProfitController::class)->middleware('auth:sanctum')->prefix('
    Route::get('monthly','monthlyProfitIndex')->name('monthly_profit');
    Route::get('report','dateWiseProfitReportGet')->name('date_wise_profit_report_get');
    Route::get('report/pdf','profitReportPDF')->name('profit_report_pdf');
+});
+
+Route::controller(MarkSheetController::class)->middleware('auth:sanctum')->prefix('marksheet')->group(function(){
+   Route::get('/','index')->name('marksheet.index');
+   Route::get('/report','markSheetReport')->name('marksheet.report');
 });
 
 
