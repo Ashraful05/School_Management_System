@@ -32,7 +32,7 @@ class MarkSheetController extends Controller
         if(!empty($singleStudent)){
             $allMarks = StudentMarks::with(['assignSubjectName','studentYear'])->where(['year_id'=>$year_id,'class_id'=>$class_id,'exam_type_id'=>$exam_type_id,'id_number'=>$id_no])->get();
             $allGrades = StudentMarksGrade::all();
-            return view('marksheet.marksheet_pdf',compact('allGrades','allMarks'));
+            return view('marksheet.marksheet_pdf',compact('allGrades','allMarks','countFail'));
         }else{
             $notification = [
               'alert-type'=>'error',
