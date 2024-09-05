@@ -37,7 +37,7 @@
                                         <tr>
                                             <td>{{ ++$row }}</td>
                                             <td>{{ $data->grade_name }}</td>
-                                            <td>{{ $data->grade_point }}</td>
+                                            <td>{{ number_format((float)$data->grade_point,2) }}</td>
                                             <td>{{ $data->start_marks }}</td>
                                             <td>{{ $data->end_marks }}</td>
                                             <td>{{ $data->start_point }} - {{ $data->end_point }}</td>
