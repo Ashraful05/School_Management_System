@@ -31,6 +31,7 @@ use App\Http\Controllers\Employee\ManageEmployeeSalaryController;
 
 use App\Http\Controllers\Report\ProfitController;
 use App\Http\Controllers\Report\MarkSheetController;
+use App\Http\Controllers\Report\EmployeeAttendanceReportController;
 
 
 
@@ -233,6 +234,10 @@ Route::controller(ProfitController::class)->middleware('auth:sanctum')->prefix('
 Route::controller(MarkSheetController::class)->middleware('auth:sanctum')->prefix('marksheet')->group(function(){
    Route::get('/','index')->name('marksheet.index');
    Route::get('/report','markSheetReport')->name('marksheet.report');
+});
+Route::controller(EmployeeAttendanceReportController::class)->middleware('auth:sanctum')->prefix('attendanceReport')->group(function(){
+   Route::get('/','index')->name('attendanceReport.index');
+   Route::get('/report','employeeAttendanceReport')->name('attendance.report');
 });
 
 
