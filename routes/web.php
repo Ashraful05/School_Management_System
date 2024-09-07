@@ -237,7 +237,7 @@ Route::controller(MarkSheetController::class)->middleware('auth:sanctum')->prefi
 });
 Route::controller(EmployeeAttendanceReportController::class)->middleware('auth:sanctum')->prefix('attendanceReport')->group(function(){
    Route::get('/','index')->name('attendanceReport.index');
-   Route::get('/report','employeeAttendanceReport')->name('attendance.report');
+   Route::get('/employee','employeeAttendanceReport')->name('attendance.report');
 });
 
 
