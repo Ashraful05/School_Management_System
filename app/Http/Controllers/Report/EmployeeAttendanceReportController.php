@@ -25,7 +25,9 @@ class EmployeeAttendanceReportController extends Controller
         if(!empty($date)){
             $where[] = ['date','like',$date.'%'];
         }
+
         $singleAttendance = EmployeeAttendance::with('user')->where($where)->get();
+
         if(!empty($singleAttendance)){
             $allData = EmployeeAttendance::with('user')->where($where)->get();
 //            return $allData;
@@ -36,7 +38,7 @@ class EmployeeAttendanceReportController extends Controller
 
             $monthData = date('m-Y',strtotime($request->date));
 
-            $pdf = PDF::loadView('employee_attendance_report_pdf',compact('allData',
+            $pdf = PDF::loadView('employee_attendance_report.employee_attendance_report_pdf',compact('allData',
                 'absentData','leaveData','monthData'));
             $pdf->setProtection(['copy','print'],'','pass');
             return $pdf->stream('document.pdf');
