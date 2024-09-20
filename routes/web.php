@@ -247,6 +247,7 @@ Route::controller(ResultReportController::class)->middleware('auth:sanctum')
     ->prefix('resultReport')->group(function (){
 
    Route::get('/','index')->name('resultReport.index');
+   Route::get('/get','resultReport')->name('resultReport.get');
 
 });
 

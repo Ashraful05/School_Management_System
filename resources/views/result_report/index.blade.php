@@ -18,7 +18,7 @@
                             <a href="{{ route('edit.student.marks') }}" class="btn btn-rounded btn-primary" style="float:right">Marks Edit</a>
                         </div>
                         <div class="box-body">
-                            <form action="{{ route('marksheet.report') }}" method="get" target="_blank">
+                            <form action="{{ route('resultReport.get') }}" method="get" target="_blank">
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-4">
@@ -58,13 +58,6 @@
                                             </div>
                                         </div>
                                     </div>
-{{--                                    <div class="col-md-3">--}}
-{{--                                        <div class="form-group">--}}
-{{--                                            <div class="controls">--}}
-{{--                                                <input type="text" name="id_number" class="form-control" placeholder="enter student id">--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
 
                                 </div>
                                 <div class="row">
