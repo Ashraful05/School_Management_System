@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Employee\EmployeeAttendenceController;
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\OthersCostController;
@@ -32,6 +33,7 @@ use App\Http\Controllers\Employee\ManageEmployeeSalaryController;
 use App\Http\Controllers\Report\ProfitController;
 use App\Http\Controllers\Report\MarkSheetController;
 use App\Http\Controllers\Report\EmployeeAttendanceReportController;
+use App\Http\Controllers\Result\ResultReportController;
 
 
 
@@ -235,9 +237,17 @@ Route::controller(MarkSheetController::class)->middleware('auth:sanctum')->prefi
    Route::get('/','index')->name('marksheet.index');
    Route::get('/report','markSheetReport')->name('marksheet.report');
 });
-Route::controller(EmployeeAttendanceReportController::class)->middleware('auth:sanctum')->prefix('attendanceReport')->group(function(){
+Route::controller(EmployeeAttendanceReportController::class)->middleware('auth:sanctum')
+    ->prefix('attendanceReport')->group(function(){
    Route::get('/','index')->name('attendanceReport.index');
    Route::get('/employee','employeeAttendanceReport')->name('attendance.report');
+});
+
+Route::controller(ResultReportController::class)->middleware('auth:sanctum')
+    ->prefix('resultReport')->group(function (){
+
+   Route::get('/','index')->name('resultReport.index');
+
 });
 
 

@@ -158,7 +158,8 @@
                 <ul class="treeview-menu">
                     <li class="{{ Request::is('profit*')?'active':'' }}"><a href="{{ route('monthly_profit') }}"><i class="ti-more"></i>Yearly/Monthly Profit</a></li>
                     <li class="{{ Request::is('marksheet*')?'active':'' }}"><a href="{{ route('marksheet.index') }}"><i class="ti-more"></i>MarkSheet Management</a></li>
-                    <li class="{{ Request::is('employeeAttendanceReport*')?'active':'' }}"><a href="{{ route('attendanceReport.index') }}"><i class="ti-more"></i>Employee Attendance Report</a></li>
+                    <li class="{{ Request::is('attendanceReport*')?'active':'' }}"><a href="{{ route('attendanceReport.index') }}"><i class="ti-more"></i>Employee Attendance Report</a></li>
+                    <li class="{{ Request::is('resultReport*')?'active':'' }}"><a href="{{ route('resultReport.index') }}"><i class="ti-more"></i>Result Report</a></li>
 
                 </ul>
             </li>
