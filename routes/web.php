@@ -35,6 +35,8 @@ use App\Http\Controllers\Report\MarkSheetController;
 use App\Http\Controllers\Report\EmployeeAttendanceReportController;
 use App\Http\Controllers\Result\ResultReportController;
 
+use App\Http\Controllers\Student\StudentIdCardController;
+
 
 
 /*
@@ -250,6 +252,12 @@ Route::controller(ResultReportController::class)->middleware('auth:sanctum')
    Route::get('/get','resultReport')->name('resultReport.get');
 
 });
+
+Route::controller(StudentIdCardController::class)->middleware('auth:sanctum')
+    ->prefix('studentIdCard')->group(function(){
+    Route::get('/','index')->name('studentIdCard.index');
+    Route::get('/get','studentIdCardGet')->name('studentIdCard.get');
+    });
 
 
 

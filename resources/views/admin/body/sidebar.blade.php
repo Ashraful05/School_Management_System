@@ -160,6 +160,7 @@
                     <li class="{{ Request::is('marksheet*')?'active':'' }}"><a href="{{ route('marksheet.index') }}"><i class="ti-more"></i>MarkSheet Management</a></li>
                     <li class="{{ Request::is('attendanceReport*')?'active':'' }}"><a href="{{ route('attendanceReport.index') }}"><i class="ti-more"></i>Employee Attendance Report</a></li>
                     <li class="{{ Request::is('resultReport*')?'active':'' }}"><a href="{{ route('resultReport.index') }}"><i class="ti-more"></i>Result Report</a></li>
+                    <li class="{{ Request::is('studentIdCard*')?'active':'' }}"><a href="{{ route('studentIdCard.index') }}"><i class="ti-more"></i>Student ID Card</a></li>
 
                 </ul>
             </li>
